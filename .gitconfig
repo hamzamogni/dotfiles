@@ -1,0 +1,15 @@
+[alias]
+  br = branch
+  ci = commit
+  co = checkout
+  lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
+  sh = stash
+  st = status
+  sub = submodule
+[user]
+	name = Hamza Mogni 
+	email = hamzamogni5@gmail.com
+[push]
+  default = current
+[color]
+	ui = true

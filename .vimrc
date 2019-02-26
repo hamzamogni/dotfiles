@@ -41,7 +41,7 @@ set cursorline
 set termencoding=utf-8
 set fileencodings=utf-8,default
 
-" set autoread  " watch for file changes
+set autoread  " watch for file changes
 
 " no file auto-backup since we use Git
 set nowb
@@ -82,9 +82,9 @@ set foldmethod=indent
 set foldlevel=99
 
 " remove empty lines at end of file
-" %s/\($\n\s*\)\+\%$//e
+%s/\($\n\s*\)\+\%$//e
 " Removing trailing whitespaces in Vim can be done pretty easy:
-" autocmd BufWritePre * :%s/\s\+$//e
+autocmd BufWritePre * :%s/\s\+$//e
 
 " highlight all matches of search pattern,
 " search all occurrences of current word with '*'
@@ -146,13 +146,6 @@ else
   set t_ut=
 endif
 
-" alternate relativenumber mode
-autocmd FocusLost * :set number
-autocmd FocusGained * :set relativenumber
-autocmd InsertEnter * :set number
-autocmd InsertLeave * :set relativenumber
-autocmd BufReadPost * :set relativenumber
-autocmd BufNewFile * :set relativenumber
 
 " Per-directory .vimrc files
 set exrc
@@ -174,3 +167,10 @@ au BufRead,BufNewFile *.tag set filetype=javascript
 
 "show status bar on single window mode
 set laststatus=2
+
+
+augroup numbertoggle
+  autocmd!
+  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+augroup END

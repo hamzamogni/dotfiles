@@ -105,7 +105,7 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
-export PS1="\$(__git_ps1 \"%s ± \")\w
+export PS1="\[\e[36m\]\$(__git_ps1 \"%s ± \")\W\[\e[m\]
   \[\e[31m\]\u@\h\[\e[m\] $ "
 
 # enable programmable completion features (you don't need to enable

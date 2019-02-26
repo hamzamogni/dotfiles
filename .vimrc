@@ -15,6 +15,7 @@ Plugin 'tmhedberg/SimpylFold'
 Plugin 'vim-scripts/indentpython.vim'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-syntastic/syntastic'
+Plugin 'nvie/vim-flake8'
 Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'kien/ctrlp.vim'
@@ -22,8 +23,6 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 
 
-let g:ycm_autoclose_preview_window_after_completion=1
-map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 " add all your plugins here (note older versions of Vundle
 " used Bundle instead of Plugin)
 
@@ -36,7 +35,6 @@ filetype plugin indent on    " required
 filetype off
 filetype plugin indent on
 
-set relativenumber
 set cursorline
 set termencoding=utf-8
 set fileencodings=utf-8,default
@@ -102,10 +100,9 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-let mapleader="|"
+let mapleader=","
 let maplocalleader=","
 
-" nmap <Space> i <Esc>r  " make spacebar insert a single character
 nmap <CR> :
 
 nmap <C-W>t <Esc>:tabnew<CR>
@@ -168,9 +165,39 @@ au BufRead,BufNewFile *.tag set filetype=javascript
 "show status bar on single window mode
 set laststatus=2
 
-
+set relativenumber
+set number
 augroup numbertoggle
   autocmd!
   autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
   autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
 augroup END
+
+let g:ycm_autoclose_preview_window_after_completion=1
+map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+" Enable folding with the spacebar
+nnoremap <space> za
+
+" proper indentation for .py files
+"au BufNewFile,BufRead *.py
+"    \ set tabstop=4 |
+"    \ set softtabstop=4 |
+"    \ set shiftwidth=4 |
+"    \ set textwidth=79 |
+"    \ set expandtab |
+"    \ set autoindent |
+"    \ set fileformat=unix
+"
+"" proper indentation for webdev files
+"au BufNewFile,BufRead *.js, *.html, *.css
+"    \ set tabstop=2 |
+"    \ set softtabstop=2 |
+"    \ set shiftwidth=2
+
+
+let python_highlight_all=1
+
+map <C-n> :NERDTreeToggle<CR>
+
+autocmd vimenter * NERDTree

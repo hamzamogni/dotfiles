@@ -197,4 +197,5 @@ let python_highlight_all=1
 
 map <C-n> :NERDTreeToggle<CR>
 
-autocmd vimenter * NERDTree
+" show nerdtree automatically on file opening
+"autocmd vimenter * NERDTree

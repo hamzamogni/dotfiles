@@ -32,9 +32,6 @@ Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 call vundle#end()            " required
 filetype plugin indent on    " required
 
-filetype off
-filetype plugin indent on
-
 set cursorline
 set termencoding=utf-8
 set fileencodings=utf-8,default

@@ -15,8 +15,10 @@ exec setxkbmap -option "ctrl:swapcaps"
 exec feh --bg-scale ~/.i3/DeathStar.png
 # urxvt in daemon/client mode
 exec --no-startup-id urxvtd -q -f -o
+exec nm-applet
 # exec dropbox start
 
+for_window [class="^.*"] border normal 2
 for_window [class="feh"] floating enable
 for_window [class="^GIMP"] floating enable
 for_window [class="MPlayer"] floating enable
@@ -203,12 +205,14 @@ bar {
   # font pango: Ohsnap 8px
   status_command i3blocks -c ~/.i3/i3blocks.conf
 #  status_command i3status
-  position bottom
+  position top
+
+  separator_symbol ":|:"
   # mode hide
   colors {
     background $inactive-bg-color
     statusline $text-color
-    separator $bg-color
+    separator $urgent-bg-color
     #                  border             background         text
     active_workspace   $inactive-bg-color $inactive-bg-color $text-color
     focused_workspace  $bg-color          $bg-color          $text-color
@@ -219,6 +223,11 @@ bar {
 
 # vim: notermguicolors nofoldenable
 #
+
+# screenshot
+bindsym --release Print exec scrot '%Y-%m-%d_%H.%M.%S_$wx$h.png' -e 'mv $f ~/Pictures/screenshots' -q 100
+bindsym --release Shift+Print exec scrot '%Y-%m-%d_%H.%M.%S_$wx$h.png' -e 'mv $f ~/Pictures/screenshots'
+
 
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume

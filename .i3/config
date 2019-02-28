@@ -12,7 +12,7 @@ hide_edge_borders both
 # $ sudo apt install -y gnome-control-center
 exec gnome-settings-daemon
 exec setxkbmap -option "ctrl:swapcaps"
-exec feh --bg-scale ~/.i3/DeathStar.png
+exec feh --bg-scale ~/Pictures/Wallpapers/solarized-wallpaper-kernel.png
 # urxvt in daemon/client mode
 exec --no-startup-id urxvtd -q -f -o
 exec nm-applet

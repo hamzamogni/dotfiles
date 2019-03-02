@@ -14,7 +14,6 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'tmhedberg/SimpylFold'
 Plugin 'vim-scripts/indentpython.vim'
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'vim-syntastic/syntastic'
 Plugin 'nvie/vim-flake8'
 Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
@@ -48,8 +47,8 @@ set smarttab
 set textwidth=8
 " use :retab to change all tabs to match these settings
 set expandtab       " insert tabs instead of spaces:
-set tabstop=2       " number of spaces:
-set shiftwidth=2    " number of spaces for indentation:
+set tabstop=4       " number of spaces:
+set shiftwidth=4    " number of spaces for indentation:
 set shiftround      " always round indents to multiple of shiftwidth
 set autoindent
 set smartindent
@@ -199,3 +198,14 @@ map <C-n> :NERDTreeToggle<CR>
 
 " show nerdtree automatically on file opening
 "autocmd vimenter * NERDTree
+"
+
+
+"automatic closing
+inoremap (<CR> (<CR>)<C-c>O
+inoremap (; (<CR>);<C-c>O
+inoremap {; {<CR>};<C-c>O
+inoremap {<CR> {<CR>}<C-c>O
+inoremap [; [<CR>];<C-c>O
+inoremap [<CR> [<CR>]<C-c>O
+

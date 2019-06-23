@@ -1,6 +1,6 @@
 URxvt*.transparent: false
-URxvt*.shading: 80
-URxvt*.fading: 40
+#URxvt*.shading: 99
+#URxvt*.fading: 40
 URxvt.font: xft:Bitstream Vera Sans Mono:pixelsize=12
 # disable bold fonts by just applying the same font string:
 # URxvt.font: xft:terminus12

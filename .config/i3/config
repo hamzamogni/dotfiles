@@ -22,10 +22,10 @@ gaps left 5
 smart_gaps on
 
 exec setxkbmap -option "ctrl:swapcaps"
-exec feh --bg-scale ~/Pictures/Wallpapers/screen.jpeg
+exec feh --bg-fill ~/Pictures/Wallpapers/screen.jpeg
 exec --no-startup-id urxvtd -q -f -o
 exec nm-applet
-exec --no-startup-id compton -b
+exec --no-startup-id compton -b --config ~/.config/compton/compton.conf
 
 for_window [class="^.*"] border pixel 0
 for_window [class="feh"] floating enable
@@ -211,6 +211,7 @@ set $inactive-bg-color   #21242c
 set $inactive-text-color #7f848f
 set $urgent-bg-color     #5294e2
 set $urgent-text-color   #ffffff
+set $transparent         #00000000
 
 # colors                 border             background         text                 indicator
 client.focused           $bg-color          $bg-color          $text-color          $urgent-bg-color
@@ -236,7 +237,7 @@ bar {
   separator_symbol ":|:"
   # mode hide
   colors {
-    background $inactive-bg-color
+    background $transparent
     statusline $text-color
     separator $urgent-bg-color
     #                  border             background         text

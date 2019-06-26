@@ -127,6 +127,8 @@ export XZ_OPT=-9
 # no need for 'tmux -2' anymore, 'cause .vimrc BCE fix
 export TERM="xterm-256color"
 
+export COLORTERM='rxvt-unicode-256color'
+
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 

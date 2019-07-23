@@ -21,11 +21,14 @@ gaps left 5
 
 smart_gaps on
 
-exec setxkbmap -option "ctrl:swapcaps"
-exec feh --bg-fill ~/Pictures/Wallpapers/screen.jpeg
+# exec setxkbmap -option "ctrl:swapcaps"
+exec feh --bg-fill ~/Pictures/Wallpapers/screen.png
 exec --no-startup-id urxvtd -q -f -o
 exec nm-applet
 exec --no-startup-id compton -b --config ~/.config/compton/compton.conf
+
+exec "setxkbmap -layout fr,ar"
+exec "setxkbmap -option 'grp:alt_shift_toggle'"
 
 for_window [class="^.*"] border pixel 0
 for_window [class="feh"] floating enable
@@ -46,8 +49,6 @@ for_window [class="Update"] floating enable
 # workspace "[6]" output LVDS
 
 
-# i3 config file (v4)
-#
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod4
@@ -63,11 +64,14 @@ font -*-ohsnap-medium-*-*-*-12-*-*-*-*-*-*-*
 
 # start a terminal
 #  lxterminal Background color #00141A
-bindsym $mod+Shift+Return exec --no-startup-id lxterminal
 bindsym $mod+Return exec --no-startup-id urxvt
 bindsym $mod+Shift+T exec --no-startup-id i3-sensible-terminal
 bindsym $mod+Shift+F exec --no-startup-id firefox
 bindsym $mod+Shift+I exec --no-startup-id chromium-browser
+
+# lock screen
+bindsym $mod+Escape exec i3lock -i ~/Pictures/Wallpapers/screen.png
+
 
 # kill focused window
 bindsym $mod+Shift+Q kill
@@ -264,6 +268,7 @@ bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 20 # decrease
 bindsym XF86TouchpadToggle exec ~/toggletouchpad.sh # toggle touchpad
 
 # Media player controls
-bindsym XF86AudioPlay exec playerctl play-pause
-bindsym XF86AudioNext exec playerctl next
-bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86AudioPlay exec ~/.config/i3/cmus-playPause # playerctl play-pause
+bindsym XF86AudioNext exec cmus-remote -n # playerctl next
+bindsym XF86AudioPrev exec cmus-remote -r #playerctl previous
+

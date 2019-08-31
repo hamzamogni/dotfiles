@@ -22,9 +22,9 @@ gaps left 5
 smart_gaps on
 
 # exec setxkbmap -option "ctrl:swapcaps"
-exec feh --bg-fill ~/Pictures/Wallpapers/screen.png
+exec feh --bg-fill ~/Pictures/Wallpapers/wallpaper.jpg
 exec --no-startup-id urxvtd -q -f -o
-exec nm-applet
+# exec nm-applet
 exec --no-startup-id compton -b --config ~/.config/compton/compton.conf
 
 exec "setxkbmap -layout fr,ar"
@@ -39,17 +39,6 @@ for_window [class="Skype"] floating enable
 for_window [class="(Steam|hl_linux)"] floating enable
 for_window [class="Update"] floating enable
 
-
-
-# workspace "[1]" output CRT1
-# workspace "[2]" output CRT1
-# workspace "[3]" output CRT1
-# workspace "[4]" output LVDS
-# workspace "[5]" output LVDS
-# workspace "[6]" output LVDS
-
-
-# Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod4
 # Use Mouse+$mod to drag floating windows to their wanted position
@@ -268,7 +257,7 @@ bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 20 # decrease
 bindsym XF86TouchpadToggle exec ~/toggletouchpad.sh # toggle touchpad
 
 # Media player controls
-bindsym XF86AudioPlay exec ~/.config/i3/cmus-playPause # playerctl play-pause
-bindsym XF86AudioNext exec cmus-remote -n # playerctl next
-bindsym XF86AudioPrev exec cmus-remote -r #playerctl previous
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
 

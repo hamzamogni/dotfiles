@@ -104,7 +104,7 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
-
+source ~/.bash_git
 export PS1="\[\e[36m\]\$(__git_ps1 \"%s ± \")\W\[\e[m\]
   \[\e[31m\]\u@\h\[\e[m\] $ "
 

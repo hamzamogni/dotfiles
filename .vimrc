@@ -209,3 +209,4 @@ inoremap {<CR> {<CR>}<C-c>O
 inoremap [; [<CR>];<C-c>O
 inoremap [<CR> [<CR>]<C-c>O
 
+syntax on

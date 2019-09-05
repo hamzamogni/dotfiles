@@ -10,16 +10,20 @@ new_float 1pixel
 hide_edge_borders both
 
 
-gaps inner 5
-#gaps outer 5
-gaps horizontal 5
-gaps vertical 5
-#gaps top 5
-gaps right 5
-#gaps bottom 5
-gaps left 5
+gaps inner 8
+gaps outer 0
+gaps horizontal 0
+gaps vertical 0
+gaps top 0
+gaps right 0
+gaps bottom 0
+gaps left 0
 
 smart_gaps on
+
+bindsym $mod+Shift+plus gaps inner all plus 5
+bindsym $mod+Shift+minus gaps inner all minus 5
+
 
 # exec setxkbmap -option "ctrl:swapcaps"
 exec feh --bg-fill ~/Pictures/Wallpapers/wallpaper.jpg
@@ -38,7 +42,7 @@ for_window [class="Remmina"] floating enable
 for_window [class="Skype"] floating enable
 for_window [class="(Steam|hl_linux)"] floating enable
 for_window [class="Update"] floating enable
-
+for_window [class="Yad"] floating enable
 
 set $mod Mod4
 # Use Mouse+$mod to drag floating windows to their wanted position
@@ -68,7 +72,7 @@ bindsym $mod+Shift+Q kill
 # start dmenu (a program launcher)
 # bindsym $mod+d exec dmenu_run -b -fn 'Terminus:size=8'
 
-bindsym $mod+d exec --no-startup-id rofi -show
+bindsym $mod+d exec --no-startup-id rofi -show combi
 
 # change focus
 bindsym $mod+h focus left
@@ -126,26 +130,30 @@ bindsym $mod+a focus parent
 #bindcode $mod+d focus child
 
 #default workspaces names
-set $ws1 "1: "
-set $ws2 "2: "
-set $ws8 "8: "
-set $ws9 "9: "
+set $ws1 "1:  Terminal"
+set $ws2 "2:  Code"
+set $ws3 "3:  Chromium"
+set $ws4 "4:  Files"
+set $ws5 "5:  Documents"
+set $ws6 "6:  LibreOffice"
+set $ws8 "8:  Mail"
+set $ws9 "9:  Media"
 
 # switch to workspace
 # use the Icons.ttf ref: https://wiki.archlinux.org/index.php/I3#Iconic_fonts_in_the_status_bar
 # bindsym $mod+1 workspace ⠁
 bindsym $mod+1 workspace $ws1
 bindsym $mod+2 workspace $ws2
-bindsym $mod+3 workspace 3
-bindsym $mod+4 workspace 4
-bindsym $mod+5 workspace 5
-bindsym $mod+6 workspace 6
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
 bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace $ws8
 bindsym $mod+9 workspace $ws9
 
 
-assign [class="Firefox"] $ws2
+assign [class="Firefox"] $ws3
 assign [class="Rhythmbox"] $ws9
 assign [class="Thunderbird"] $ws8
 
@@ -154,10 +162,10 @@ assign [class="Thunderbird"] $ws8
 # bindsym $mod+Shift+exclam move container to workspace ⠁
 bindsym $mod+Shift+1 move container to workspace $ws1
 bindsym $mod+Shift+2 move container to workspace $ws2
-bindsym $mod+Shift+3 move container to workspace 3
-bindsym $mod+Shift+4 move container to workspace 4
-bindsym $mod+Shift+5 move container to workspace 5
-bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
 bindsym $mod+Shift+7 move container to workspace 7
 bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9
@@ -198,12 +206,12 @@ mode "resize" {
         bindsym Escape mode "default"
 }
 
-set $bg-color            #2f343f
-set $text-color          #c0c7d0
-set $inactive-bg-color   #102838
-set $inactive-text-color #7f848f
-set $urgent-bg-color     #5294e2
-set $urgent-text-color   #ffffff
+set $bg-color            #5F819D
+set $text-color          #C5C8C6
+set $inactive-bg-color   #1D1F21
+set $inactive-text-color #C5C8C6
+set $urgent-bg-color     #A54242
+set $urgent-text-color   #C5C8C6
 
 # colors                 border             background         text                 indicator
 client.focused           $bg-color          $bg-color          $text-color          $urgent-bg-color
@@ -217,13 +225,13 @@ client.background                           $bg-color
 bar {
     #not showing workspaces numbers with their names
   strip_workspace_numbers yes
-  font pango:Terminus 13px
+  font pango:FontAwesome 10
   status_command i3blocks -c ~/.config/i3/i3blocks.conf
 
 #  status_command i3status
-  position top
+  position bottom
 
-  separator_symbol "|"
+  separator_symbol "."
   colors {
     background $inactive-bg-color
     statusline $text-color

@@ -3,21 +3,21 @@ URxvt.font: xft:Hack:pixelsize=12
 ! URxvt.font: xft:terminus12
 ! URxvt.boldFont: xft:terminus12
 URxvt.foreground: #43a047
-URxvt.background: black
+URxvt.background: #121212
 URxvt.saveLines: 8192
 URxvt.scrollBar: false
 ! do not scroll with output
-URxvt.scrollTtyOutput: true
+URxvt.scrollTtyOutput: false
 ! scroll in relation to buffer (with mouse scroll or Shift+Page Up)
 URxvt.scrollWithBuffer: true
 ! scroll back to the bottom on keypress
 URxvt.scrollTtyKeypress: true
 ! tabs
-URxvt.perl-ext-common: tabbed
-URxvt.tabbed.tabbar-fg: 2
-URxvt.tabbed.tabbar-bg: 0
-URxvt.tabbed.tab-fg: 3
-URxvt.tabbed.tab-bg: 0
+!URxvt.perl-ext-common: tabbed
+!URxvt.tabbed.tabbar-fg: 2
+!URxvt.tabbed.tabbar-bg: 16
+!URxvt.tabbed.tab-fg: 3
+!URxvt.tabbed.tab-bg: 16
 
 ! COLORS SETTINGS
 ! black
@@ -44,3 +44,6 @@ URxvt*color14 : #34e2e2
 ! white
 URxvt*color7: #dedede
 URxvt*color15 : #eeeeec
+
+! colors for rxvt tabs plugin
+URxvt*color16: #121212

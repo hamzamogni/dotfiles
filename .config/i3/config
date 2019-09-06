@@ -25,7 +25,7 @@ bindsym $mod+Shift+plus gaps inner all plus 5
 bindsym $mod+Shift+minus gaps inner all minus 5
 
 
-# exec setxkbmap -option "ctrl:swapcaps"
+exec "setxkbmap -option 'ctrl:swapcaps'"
 exec feh --bg-fill ~/Pictures/Wallpapers/wallpaper.jpg
 exec --no-startup-id urxvtd -q -f -o
 # exec nm-applet

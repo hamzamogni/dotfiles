@@ -5,130 +5,86 @@
 #                       #
 #########################
 
+set $mod Mod4
+
 new_window none
 new_float 1pixel
 hide_edge_borders both
 
-
 gaps inner 8
-gaps outer 0
-gaps horizontal 0
-gaps vertical 0
-gaps top 0
-gaps right 0
-gaps bottom 0
-gaps left 0
-
 smart_gaps on
 
-bindsym $mod+Shift+plus gaps inner all plus 5
-bindsym $mod+Shift+minus gaps inner all minus 5
+bindsym $mod+Control+plus gaps inner all plus 5
+bindsym $mod+Control+minus gaps inner all minus 5
 
-
+#Startup 
 exec "setxkbmap -option 'ctrl:swapcaps'"
-exec feh --bg-fill ~/Pictures/Wallpapers/wallpaper.jpg
-exec --no-startup-id urxvtd -q -f -o
-# exec nm-applet
-exec --no-startup-id compton -b --config ~/.config/compton/compton.conf
-
 exec "setxkbmap -layout fr,ar"
 exec "setxkbmap -option 'grp:alt_shift_toggle'"
+exec --no-startup-id feh --bg-fill ~/Pictures/Wallpapers/wallpaper.jpg
+exec --no-startup-id urxvtd -q -f -o
+exec --no-startup-id compton -b --config ~/.config/compton/compton.conf
 
-for_window [class="^.*"] border pixel 0
-for_window [class="feh"] floating enable
-for_window [class="^GIMP"] floating enable
-for_window [class="MPlayer"] floating enable
-for_window [class="Remmina"] floating enable
-for_window [class="Skype"] floating enable
+bindsym $mod+Return           exec --no-startup-id i3-sensible-terminal
+bindsym $mod+Shift+I          exec --no-startup-id chromium
+bindsym $mod+Shift+F          exec --no-startup-id urxvt -e ranger
+bindsym $mod+Escape           exec --no-startup-id i3lock -i ~/Pictures/Wallpapers/screen.png
+bindsym $mod+d                exec --no-startup-id rofi -show combi
+bindsym Print                 exec --no-startup-id scrot '%Y-%m-%d_%H.%M.%S_$wx$h.png' -e 'mv $f ~/Pictures/$f' -q 100
+bindsym Shift+Print           exec --no-startup-id scrot '%Y-%m-%d_%H.%M.%S_$wx$h.png' -e 'mv $f ~/Pictures/$f'
+bindsym XF86AudioRaiseVolume  exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
+bindsym XF86AudioLowerVolume  exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
+bindsym XF86AudioMute         exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+bindsym XF86MonBrightnessUp   exec --no-startup-id xbacklight -inc 20 # increase screen brightness
+bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 20 # decrease screen brightness
+bindsym XF86AudioPlay         exec playerctl play-pause
+bindsym XF86AudioNext         exec playerctl next
+bindsym XF86AudioPrev         exec playerctl previous
+
+for_window [class="^.*"]              border pixel 0
+for_window [class="feh"]              floating enable
+for_window [class="^GIMP"]            floating enable
+for_window [class="MPlayer"]          floating enable
+for_window [class="Remmina"]          floating enable
+for_window [class="Skype"]            floating enable
 for_window [class="(Steam|hl_linux)"] floating enable
-for_window [class="Update"] floating enable
-for_window [class="Yad"] floating enable
+for_window [class="Update"]           floating enable
+for_window [class="Yad"]              floating enable
 
-set $mod Mod4
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-# see full charset using `xfd -fa terminus`
-# get font strings using `xfontsel`
-# font for window titles. ISO 10646 = Unicode
-font -*-terminus-medium-r-*-*-*-120-75-75-*-*-iso8859-15
-font pango:Terminus 12px
-font -*-ohsnap-medium-*-*-*-12-*-*-*-*-*-*-*
-
-# start a terminal
-#  lxterminal Background color #00141A
-bindsym $mod+Return exec --no-startup-id urxvt
-bindsym $mod+Shift+T exec --no-startup-id i3-sensible-terminal
-bindsym $mod+Shift+F exec --no-startup-id firefox
-bindsym $mod+Shift+I exec --no-startup-id chromium-browser
-
-# lock screen
-bindsym $mod+Escape exec i3lock -i ~/Pictures/Wallpapers/screen.png
-
-
 # kill focused window
 bindsym $mod+Shift+Q kill
-
-# start dmenu (a program launcher)
-# bindsym $mod+d exec dmenu_run -b -fn 'Terminus:size=8'
-
-bindsym $mod+d exec --no-startup-id rofi -show combi
-
 # change focus
 bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
-
-# alternatively, you can use the cursor keys:
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
-
 # scroll through workspaces
-bindsym Control+$mod+Right workspace next_on_output
 bindsym Control+$mod+L workspace next_on_output
-bindsym Control+$mod+Left workspace prev_on_output
 bindsym Control+$mod+H workspace prev_on_output
-
 # move focused window
 bindsym $mod+Shift+H move left
 bindsym $mod+Shift+J move down
 bindsym $mod+Shift+K move up
 bindsym $mod+Shift+L move right
-
-# alternatively, you can use the cursor keys:
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
-
 # split in horiZontal orientation
 bindsym $mod+z split v
 # split in Vertical orientation
 bindsym $mod+v split h
-
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen
-
 # change container layout (stacked, tabbed, default)
 bindsym $mod+s layout stacking
 bindsym $mod+t layout tabbed
 bindsym $mod+e layout default
-
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
-
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
-
 # focus the parent container
 bindsym $mod+a focus parent
-
-# focus the child container
-#bindcode $mod+d focus child
-
 #default workspaces names
 set $ws1 "1:  Terminal"
 set $ws2 "2:  Code"
@@ -140,8 +96,6 @@ set $ws8 "8:  Mail"
 set $ws9 "9:  Media"
 
 # switch to workspace
-# use the Icons.ttf ref: https://wiki.archlinux.org/index.php/I3#Iconic_fonts_in_the_status_bar
-# bindsym $mod+1 workspace ⠁
 bindsym $mod+1 workspace $ws1
 bindsym $mod+2 workspace $ws2
 bindsym $mod+3 workspace $ws3
@@ -153,10 +107,10 @@ bindsym $mod+8 workspace $ws8
 bindsym $mod+9 workspace $ws9
 
 
-assign [class="Firefox"] $ws3
-assign [class="Rhythmbox"] $ws9
+assign [class="Firefox"]     $ws3
+assign [class="Chromium"]    $ws3
+assign [class="Rhythmbox"]   $ws9
 assign [class="Thunderbird"] $ws8
-
 
 # move focused container to workspace
 # bindsym $mod+Shift+exclam move container to workspace ⠁
@@ -195,12 +149,6 @@ mode "resize" {
         bindsym k resize shrink height 10 px or 10 ppt
         bindsym h resize shrink width 10 px or 10 ppt
 
-        # same bindings, but for the arrow keys
-        bindsym 113 resize shrink width 10 px or 10 ppt
-        bindsym 116 resize grow height 10 px or 10 ppt
-        bindsym 111 resize shrink height 10 px or 10 ppt
-        bindsym 114 resize grow width 10 px or 10 ppt
-
         # back to normal: Enter or Escape
         bindsym Return mode "default"
         bindsym Escape mode "default"
@@ -220,15 +168,12 @@ client.unfocused         $inactive-bg-color $inactive-bg-color $inactive-text-co
 client.urgent            $urgent-bg-color   $urgent-bg-color   $urgent-text-color
 client.background                           $bg-color
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
 bar {
-    #not showing workspaces numbers with their names
+  #not showing workspaces numbers with their names
   strip_workspace_numbers yes
   font pango:FontAwesome 10
   status_command i3blocks -c ~/.config/i3/i3blocks.conf
 
-#  status_command i3status
   position bottom
 
   separator_symbol "."
@@ -243,29 +188,3 @@ bar {
     urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
   }
 }
-
-# vim: notermguicolors nofoldenable
-#
-
-# screenshot
-bindsym Print exec --no-startup-id scrot '%Y-%m-%d_%H.%M.%S_$wx$h.png' -e 'mv $f ~/Pictures/$f' -q 100
-bindsym Shift+Print exec --no-startup-id scrot '%Y-%m-%d_%H.%M.%S_$wx$h.png' -e 'mv $f ~/Pictures/$f'
-
-
-# Pulse Audio controls
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
-
-# Sreen brightness controls
-bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 20 # increase screen brightness
-bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 20 # decrease screen brightness
-
-# Touchpad controls
-bindsym XF86TouchpadToggle exec ~/toggletouchpad.sh # toggle touchpad
-
-# Media player controls
-bindsym XF86AudioPlay exec playerctl play-pause
-bindsym XF86AudioNext exec playerctl next
-bindsym XF86AudioPrev exec playerctl previous
-

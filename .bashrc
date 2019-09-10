@@ -138,3 +138,5 @@ export PATH="/usr/local/heroku/bin:$PATH"
 
 export PATH="$HOME/anaconda3/bin:$PATH"
 export PATH="/opt/geckodriver:$PATH"
+
+export QT_QPA_PLATFORMTHEME="qt5ct"

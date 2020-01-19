@@ -94,6 +94,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-syntastic/syntastic'
 Plug 'Valloric/YouCompleteMe'
+Plug 'iCyMind/NeoSolarized'
 call plug#end()
 
 " Colors, Fonts, and Syntax.
@@ -101,8 +102,9 @@ filetype plugin indent on
 syntax enable
 set t_Co=256
 set encoding=utf-8
-set guifont=Hack
-colorscheme minimalist
+set guifont=Hack"
+set background=dark
+"colorscheme NeoSolarized
 
 " Directories.
 set backupdir=~/.local/share/nvim/backup
@@ -138,3 +140,5 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+
+nnoremap <F5> :buffers<CR>:buffer<Space>

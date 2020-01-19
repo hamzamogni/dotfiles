@@ -129,14 +129,16 @@ export TERM="xterm-256color"
 
 export COLORTERM='rxvt-unicode-256color'
 
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
-
 # The terminal's flow control commands may interfere with Ctrl-S and Ctrl-Q
 # ref. https://stackoverflow.com/a/13648667
 # stty start undef stop undef
 
-export PATH="$HOME/anaconda3/bin:$PATH"
-export PATH="/opt/geckodriver:$PATH"
 
 export QT_QPA_PLATFORMTHEME="qt5ct"
+
+export PATH="$PATH:/opt/flutter/bin"
+
+bind '"[A":history-search-backward'
+bind '"[B":history-search-forward'
+
+export PATH="$PATH:$HOME/anaconda3/bin"

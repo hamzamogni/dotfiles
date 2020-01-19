@@ -21,9 +21,10 @@ bindsym $mod+Control+minus gaps inner all minus 5
 exec "setxkbmap -option 'ctrl:swapcaps'"
 exec "setxkbmap -layout fr,ar"
 exec "setxkbmap -option 'grp:alt_shift_toggle'"
-exec --no-startup-id feh --bg-fill ~/Pictures/Wallpapers/wallpaper.jpg
+exec --no-startup-id feh --bg-fill ~/Pictures/Wallpapers/solarized-wallpaper-arch.png
 exec --no-startup-id urxvtd -q -f -o
 exec --no-startup-id compton -b --config ~/.config/compton/compton.conf
+exec --no-startup-id nm-applet
 
 bindsym $mod+Return           exec --no-startup-id i3-sensible-terminal
 bindsym $mod+Shift+I          exec --no-startup-id chromium
@@ -113,6 +114,8 @@ assign [class="Rhythmbox"]   $ws9
 assign [class="Thunderbird"] $ws8
 assign [class="Cantata"]     $ws9
 
+for_window [class="Thunderbird"] sticky enable 
+
 # move focused container to workspace
 # bindsym $mod+Shift+exclam move container to workspace ⠁
 bindsym $mod+Shift+1 move container to workspace $ws1
@@ -156,12 +159,12 @@ mode "resize" {
         bindsym Escape mode "default"
 }
 
-set $bg-color            #5F819D
-set $text-color          #C5C8C6
-set $inactive-bg-color   #1D1F21
-set $inactive-text-color #C5C8C6
-set $urgent-bg-color     #A54242
-set $urgent-text-color   #C5C8C6
+set $bg-color            #B58900
+set $text-color          #FDF6E3
+set $inactive-bg-color   #6C71C4
+set $inactive-text-color #FDF6E3
+set $urgent-bg-color     #DC322F
+set $urgent-text-color   #FDF6E3
 
 # colors                 border             background         text                 indicator
 client.focused           $bg-color          $bg-color          $text-color          $urgent-bg-color

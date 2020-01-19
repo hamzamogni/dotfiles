@@ -2,8 +2,6 @@ URxvt.font: xft:Hack:pixelsize=12
 ! disable bold fonts by just applying the same font string:
 ! URxvt.font: xft:terminus12
 ! URxvt.boldFont: xft:terminus12
-URxvt.foreground: #43a047
-URxvt.background: #121212
 URxvt.saveLines: 8192
 URxvt.scrollBar: false
 ! do not scroll with output
@@ -20,30 +18,39 @@ URxvt.scrollTtyKeypress: true
 !URxvt.tabbed.tab-bg: 16
 
 ! COLORS SETTINGS
-! black
-URxvt*color0  : #000000
-URxvt*color8  : #555753
-! red
-URxvt*color1  : #cc0000
-URxvt*color9  : #ef2929
-! green
-URxvt*color2  : #4e9a06
-URxvt*color10 : #8ae234
-! yellow
-URxvt*color3  : #c4a000
-URxvt*color11 : #fce94f
-! blue
-URxvt*color4  : #3465a4
-URxvt*color12 : #729fcf
-! magenta
-URxvt*color5  : #75507b
-URxvt*color13 : #ad7fa8
-! cyan
-URxvt*color6  : #06989a
-URxvt*color14 : #34e2e2
-! white
-URxvt*color7: #dedede
-URxvt*color15 : #eeeeec
+! special
+URxvt.foreground:   #93a1a1
+URxvt.background:   #002b36
+URxvt.cursorColor:  #93a1a1
 
-! colors for rxvt tabs plugin
-URxvt*color16: #121212
+! black
+URxvt.color0:       #002b36
+URxvt.color8:       #657b83
+
+! red
+URxvt.color1:       #dc322f
+URxvt.color9:       #dc322f
+
+! green
+URxvt.color2:       #859900
+URxvt.color10:      #859900
+
+! yellow
+URxvt.color3:       #b58900
+URxvt.color11:      #b58900
+
+! blue
+URxvt.color4:       #268bd2
+URxvt.color12:      #268bd2
+
+! magenta
+URxvt.color5:       #6c71c4
+URxvt.color13:      #6c71c4
+
+! cyan
+URxvt.color6:       #2aa198
+URxvt.color14:      #2aa198
+
+! white
+URxvt.color7:       #93a1a1
+URxvt.color15:      #fdf6e3

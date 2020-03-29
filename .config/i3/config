@@ -23,7 +23,7 @@ exec "setxkbmap -layout fr,ar"
 exec "setxkbmap -option 'grp:alt_shift_toggle'"
 exec --no-startup-id feh --bg-fill ~/Pictures/Wallpapers/solarized-wallpaper-arch.png
 exec --no-startup-id urxvtd -q -f -o
-exec --no-startup-id compton -b --config ~/.config/compton/compton.conf
+exec --no-startup-id picom -b --config ~/.config/compton/compton.conf
 exec --no-startup-id nm-applet
 
 bindsym $mod+Return           exec --no-startup-id i3-sensible-terminal

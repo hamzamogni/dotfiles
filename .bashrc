@@ -121,7 +121,7 @@ fi
 
 # no cow love? ref. https://ansibleworks.zendesk.com/entries/26206167-How-do-I-disable-cowsay-
 # export ANSIBLE_NOCOWS=1
-export EDITOR=/usr/bin/vim
+export EDITOR=/usr/bin/nvim
 export XZ_OPT=-9
 
 # no need for 'tmux -2' anymore, 'cause .vimrc BCE fix
@@ -142,3 +142,6 @@ bind '"[A":history-search-backward'
 bind '"[B":history-search-forward'
 
 export PATH="$PATH:$HOME/anaconda3/bin"
+
+
+export QT_QPA_PLATFORMTHEME="qt5ct"

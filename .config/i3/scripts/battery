@@ -1,0 +1,13 @@
+#!/bin/sh
+
+
+OUTPUT="$(acpi -i | awk 'NR==1 { print $3 " " $4}')"
+
+echo ${OUTPUT//","/ }
+
+CAPACITY=$(cat /sys/class/power_supply/BAT0/capacity)
+
+if [ "$CAPACITY" -lt "15" ]
+then
+    notify-send "Battery is flat" "Plug in power" --icon=dialog-error
+fi

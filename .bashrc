@@ -137,11 +137,23 @@ export COLORTERM='rxvt-unicode-256color'
 export QT_QPA_PLATFORMTHEME="qt5ct"
 
 export PATH="$PATH:/opt/flutter/bin"
+export ANDROID_HOME="$HOME/Android/Sdk"
+export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
 
 bind '"[A":history-search-backward'
 bind '"[B":history-search-forward'
 
 export PATH="$PATH:$HOME/anaconda3/bin"
+export PATH="$PATH:$HOME/.local/bin"
+export PATH="$PATH:$HOME/.yarn/bin"
 
 
 export QT_QPA_PLATFORMTHEME="qt5ct"
+
+set -o vi
+
+
+#powerline-daemon -q
+#POWERLINE_BASH_CONTINUATION=1
+#POWERLINE_BASH_SELECT=1
+#. /usr/share/powerline/bindings/bash/powerline.sh

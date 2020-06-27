@@ -21,7 +21,7 @@ bindsym $mod+Control+minus gaps inner all minus 5
 exec "setxkbmap -option 'ctrl:swapcaps'"
 exec "setxkbmap -layout fr,ar"
 exec "setxkbmap -option 'grp:alt_shift_toggle'"
-exec --no-startup-id feh --bg-fill ~/Pictures/Wallpapers/solarized-wallpaper-arch.png
+exec --no-startup-id feh --bg-fill ~/Pictures/Wallpapers/deer3.jpg
 exec --no-startup-id urxvtd -q -f -o
 exec --no-startup-id picom -b --config ~/.config/compton/compton.conf
 exec --no-startup-id nm-applet
@@ -29,11 +29,11 @@ exec --no-startup-id nm-applet
 bindsym $mod+Return           exec --no-startup-id i3-sensible-terminal
 bindsym $mod+Shift+I          exec --no-startup-id chromium
 bindsym $mod+Shift+F          exec --no-startup-id urxvt -e ranger
-bindsym $mod+Escape           exec --no-startup-id i3lock -i ~/Pictures/Wallpapers/screen.png
+bindsym $mod+Escape           exec --no-startup-id i3lock -tf -i ~/Pictures/Wallpapers/deer3_lock.png
 bindsym $mod+d                exec --no-startup-id rofi -show combi
 bindsym Print                 exec --no-startup-id scrot '%Y-%m-%d_%H.%M.%S_$wx$h.png' -e 'mv $f ~/Pictures/$f' -q 100
 bindsym Shift+Print           exec --no-startup-id scrot '%Y-%m-%d_%H.%M.%S_$wx$h.png' -e 'mv $f ~/Pictures/$f'
-bindsym XF86AudioRaiseVolume  exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
+bindsym XF86AudioRaiseVolume  exec --no-startup-id pactl set-sink-volume 0 +2% #increase sound volume
 bindsym XF86AudioLowerVolume  exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
 bindsym XF86AudioMute         exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
 bindsym XF86MonBrightnessUp   exec --no-startup-id xbacklight -inc 20 # increase screen brightness
@@ -88,11 +88,12 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus parent
 #default workspaces names
 set $ws1 "1:  Terminal"
-set $ws2 "2:  Code"
-set $ws3 "3:  Chromium"
+set $ws2 "2:  Dev"
+set $ws3 "3:  Web"
 set $ws4 "4:  Files"
-set $ws5 "5:  Documents"
-set $ws6 "6:  LibreOffice"
+set $ws5 "5:  Docs"
+set $ws6 "6:  Office"
+set $ws7 "7:  Misc"
 set $ws8 "8:  Mail"
 set $ws9 "9:  Media"
 
@@ -103,7 +104,7 @@ bindsym $mod+3 workspace $ws3
 bindsym $mod+4 workspace $ws4
 bindsym $mod+5 workspace $ws5
 bindsym $mod+6 workspace $ws6
-bindsym $mod+7 workspace 7
+bindsym $mod+7 workspace $ws7
 bindsym $mod+8 workspace $ws8
 bindsym $mod+9 workspace $ws9
 bindsym $mod+0 scratchpad show
@@ -113,6 +114,13 @@ assign [class="Chromium"]    $ws3
 assign [class="Rhythmbox"]   $ws9
 assign [class="Thunderbird"] $ws8
 assign [class="Cantata"]     $ws9
+assign [class="spotify"]     $ws9
+assign [class="zoom"]        $ws7
+assign [class="skype"]       $ws7
+assign [class="Slack"]       $ws7
+assign [class="discord"]     $ws7
+assign [class="code-oss"]    $ws2
+assign [class="subl3"]    $ws2
 
 for_window [class="Thunderbird"] sticky enable 
 
@@ -124,7 +132,7 @@ bindsym $mod+Shift+3 move container to workspace $ws3
 bindsym $mod+Shift+4 move container to workspace $ws4
 bindsym $mod+Shift+5 move container to workspace $ws5
 bindsym $mod+Shift+6 move container to workspace $ws6
-bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+7 move container to workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+0 move scratchpad
@@ -159,9 +167,9 @@ mode "resize" {
         bindsym Escape mode "default"
 }
 
-set $bg-color            #B58900
+set $bg-color            #2AA198
 set $text-color          #FDF6E3
-set $inactive-bg-color   #6C71C4
+set $inactive-bg-color   #073642
 set $inactive-text-color #FDF6E3
 set $urgent-bg-color     #DC322F
 set $urgent-text-color   #FDF6E3
@@ -176,10 +184,10 @@ client.background                           $bg-color
 bar {
   #not showing workspaces numbers with their names
   strip_workspace_numbers yes
-  font pango:FontAwesome 10
+  font pango:Roboto bold 10
   status_command i3blocks -c ~/.config/i3/i3blocks.conf
 
-  position bottom
+  position top
 
   separator_symbol "."
   colors {

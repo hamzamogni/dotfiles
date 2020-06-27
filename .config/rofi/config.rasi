@@ -1,10 +1,8 @@
 configuration {
-    lines: 12;
-    font: "Source Sans Pro 12";
-    show-icons: true;
-    theme: "oxide";
-/*    display-window: "Window"; */
-    display-drun: "Search";
-    modi: "window,drun,run,ssh";
-    combi-modi: "window,run,ssh";
-}
+ modi: "window,drun,ssh,combi";
+ combi-modi: "window,drun,ssh";
+ display-drun: "Search";
+ font: "Roboto bold 12";
+ show-icons: true;
+ theme: "solarized";
+ }

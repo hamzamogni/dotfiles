@@ -92,6 +92,8 @@ Plug 'scrooloose/nerdtree'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'powerline/powerline'
 Plug 'vim-syntastic/syntastic'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 Plug 'iCyMind/NeoSolarized'
@@ -112,7 +114,7 @@ set directory=~/.local/share/nvim/swap
 set undodir=~/.local/share/nvim/undo
 
 " Airline.
-let g:airline_theme='minimalist'
+"let g:airline_theme='dark'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#branch#enabled = 1
@@ -142,3 +144,7 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
 nnoremap <F5> :buffers<CR>:buffer<Space>
+
+
+" copy to clipboard
+set clipboard=unnamed

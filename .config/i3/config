@@ -17,6 +17,9 @@ smart_gaps on
 bindsym $mod+Control+plus gaps inner all plus 5
 bindsym $mod+Control+minus gaps inner all minus 5
 
+#focus_follows_mouse no
+mouse_warping none 
+
 #Startup 
 exec "setxkbmap -option 'ctrl:swapcaps'"
 exec "setxkbmap -layout fr,ar"
@@ -27,6 +30,7 @@ exec --no-startup-id picom -b --config ~/.config/compton/compton.conf
 exec --no-startup-id nm-applet
 
 bindsym $mod+Return           exec --no-startup-id i3-sensible-terminal
+bindsym $mod+Shift+Return     exec --no-startup-id i3-input
 bindsym $mod+Shift+I          exec --no-startup-id chromium
 bindsym $mod+Shift+F          exec --no-startup-id urxvt -e ranger
 bindsym $mod+Escape           exec --no-startup-id i3lock -tf -i ~/Pictures/Wallpapers/deer3_lock.png

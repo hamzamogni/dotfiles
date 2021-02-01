@@ -21,10 +21,7 @@ bindsym $mod+Control+minus gaps inner all minus 5
 mouse_warping none 
 
 #Startup 
-exec "setxkbmap -option 'ctrl:swapcaps'"
-exec "setxkbmap -layout fr,ar"
-exec "setxkbmap -option 'grp:alt_shift_toggle'"
-exec --no-startup-id feh --bg-fill ~/Pictures/Wallpapers/deer3.jpg
+exec --no-startup-id feh --bg-fill ~/Pictures/Wallpapers/deer2.jpg
 exec --no-startup-id urxvtd -q -f -o
 exec --no-startup-id picom -b --config ~/.config/compton/compton.conf
 exec --no-startup-id nm-applet

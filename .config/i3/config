@@ -43,6 +43,9 @@ bindsym XF86AudioPlay         exec playerctl play-pause
 bindsym XF86AudioNext         exec playerctl next
 bindsym XF86AudioPrev         exec playerctl previous
 
+bindsym $mod+Shift+M          move workspace to output VGA1
+bindsym $mod+m                move workspace to output LVDS1
+
 for_window [class="^.*"]              border pixel 0
 for_window [class="feh"]              floating enable
 for_window [class="^GIMP"]            floating enable

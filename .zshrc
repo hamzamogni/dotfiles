@@ -102,3 +102,28 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+#
+alias ll='ls -alF'
+
+
+
+export EDITOR=/usr/bin/nvim
+
+
+
+
+export QT_QPA_PLATFORMTHEME="qt5ct"
+
+export PATH="$PATH:/opt/flutter/bin"
+export ANDROID_HOME="$HOME/Android/Sdk"
+export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
+
+export PATH="$PATH:$HOME/anaconda3/bin"
+export PATH="$PATH:$HOME/.local/bin"
+export PATH="$PATH:$HOME/.yarn/bin"
+export PATH="$PATH:$HOME/.config/composer/vendor/bin"
+
+
+export QT_QPA_PLATFORMTHEME="qt5ct"
+
+

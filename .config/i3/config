@@ -37,8 +37,8 @@ bindsym Shift+Print           exec --no-startup-id scrot '%Y-%m-%d_%H.%M.%S_$wx$
 bindsym XF86AudioRaiseVolume  exec --no-startup-id pactl set-sink-volume 0 +2% #increase sound volume
 bindsym XF86AudioLowerVolume  exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
 bindsym XF86AudioMute         exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
-bindsym XF86MonBrightnessUp   exec --no-startup-id xbacklight -inc 20 # increase screen brightness
-bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 20 # decrease screen brightness
+bindsym XF86MonBrightnessUp   exec --no-startup-id xbacklight -inc 5 # increase screen brightness
+bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 1 # decrease screen brightness
 bindsym XF86AudioPlay         exec playerctl play-pause
 bindsym XF86AudioNext         exec playerctl next
 bindsym XF86AudioPrev         exec playerctl previous
@@ -171,12 +171,12 @@ mode "resize" {
         bindsym Escape mode "default"
 }
 
-set $bg-color            #2AA198
-set $text-color          #FDF6E3
-set $inactive-bg-color   #073642
-set $inactive-text-color #FDF6E3
-set $urgent-bg-color     #DC322F
-set $urgent-text-color   #FDF6E3
+set $bg-color            #292D3E
+set $text-color          #C792EA
+set $inactive-bg-color   #292D3E
+set $inactive-text-color #959DCB
+set $urgent-bg-color     #292D3E
+set $urgent-text-color   #F07178
 
 # colors                 border             background         text                 indicator
 client.focused           $bg-color          $bg-color          $text-color          $urgent-bg-color
@@ -188,7 +188,7 @@ client.background                           $bg-color
 bar {
   #not showing workspaces numbers with their names
   strip_workspace_numbers yes
-  font pango:Roboto bold 10
+  font pango:Fira Code 11
   status_command i3blocks -c ~/.config/i3/i3blocks.conf
 
   position top
@@ -202,6 +202,6 @@ bar {
     active_workspace   $inactive-bg-color $inactive-bg-color $text-color
     focused_workspace  $bg-color          $bg-color          $text-color
     inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
-    urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
+    urgent_workspace   $urgent-bg-color   $urgent-bg-color   $urgent-text-color
   }
 }

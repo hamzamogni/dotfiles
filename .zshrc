@@ -42,7 +42,7 @@ ZSH_THEME="robbyrussell"
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 # Caution: this setting can cause issues with multiline prompts (zsh 5.7.1 and newer seem to work)
@@ -126,4 +126,7 @@ export PATH="$PATH:$HOME/.config/composer/vendor/bin"
 
 export QT_QPA_PLATFORMTHEME="qt5ct"
 
+fpath+=$HOME/.zsh/pure
 
+autoload -U promptinit; promptinit
+prompt pure

@@ -130,3 +130,6 @@ fpath+=$HOME/.zsh/pure
 
 autoload -U promptinit; promptinit
 prompt pure
+
+# turn on git stash status
+zstyle :prompt:pure:git:stash show yes

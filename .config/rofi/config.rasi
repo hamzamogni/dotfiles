@@ -2,7 +2,7 @@ configuration {
  modi: "window,drun,ssh,combi";
  combi-modi: "window,drun,ssh";
  display-drun: "Search";
- font: "Roboto bold 12";
+ font: "Fira Code bold 12";
  show-icons: true;
- theme: "solarized";
+ theme: "palenight";
  }

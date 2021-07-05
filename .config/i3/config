@@ -188,7 +188,7 @@ client.background                           $bg-color
 bar {
   #not showing workspaces numbers with their names
   strip_workspace_numbers yes
-  font pango:Fira Code 11
+  font pango:Fira Code bold 11
   status_command i3blocks -c ~/.config/i3/i3blocks.conf
 
   position top

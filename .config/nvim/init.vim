@@ -84,7 +84,6 @@ nnoremap <space> za
 " Plugin.
 call plug#begin('~/.local/share/nvim/plugged')
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'dikiaap/minimalist'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'junegunn/vim-plug'
 Plug 'mattn/emmet-vim'

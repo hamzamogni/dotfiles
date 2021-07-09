@@ -26,13 +26,13 @@ cal --color=always $month $year \
         -dmenu \
         -markup-rows \
         -no-fullscreen \
-        -font "Monospace 10" \
+        -font "Fira Code 15" \
         -hide-scrollbar \
         -bw 2 \
         -m -3 \
-        -theme-str '#window {anchor:southeast; location: northwest;}' \
+        -theme-str '#window {anchor:northeast; location: 2;}' \
         -eh 1 \
-        -width -22 \
+        -width -25 \
         -no-custom \
         -p "$date" > /dev/null
     esac

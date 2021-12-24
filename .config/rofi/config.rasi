@@ -4,5 +4,6 @@ configuration {
  display-drun: "Search";
  font: "Fira Code bold 12";
  show-icons: true;
- theme: "palenight";
  }
+
+ @theme "palenight"

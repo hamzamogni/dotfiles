@@ -41,7 +41,7 @@ ZSH_THEME="robbyrussell"
 # DISABLE_LS_COLORS="true"
 
 # Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
+DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
 ENABLE_CORRECTION="true"
@@ -76,6 +76,10 @@ plugins=(
     git 
     zsh-autosuggestions
     zsh-syntax-highlighting
+    docker
+    docker-compose
+    emoji
+    minikube
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -91,7 +95,7 @@ source $ZSH/oh-my-zsh.sh
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
 # else
-#   export EDITOR='mvim'
+#   export EDITOR='nvim'
 # fi
 
 # Compilation flags
@@ -121,7 +125,7 @@ export PATH="$PATH:/opt/flutter/bin"
 export ANDROID_HOME="$HOME/Android/Sdk"
 export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
 
-export PATH="$PATH:$HOME/anaconda3/bin"
+export PATH="$PATH:/media/internal_hdd/Softwares/anaconda3/bin"
 export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:$HOME/.yarn/bin"
 export PATH="$PATH:$HOME/.config/composer/vendor/bin"

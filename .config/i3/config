@@ -21,7 +21,7 @@ bindsym $mod+Control+minus gaps inner all minus 5
 mouse_warping none 
 
 #Startup 
-exec --no-startup-id feh --bg-fill ~/Pictures/Wallpapers/wallpaper1.jpg
+exec --no-startup-id feh --bg-fill ~/Pictures/Wallpapers/solarized-wallpaper-kernel.png
 exec --no-startup-id picom -b --config ~/.config/compton/compton.conf
 exec --no-startup-id nm-applet
 exec --no-startup-id rescuetime

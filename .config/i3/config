@@ -56,6 +56,7 @@ for_window [class="Skype"]            floating enable
 for_window [class="(Steam|hl_linux)"] floating enable
 for_window [class="Update"]           floating enable
 for_window [class="Yad"]              floating enable
+for_window [class="Thunderbird"]      sticky enable 
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -114,20 +115,22 @@ bindsym $mod+8 workspace $ws8
 bindsym $mod+9 workspace $ws9
 bindsym $mod+0 scratchpad show
 
-assign [class="Firefox"]     $ws3
-assign [class="Chromium"]    $ws3
-assign [class="Rhythmbox"]   $ws9
-assign [class="Thunderbird"] $ws8
-assign [class="Cantata"]     $ws9
-assign [class="spotify"]     $ws9
-assign [class="zoom"]        $ws7
-assign [class="skype"]       $ws7
-assign [class="Slack"]       $ws7
-assign [class="discord"]     $ws7
-assign [class="code-oss"]    $ws2
-assign [class="subl3"]    $ws2
+assign [class="code-oss"]                $ws2
+assign [class="subl3"]                   $ws2
+assign [class="firefox"]                 $ws3
+assign [class="Chromium"]                $ws3
+assign [class="Google-chrome"]           $ws3
+assign [class="okular"]                  $ws5
+assign [class="zoom"]                    $ws7
+assign [class="skype"]                   $ws7
+assign [class="Slack"]                   $ws7
+assign [class="discord"]                 $ws7
+assign [class="notion-app-enhanced"]     $ws7
+assign [class="Thunderbird"]             $ws8
+assign [class="Rhythmbox"]               $ws9
+assign [class="cantata"]                 $ws9
+assign [class="spotify"]                 $ws9
 
-for_window [class="Thunderbird"] sticky enable 
 
 # move focused container to workspace
 # bindsym $mod+Shift+exclam move container to workspace ⠁

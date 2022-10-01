@@ -79,10 +79,11 @@ plugins=(
     docker
     docker-compose
     emoji
+    minikube
+    kubectl
 )
 
 source $ZSH/oh-my-zsh.sh
-source ~/.minikube-completion
 
 # User configuration
 
@@ -111,13 +112,21 @@ source ~/.minikube-completion
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
 alias ll='ls -alF'
-alias k="kubectl"
+alias kubectl="minikube kubectl --"
+
+
 
 
 export EDITOR=/usr/bin/nvim
 
 
+
+
 export QT_QPA_PLATFORMTHEME="qt5ct"
+
+export PATH="$PATH:/opt/flutter/bin"
+export ANDROID_HOME="$HOME/Android/Sdk"
+export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
 
 export PATH="$PATH:/media/internal_hdd/Softwares/anaconda3/bin"
 export PATH="$PATH:$HOME/.local/bin"
@@ -130,16 +139,9 @@ export QT_QPA_PLATFORMTHEME="qt5ct"
 export CURRENT_UID=$(id -u):$(id -g)
 
 fpath+=$HOME/.zsh/pure
-fpath+=~/.zfunc
 
 autoload -U promptinit; promptinit
 prompt pure
 
 # turn on git stash status
 zstyle :prompt:pure:git:stash show yes
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/home/hmogni/google-cloud-sdk/path.zsh.inc' ]; then . '/home/hmogni/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/home/hmogni/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/hmogni/google-cloud-sdk/completion.zsh.inc'; fi

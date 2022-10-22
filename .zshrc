@@ -79,6 +79,7 @@ plugins=(
     docker
     docker-compose
     emoji
+    kubectl
 )
 
 source $ZSH/oh-my-zsh.sh

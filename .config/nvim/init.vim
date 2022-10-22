@@ -75,8 +75,8 @@ augroup numbertoggle
     autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
 augroup END
 
-" Press ii to return to normal mode
-:imap ii <Esc>
+" Press jj to return to normal mode
+:imap jj <Esc>
 " Enable folding with spacebar
 nnoremap <space> za
 
@@ -85,16 +85,15 @@ call plug#begin('~/.local/share/nvim/plugged')
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'junegunn/vim-plug'
-Plug 'mattn/emmet-vim'
 Plug 'kyazdani42/nvim-web-devicons' " for file icons
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'vim-syntastic/syntastic'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 Plug 'kaicataldo/material.vim', { 'branch': 'main' }
+Plug 'deoplete-plugins/deoplete-clang'
 call plug#end()
 
 " Colors, Fonts, and Syntax.

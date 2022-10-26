@@ -36,7 +36,7 @@ set magic " Enable extended regexes
 set mouse=a " Enable mouse in all in all modes
 set noerrorbells " Disable error bells
 set nojoinspaces " Only insert single space after a '.', '?' and '!' with a join command
-set noshowmode " Don't show the current mode (airline.vim takes care of us)
+set noshowmode " Don't show the current mode (lightline.vim takes care of us)
 set nostartofline " Don't reset cursor to start of line when moving around
 set nowrap " Do not wrap lines
 set ofu=syntaxcomplete#Complete " Set omni-completion method
@@ -89,11 +89,36 @@ Plug 'kyazdani42/nvim-web-devicons' " for file icons
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-fugitive'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'itchyny/lightline.vim'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
-Plug 'kaicataldo/material.vim', { 'branch': 'main' }
+" Plug 'kaicataldo/material.vim', { 'branch': 'main' }
 Plug 'deoplete-plugins/deoplete-clang'
+Plug 'williamboman/mason.nvim'
+Plug 'williamboman/mason-lspconfig.nvim'
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+
+" For vsnip users.
+Plug 'hrsh7th/cmp-vsnip'
+Plug 'hrsh7th/vim-vsnip'
+
+" navigator
+Plug 'ray-x/guihua.lua', {'do': 'cd lua/fzy && make' }
+Plug 'ray-x/navigator.lua'
+
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
+" telescope
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
+
+" aurora theme 
+Plug 'ray-x/aurora'  
+
 call plug#end()
 
 " Colors, Fonts, and Syntax.
@@ -107,47 +132,40 @@ if (has("nvim"))
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 endif
 
-"For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
-"Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
-" < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
-if (has("termguicolors"))
-  set termguicolors
-endif
+set termguicolors
 
-let g:palenight_termcolors=16
+let g:aurora_italic = 0     " italic
+let g:aurora_transparent = 0     " transparent
+let g:aurora_bold = 0     " bold
+let g:aurora_darker = 0     " darker background
 
-" Airline.
-let g:airline_theme='base16_material_palenight'
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#branch#enabled = 1
-let g:airline#extensions#whitespace#enabled = 1
+set background=dark
+colorscheme aurora
+"let g:palenight_termcolors=16
 
 set guifont="Fira Code"
-let g:material_terminal_italics = 1
-let g:material_theme_style = "palenight"
-set background=dark
-colorscheme material
+"let g:material_terminal_italics = 1
+"let g:material_theme_style = "palenight"
+
+let g:lightline = {
+      \ 'colorscheme': 'one',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'FugitiveHead'
+      \ },
+      \ }
+
+
+" for nvim cmp (auto completion)
+set completeopt=menu,menuone,noselect
 
 " Directories.
 set backupdir=~/.local/share/nvim/backup
 set directory=~/.local/share/nvim/swap
 set undodir=~/.local/share/nvim/undo
-
-" Syntastic.
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_phpcs_disable = 1
-let g:syntastic_phpmd_disable = 1
-let g:syntastic_php_checkers = ['php']
-let g:syntastic_quiet_messages = { "type": "style" }
-let g:syntastic_aggregate_errors = 1
-let g:syntastic_auto_jump = 2
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
 
 nnoremap <F5> :buffers<CR>:buffer<Space>
 
@@ -227,9 +245,13 @@ nnoremap <leader>r :NvimTreeRefresh<CR>
 nnoremap <leader>n :NvimTreeFindFile<CR>
 " NvimTreeOpen, NvimTreeClose, NvimTreeFocus, NvimTreeFindFileToggle, and NvimTreeResize are also available if you need them
 
-set termguicolors " this variable must be enabled for colors to be applied properly
-
 " a list of groups can be found at `:help nvim_tree_highlight`
 highlight NvimTreeFolderIcon guibg=blue
 
 lua require'nvim_tree'
+lua require'nvimcmp'
+lua require'mason_setup'
+lua require'navigator_setup'
+lua require'telescope_setup'
+
+

@@ -6,7 +6,6 @@ FULLTEXT=$null
 
 # ICONS
 UNPLUGGED_ICON=$(printf '\uf00d\uf240')
-CHARGING_ICON=$(printf '\uf1e6')
 
 color() {
     if [[ $1 -lt 20 ]]; then

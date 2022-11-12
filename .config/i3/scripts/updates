@@ -1,0 +1,10 @@
+#!/usr/bin/bash
+
+
+updates=$(checkupdates | wc -l)
+
+if [ $updates -ge 1 ] 
+then
+    echo "${LABEL}<span color='${UPDATE_COLOR}'>${updates}</span>"
+fi
+

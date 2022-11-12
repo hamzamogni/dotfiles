@@ -1,13 +1,50 @@
-#!/bin/sh
+#!/usr/bin/sh
+
+STATUS=$(acpi)
+FULLTEXT=$null
 
 
-OUTPUT="$(acpi -i | awk 'NR==1 { print $3 " " $4}')"
+# ICONS
+UNPLUGGED_ICON=$(printf '\uf00d\uf240')
+CHARGING_ICON=$(printf '\uf1e6')
 
-echo ${OUTPUT//","/ }
+color() {
+    if [[ $1 -lt 20 ]]; then
+        echo 'red'
+    elif [[ $1 -lt 60 ]]; then
+        echo 'yellow'
+    else
+        echo 'white'
+    fi
+}
 
-CAPACITY=$(cat /sys/class/power_supply/BAT0/capacity)
+icon() {
+    case $1 in 
+        "Full")
+            echo "<span font='FontAwesome'>$(printf '\uf1e6')</span>"
+            ;;
+        "Discharging")
+            echo "<span font='FontAwesome'>$(printf '\uf240')</span>"
+            ;;
+        "Unknown")
+            echo "<span font='FontAwesome'>$(printf '\uf128\uf240')</span>"
+            ;;
+        *)
+            echo "<span color='yellow' font='FontAwesome'>$(printf '\uf0e7\uf1e6')</span>"
+            ;;
+    esac
+}
 
-if [ "$CAPACITY" -lt "15" ]
-then
-    notify-send "Battery is flat" "Plug in power" --icon=dialog-error
+if [[ -z $STATUS ]]; then
+    # BATTERY UNPLUGGED
+    FULLTEXT="<span color='red' font='FontAwesome'>${UNPLUGGED_ICON}</span>"
+else
+    TEXT=$(acpi | awk -F'[, ]+' '{print $4 " (" $5 ")"}')
+
+    PERCENT_REMAINING=$(echo $STATUS | awk -F'[, ]+' '{print $4}' | sed 's/%//') 
+    STATE=$(echo $STATUS | awk -F'[, ]+' '{print $3}')
+    
+    FULLTEXT="$(icon ${STATE})<span color='$(color $PERCENT_REMAINING)' font='FontAwesome'>${TEXT}</span>"
 fi
+
+echo $FULLTEXT

@@ -1,10 +1,15 @@
 #!/usr/bin/bash
 
+if [ $button == 1 ]
+then
+    i3-msg -q exec "i3-sensible-terminal -e sudo pacman -Suy" 
+    i3-msg -q layout tabbed
+fi
 
 updates=$(checkupdates | wc -l)
-
 if [ $updates -ge 1 ] 
 then
     echo "${LABEL}<span color='${UPDATE_COLOR}'>${updates}</span>"
 fi
+
 

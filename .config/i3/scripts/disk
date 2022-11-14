@@ -1,3 +1,3 @@
 #!/bin/bash
 
-df -h | grep sda5 | awk '{print $3"/"$2" ("$5")"}'
+echo 'DISK' $(df -h | grep sda5 | awk '{print $5}')

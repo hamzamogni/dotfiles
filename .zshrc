@@ -116,6 +116,7 @@ alias k="kubectl"
 
 
 export EDITOR=/usr/bin/nvim
+export TERMINAL=termite
 
 
 export QT_QPA_PLATFORMTHEME="qt5ct"

@@ -3,7 +3,7 @@ cd "$(dirname "${BASH_SOURCE}")"
 git pull origin master
 function doIt() {
 	rsync --exclude ".git/" --exclude "xrandr" --exclude "install.sh" \
-		--exclude "README.*" --exclude "Xmodmap" --exclude .config/i3/scripts/  -av --no-perms . ~
+		--exclude "README.*" --exclude "Xmodmap" -av --no-perms . ~
 
 	source ~/.bashrc
 }

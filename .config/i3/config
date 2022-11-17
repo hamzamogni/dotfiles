@@ -6,6 +6,7 @@
 #########################
 
 set $mod Mod4
+font pango:MesloLGS NF 5
 
 new_window none
 new_float 1pixel

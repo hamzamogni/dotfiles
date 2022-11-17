@@ -28,10 +28,10 @@ exec --no-startup-id rescuetime
 exec --no-startup-id "setxkbmap -layout fr,ar -option 'grp:alt_shift_toggle'"
 exec --no-startup-id "setxkbmap -option 'ctrl:swapcaps'"
 
-bindsym $mod+Return           exec --no-startup-id termite
+bindsym $mod+Return           exec --no-startup-id alacritty
 bindsym $mod+Shift+Return     exec --no-startup-id i3-input
 bindsym $mod+Shift+I          exec --no-startup-id chromium
-bindsym $mod+Shift+F          exec --no-startup-id termite -e ranger
+bindsym $mod+Shift+F          exec --no-startup-id alacritty -e ranger
 bindsym $mod+Escape           exec --no-startup-id i3lock -tf -i ~/Pictures/Wallpapers/deer3_lock.png
 bindsym $mod+d                exec --no-startup-id rofi -show combi
 bindsym Print                 exec --no-startup-id scrot '%Y-%m-%d_%H.%M.%S_$wx$h.png' -e 'mv $f ~/Pictures/$f' -q 100

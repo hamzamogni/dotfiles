@@ -21,6 +21,7 @@ require'packer'.startup(function (use)
   use 'williamboman/mason-lspconfig.nvim'
   use 'neovim/nvim-lspconfig'
   use 'hrsh7th/nvim-cmp'
+  use 'kylechui/nvim-surround'
   use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-buffer'
   use 'hrsh7th/cmp-path'
@@ -59,4 +60,5 @@ require('plugins.mason')
 require('plugins.navigator')
 require('plugins.tree')
 require('plugins.lualine')
+require('plugins.others')
 

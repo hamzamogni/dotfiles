@@ -17,8 +17,7 @@ smart_gaps on
 bindsym $mod+Control+plus gaps inner all plus 5
 bindsym $mod+Control+minus gaps inner all minus 5
 
-#focus_follows_mouse no
-mouse_warping none 
+focus_follows_mouse false
 
 #Startup 
 exec --no-startup-id feh --bg-fill ~/Pictures/Wallpapers/solarized-wallpaper-kernel.png
@@ -48,6 +47,7 @@ bindsym XF86AudioPrev         exec playerctl previous
 bindsym $mod+Shift+M          move workspace to output VGA1
 bindsym $mod+m                move workspace to output LVDS1
 
+# default window mode settings
 for_window [class="^.*"]              border pixel 0
 for_window [class="feh"]              floating enable
 for_window [class="^GIMP"]            floating enable
@@ -64,47 +64,47 @@ floating_modifier $mod
 
 # kill focused window
 bindsym $mod+Shift+Q kill
+
 # change focus
 bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
+
 # scroll through workspaces
 bindsym Control+$mod+L workspace next_on_output
 bindsym Control+$mod+H workspace prev_on_output
+
 # move focused window
 bindsym $mod+Shift+H move left
 bindsym $mod+Shift+J move down
 bindsym $mod+Shift+K move up
 bindsym $mod+Shift+L move right
+
 # split in horiZontal orientation
 bindsym $mod+z split v
+
 # split in Vertical orientation
 bindsym $mod+v split h
+
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen
+
 # change container layout (stacked, tabbed, default)
 bindsym $mod+s layout stacking
 bindsym $mod+t layout tabbed
 bindsym $mod+e layout default
+
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
+
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
+
 # focus the parent container
 bindsym $mod+a focus parent
+
 #default workspaces names
-
-#set $ws1 "1:  "
-#set $ws2 "2:  "
-#set $ws3 "3:  "
-#set $ws4 "4:  "
-#set $ws5 "5: "
-#set $ws6 "6: "
-#set $ws7 "7: "
-#set $ws8 "8:  "
-#set $ws9 "9:  "
-
 set $ws1 "1"
 set $ws2 "2"
 set $ws3 "3"
@@ -114,7 +114,6 @@ set $ws6 "6"
 set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
-
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -128,6 +127,7 @@ bindsym $mod+8 workspace $ws8
 bindsym $mod+9 workspace $ws9
 bindsym $mod+0 scratchpad show
 
+# assign default workspace to apps
 assign [class="code-oss"]                $ws2
 assign [class="subl3"]                   $ws2
 assign [class="firefox"]                 $ws3
@@ -144,9 +144,7 @@ assign [class="Rhythmbox"]               $ws9
 assign [class="cantata"]                 $ws9
 assign [class="spotify"]                 $ws9
 
-
 # move focused container to workspace
-# bindsym $mod+Shift+exclam move container to workspace ⠁
 bindsym $mod+Shift+1 move container to workspace $ws1
 bindsym $mod+Shift+2 move container to workspace $ws2
 bindsym $mod+Shift+3 move container to workspace $ws3
@@ -157,15 +155,13 @@ bindsym $mod+Shift+7 move container to workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+0 move scratchpad
-# bindsym $mod+Shift+slash move container to workspace ⡿
-# bindsym $mod+Shift+parenleft move container to workspace ⣿
-# bindsym $mod+Shift+parenright move container to workspace 9
-# bindsym $mod+Shift+equal move container to workspace 0
 
 # reload the configuration file
 bindsym $mod+Shift+C reload
+
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+R restart
+
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+E exit
 
@@ -173,7 +169,6 @@ bindsym $mod+Shift+E exit
 bindsym $mod+r mode "resize"
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
-
         # Pressing left will shrink the window’s width.
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
@@ -188,38 +183,28 @@ mode "resize" {
         bindsym Escape mode "default"
 }
 
-set $bg-color            #292D3E
-set $text-color          #C792EA
-set $inactive-bg-color   #292D3E
-set $inactive-text-color #959DCB
-set $urgent-bg-color     #292D3E
-set $urgent-text-color   #F07178
-
-# colors                 border             background         text                 indicator
-client.focused           $bg-color          $bg-color          $text-color          $urgent-bg-color
-client.focused_inactive  $inactive-bg-color $inactive-bg-color $text-color          $urgent-bg-color
-client.unfocused         $inactive-bg-color $inactive-bg-color $inactive-text-color $urgent-bg-color
-client.urgent            $urgent-bg-color   $urgent-bg-color   $urgent-text-color
-client.background                           $bg-color
+# class                 border  backgr. text    indicator child_border
+client.focused          #4b68ad #2c3e4b #24272e #282c34   #4b68ad
+client.focused_inactive #24272e #2c3e4b #2e3c46 #484e50   #282c34   
+client.unfocused        #282c34 #282c34 #282c34 #282c34   #282c34   
+client.urgent           #2f343a #900000 #ffffff #900000   #900000
+client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 
 bar {
-  #not showing workspaces numbers with their names
-  strip_workspace_numbers yes
-  #font pango:Fira Code 11
-  font pango:MesloLGS NF 11
-  status_command i3blocks -c ~/.config/i3/i3blocks.conf
-
   position top
 
+  font pango:MesloLGS NF 11
+
+  status_command i3blocks -c ~/.config/i3/i3blocks.conf
   separator_symbol "/"
+
   colors {
-    background $inactive-bg-color
-    statusline $text-color
-    separator #C3E88D
-    #                  border             background         text
-    active_workspace   $inactive-bg-color $inactive-bg-color $text-color
-    focused_workspace  $bg-color          $bg-color          $text-color
-    inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
-    urgent_workspace   $urgent-bg-color   $urgent-bg-color   $urgent-text-color
+    background #24272e
+    statusline #abb2bf
+
+    focused_workspace  #73b2e6 #282c34
+    active_workspace   #eeeeee #333333
+    inactive_workspace #888888 #282c34
+    urgent_workspace   #ffffff #e06c75
   }
 }

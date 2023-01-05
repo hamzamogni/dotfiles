@@ -124,6 +124,7 @@ export PATH="$PATH:/media/internal_hdd/Softwares/anaconda3/bin"
 export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:$HOME/.yarn/bin"
 export PATH="$PATH:$HOME/.config/composer/vendor/bin"
+export PATH="$PATH:$HOME/go/bin"
 
 export CURRENT_UID=$(id -u):$(id -g)
 

@@ -54,7 +54,6 @@ require('mappings')
 require('settings')
 
 require('plugins.telescope')
-require('plugins.lightline')
 require('plugins.cmp')
 require('plugins.mason')
 require('plugins.navigator')

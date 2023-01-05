@@ -10,7 +10,7 @@ UNPLUGGED_ICON=$(printf '\uf00d\uf240')
 color() {
     if [[ $1 -lt 20 ]]; then
         echo 'red'
-    elif [[ $1 -lt 60 ]]; then
+    elif [[ $1 -lt 50 ]]; then
         echo 'yellow'
     else
         echo 'white'
@@ -38,12 +38,18 @@ if [[ -z $STATUS ]]; then
     # BATTERY UNPLUGGED
     FULLTEXT="<span color='red' font='FontAwesome'>${UNPLUGGED_ICON}</span>"
 else
-    TEXT=$(acpi | awk -F'[, ]+' '{print $4 " (" $5 ")"}')
+    TEXT=$(acpi | awk -F'[, ]+' '{print $4}')
 
     PERCENT_REMAINING=$(echo $STATUS | awk -F'[, ]+' '{print $4}' | sed 's/%//') 
     STATE=$(echo $STATUS | awk -F'[, ]+' '{print $3}')
     
-    FULLTEXT="$(icon ${STATE})<span color='$(color $PERCENT_REMAINING)' font='FontAwesome'>${TEXT}</span>"
+    if [[ $PERCENT_REMAINING -gt 50 ]]
+    then
+        FULLTEXT="$(icon ${STATE})<span font='FontAwesome'>${TEXT}</span>"
+    else
+        FULLTEXT="$(icon ${STATE})<span color='$(color $PERCENT_REMAINING)' font='FontAwesome'>${TEXT}</span>"
+    fi
+
 fi
 
 echo $FULLTEXT

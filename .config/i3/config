@@ -25,8 +25,7 @@ exec --no-startup-id feh --bg-fill ~/Pictures/Wallpapers/solarized-wallpaper-ker
 exec --no-startup-id picom -b --config ~/.config/compton/compton.conf
 exec --no-startup-id nm-applet
 exec --no-startup-id rescuetime
-exec --no-startup-id "setxkbmap -layout fr,ar -option 'grp:alt_shift_toggle'"
-exec --no-startup-id "setxkbmap -option 'ctrl:swapcaps'"
+#exec --no-startup-id "setxkbmap -layout fr,ar -option 'grp:alt_shift_toggle'"
 
 bindsym $mod+Return           exec --no-startup-id alacritty
 bindsym $mod+Shift+Return     exec --no-startup-id i3-input

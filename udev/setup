@@ -1,0 +1,5 @@
+#!/bin/sh
+
+for file in $PWD/*.rules; do
+  sudo ln -sf $file /etc/udev/rules.d/
+done

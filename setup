@@ -15,7 +15,7 @@ ln -sf $PWD/.tmux.conf $HOME/.tmux.conf
 
 ln -sf $PWD/.gitconfig $HOME/.gitconfig
 
-for i in rofi i3 nvim alacritty zathura xorg ranger compton mpd systemd; do
+for i in udev rofi i3 nvim alacritty zathura xorg ranger compton mpd systemd; do
 	cd $i && ./setup
 	cd "$OLDPWD"
 done

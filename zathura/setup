@@ -1,0 +1,5 @@
+#!/bin/sh
+
+mkdir -p $HOME/.config/zathura
+
+ln -sf $PWD/zathurarc $HOME/.config/zathura/zathurarc

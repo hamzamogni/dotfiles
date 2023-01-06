@@ -1,0 +1,6 @@
+#!/bin/sh
+
+mkdir -p $HOME/.config/i3
+
+ln -sf $PWD/config $HOME/.config/i3/config
+ln -sf $PWD/i3blocks.conf $HOME/.config/i3/i3blocks.conf

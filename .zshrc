@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/hmogni/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 export TERM="screen-256color"
 
@@ -83,7 +83,6 @@ plugins=(
 )
 
 source $ZSH/oh-my-zsh.sh
-source ~/.minikube-completion
 
 # User configuration
 

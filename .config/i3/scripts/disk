@@ -1,3 +1,0 @@
-#!/bin/bash
-
-echo 'DISK' $(df -h | grep sda5 | awk '{print $5}')

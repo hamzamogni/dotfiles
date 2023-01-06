@@ -1,0 +1,9 @@
+#!/bin/sh
+
+mkdir -p $HOME/.config/ranger
+
+ln -sf $PWD/commands.py $HOME/.config/ranger/commands.py
+ln -sf $PWD/commands_full.py $HOME/.config/ranger/commands_full.py
+ln -sf $PWD/rc.conf $HOME/.config/ranger/rc.conf
+ln -sf $PWD/rifle.conf $HOME/.config/ranger/rifle.conf
+ln -sf $PWD/scope.sh $HOME/.config/ranger/scope.sh

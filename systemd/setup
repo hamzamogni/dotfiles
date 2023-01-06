@@ -1,0 +1,6 @@
+#!/bin/sh
+
+
+mkdir -p $HOME/.config/systemd/user/
+
+ln -sf $PWD/user $HOME/.config/systemd/user/

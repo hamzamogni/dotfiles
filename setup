@@ -1,0 +1,21 @@
+#!/bin/bash
+
+mkdir -p $HOME/scripts
+
+for file in $PWD/scripts/*; do 
+	ln -sf $file $HOME/scripts/
+done
+
+ln -sf $PWD/.bashrc $HOME/.bashrc
+ln -sf $PWD/.bash_aliases $HOME/.bash_aliases
+ln -sf $PWD/.bash_profile $HOME/.bash_profile
+ln -sf $PWD/.zshrc $HOME/.zshrc
+
+ln -sf $PWD/.tmux.conf $HOME/.tmux.conf
+
+ln -sf $PWD/.gitconfig $HOME/.gitconfig
+
+for i in rofi i3 nvim alacritty zathura xorg ranger compton mpd systemd; do
+	cd $i && ./setup
+	cd "$OLDPWD"
+done

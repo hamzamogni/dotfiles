@@ -1,0 +1,5 @@
+#!/bin/sh
+
+mkdir -p $HOME/.config/mpd
+
+ln -sf $PWD/mpd.conf $HOME/.config/mpd/mpd.conf

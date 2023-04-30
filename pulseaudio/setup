@@ -1,0 +1,6 @@
+#!/bin/sh
+
+
+sudo mkdir -p /etc/pulse/default.pa.d
+
+sudo ln -sf $PWD/noise-cancellation.pa /etc/pulse/default.pa.d/noise-cancellation.pa

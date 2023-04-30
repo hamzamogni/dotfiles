@@ -48,9 +48,9 @@ set foldmethod=indent
 set foldlevel=99
 
 " remove empty lines at end of file
-%s/\($\n\s*\)\+\%$//e
+" %s/\($\n\s*\)\+\%$//e
 " Removing trailing whitespaces in Vim can be done pretty easy:
-autocmd BufWritePre * :%s/\s\+$//e
+" autocmd BufWritePre * :%s/\s\+$//e
 
 " highlight all matches of search pattern,
 " search all occurrences of current word with '*'

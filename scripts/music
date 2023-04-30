@@ -1,0 +1,16 @@
+#!/bin/sh
+
+if [ $button == 1 ]
+then
+  playerctl previous
+elif [ $button == 3 ]
+then
+  playerctl next
+elif [ $button == 2 ]
+then
+  playerctl play-pause
+fi
+
+echo $(playerctl metadata xesam:artist) - $(playerctl metadata xesam:title)
+
+

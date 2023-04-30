@@ -3,4 +3,4 @@
 
 mkdir -p $HOME/.config/compton
 
-ln -sf $PWD/compton.con $HOME/.config/compton/compton.conf
+ln -sf $PWD/compton.conf $HOME/.config/compton/compton.conf

@@ -18,13 +18,18 @@ smart_gaps on
 bindsym $mod+Control+plus gaps inner all plus 5
 bindsym $mod+Control+minus gaps inner all minus 5
 
-focus_follows_mouse false
+focus_follows_mouse true
 
 #Startup 
 exec --no-startup-id feh --bg-fill ~/Pictures/Wallpapers/solarized-wallpaper-kernel.png
 exec --no-startup-id picom -b --config ~/.config/compton/compton.conf
 exec --no-startup-id nm-applet
 exec --no-startup-id rescuetime
+exec --no-startup-id udiskie --tray
+exec --no-startup-id libinput-gestures-setup start
+
+exec --no-startup-id slack
+exec --no-startup-id discord
 #exec --no-startup-id "setxkbmap -layout fr,ar -option 'grp:alt_shift_toggle'"
 
 bindsym $mod+Return           exec --no-startup-id alacritty
@@ -44,8 +49,7 @@ bindsym XF86AudioPlay         exec playerctl play-pause
 bindsym XF86AudioNext         exec playerctl next
 bindsym XF86AudioPrev         exec playerctl previous
 
-bindsym $mod+Shift+M          move workspace to output VGA1
-bindsym $mod+m                move workspace to output LVDS1
+bindsym $mod+Shift+M          move workspace to output next
 
 # default window mode settings
 for_window [class="^.*"]              border pixel 0

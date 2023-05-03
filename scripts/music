@@ -1,5 +1,6 @@
 #!/bin/sh
 
+
 if [ $button == 1 ]
 then
   playerctl previous
@@ -11,6 +12,6 @@ then
   playerctl play-pause
 fi
 
+sleep 0.5
 echo $(playerctl metadata xesam:artist) - $(playerctl metadata xesam:title)
-
 

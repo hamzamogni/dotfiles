@@ -80,6 +80,7 @@ plugins=(
     docker-compose
     emoji
     kubectl
+    terraform
 )
 
 source $ZSH/oh-my-zsh.sh

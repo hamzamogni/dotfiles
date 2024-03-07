@@ -18,6 +18,11 @@ ln -sf $PWD/.tmux.conf $HOME/.tmux.conf
 
 ln -sf $PWD/.gitconfig $HOME/.gitconfig
 
+mkdir -p $HOME/wallpapers
+for file in $PWD/wallpapers/*; do 
+  ln -sf $file $HOME/wallpapers/
+done
+
 for i in pulseaudio udev rofi i3 nvim alacritty zathura xorg libinput ranger compton mpd systemd; do
 	cd $i && ./setup
 	cd "$OLDPWD"

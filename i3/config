@@ -9,59 +9,57 @@ set $mod Mod4
 font pango:MesloLGS NF 5
 
 new_window none
-new_float 1pixel
 hide_edge_borders both
 
-gaps inner 8
+gaps inner 0
 smart_gaps on
 
 bindsym $mod+Control+plus gaps inner all plus 5
 bindsym $mod+Control+minus gaps inner all minus 5
 
-focus_follows_mouse true
+focus_follows_mouse false
 
 #Startup 
-exec --no-startup-id feh --bg-fill ~/Pictures/Wallpapers/solarized-wallpaper-kernel.png
+#exec --no-startup-id feh --bg-fill ~/wallpapers/nature.jpg
 exec --no-startup-id picom -b --config ~/.config/compton/compton.conf
 exec --no-startup-id nm-applet
 exec --no-startup-id rescuetime
 exec --no-startup-id udiskie --tray
 exec --no-startup-id libinput-gestures-setup start
+exec --no-startup-id xfsettingsd start
 
 exec --no-startup-id slack
-exec --no-startup-id discord
-#exec --no-startup-id "setxkbmap -layout fr,ar -option 'grp:alt_shift_toggle'"
 
 bindsym $mod+Return           exec --no-startup-id alacritty
 bindsym $mod+Shift+Return     exec --no-startup-id i3-input
 bindsym $mod+Shift+I          exec --no-startup-id chromium
 bindsym $mod+Shift+F          exec --no-startup-id alacritty -e ranger
 bindsym $mod+Escape           exec --no-startup-id i3lock -tf -i ~/Pictures/Wallpapers/deer3_lock.png
-bindsym $mod+d                exec --no-startup-id rofi -show combi
+bindsym $mod+d                exec --no-startup-id i3-dmenu-desktop #rofi -show combi
+bindsym $mod+Shift+period     exec systemctl suspend
 bindsym Print                 exec --no-startup-id scrot '%Y-%m-%d_%H.%M.%S_$wx$h.png' -e 'mv $f ~/Pictures/$f' -q 100
 bindsym Shift+Print           exec --no-startup-id scrot '%Y-%m-%d_%H.%M.%S_$wx$h.png' -e 'mv $f ~/Pictures/$f'
+
+bindsym $mod+Shift+BackSpace  exec --no-startup-id xfconf-query -c xsettings -p /Net/ThemeName -s "Adwaita" 
+bindsym $mod+BackSpace        exec --no-startup-id xfconf-query -c xsettings -p /Net/ThemeName -s "Adwaita-dark" 
+
 bindsym XF86AudioRaiseVolume  exec --no-startup-id pactl set-sink-volume 0 +2% #increase sound volume
 bindsym XF86AudioLowerVolume  exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
 bindsym XF86AudioMute         exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
-bindsym XF86MonBrightnessUp   exec --no-startup-id xbacklight -inc 5 # increase screen brightness
-bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 5 # decrease screen brightness
+
 bindsym XF86AudioPlay         exec playerctl play-pause
 bindsym XF86AudioNext         exec playerctl next
 bindsym XF86AudioPrev         exec playerctl previous
 
+bindsym XF86MonBrightnessUp   exec --no-startup-id brightnessctl set +50 # increase screen brightness
+bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 50- # decrease screen brightness
+
+
 bindsym $mod+Shift+M          move workspace to output next
 
 # default window mode settings
-for_window [class="^.*"]              border pixel 0
-for_window [class="feh"]              floating enable
+for_window [class="^.*"]              border pixel 2
 for_window [class="^GIMP"]            floating enable
-for_window [class="MPlayer"]          floating enable
-for_window [class="Remmina"]          floating enable
-for_window [class="Skype"]            floating enable
-for_window [class="(Steam|hl_linux)"] floating enable
-for_window [class="Update"]           floating enable
-for_window [class="Yad"]              floating enable
-for_window [class="Thunderbird"]      sticky enable 
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -118,6 +116,7 @@ set $ws6 "6"
 set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
+set $ws10 "10"
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -129,24 +128,24 @@ bindsym $mod+6 workspace $ws6
 bindsym $mod+7 workspace $ws7
 bindsym $mod+8 workspace $ws8
 bindsym $mod+9 workspace $ws9
-bindsym $mod+0 scratchpad show
+bindsym $mod+0 workspace $ws10
 
 # assign default workspace to apps
 assign [class="code-oss"]                $ws2
-assign [class="subl3"]                   $ws2
 assign [class="firefox"]                 $ws3
 assign [class="Chromium"]                $ws3
 assign [class="Google-chrome"]           $ws3
 assign [class="okular"]                  $ws5
+assign [class="notion-app"]              $ws5
+assign [class="ticktick"]                $ws5
 assign [class="zoom"]                    $ws7
 assign [class="skype"]                   $ws7
 assign [class="Slack"]                   $ws7
 assign [class="discord"]                 $ws7
-assign [class="notion-app-enhanced"]     $ws7
 assign [class="Thunderbird"]             $ws8
-assign [class="Rhythmbox"]               $ws9
-assign [class="cantata"]                 $ws9
-assign [class="spotify"]                 $ws9
+assign [class="Rhythmbox"]               $ws10
+assign [class="cantata"]                 $ws10
+assign [class="spotify"]                 $ws10
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $ws1
@@ -158,7 +157,7 @@ bindsym $mod+Shift+6 move container to workspace $ws6
 bindsym $mod+Shift+7 move container to workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9
-bindsym $mod+Shift+0 move scratchpad
+bindsym $mod+Shift+0 move container to workspace $ws10
 
 # reload the configuration file
 bindsym $mod+Shift+C reload
@@ -167,7 +166,7 @@ bindsym $mod+Shift+C reload
 bindsym $mod+Shift+R restart
 
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+E exit
+bindsym $mod+Shift+E exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 bindsym $mod+r mode "resize"
@@ -195,12 +194,12 @@ client.urgent           #2f343a #900000 #ffffff #900000   #900000
 client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 
 bar {
-  position top
+  position bottom
 
   font pango:MesloLGS NF 11
 
   status_command i3blocks -c ~/.config/i3/i3blocks.conf
-  separator_symbol "/"
+  separator_symbol "|"
 
   colors {
     background #24272e

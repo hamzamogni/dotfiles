@@ -111,90 +111,9 @@ font:
     x: 0
     y: 0
 
-# Display the time it takes to redraw each frame.
-debug.render_timer: false
 
 # If `true`, bold text is drawn using the bright color variants.
 draw_bold_text_with_bright_colors: false
-
-schemes:
-  one_dark: &dark
-    primary:
-      background: '#212427'
-      foreground: '#abb2bf'
-    normal:
-      # NOTE: Use '#131613' for the `black` color if you'd like to see
-      # black text on the background.
-      black: '#282c34'
-      red: '#e06c75'
-      green: '#98c379'
-      yellow: '#d19a66'
-      blue: '#61afef'
-      magenta: '#c678dd'
-      cyan: '#56b6c2'
-      white: '#abb2bf'
-    bright:
-      black: '#5c6370'
-      red: '#e06c75'
-      green: '#98c379'
-      yellow: '#d19a66'
-      blue: '#61afef'
-      magenta: '#c678dd'
-      cyan: '#56b6c2'
-      white: '#ffffff'
-
-  one_light: &light
-    primary:
-      foreground: '#282c34'
-      background: '#ffffff'
-    normal:
-      black: '#282c34'
-      red: '#e06c75'
-      green: '#98c379'
-      yellow: '#d19a66'
-      blue: '#61afef'
-      magenta: '#c678dd'
-      cyan: '#56b6c2'
-      white: '#abb2bf'
-    bright:
-      black: '#5c6370'
-      red: '#e06c75'
-      green: '#98c379'
-      yellow: '#d19a66'
-      blue: '#61afef'
-      magenta: '#c678dd'
-      cyan: '#56b6c2'
-      white: '#ffffff'
-
-  tokyo: &tokyo
-    primary:
-      background: '0x1a1b1f'
-      # background: '#212427'
-      foreground: '0xc0caf5'
-    normal:
-      black:   '0x15161e'
-      red:     '0xf7768e'
-      green:   '0x9ece6a'
-      yellow:  '0xe0af68'
-      blue:    '0x7aa2f7'
-      magenta: '0xbb9af7'
-      cyan:    '0x7dcfff'
-      white:   '0xa9b1d6'
-    bright:
-      black:   '0x414868'
-      red:     '0xf7768e'
-      green:   '0x9ece6a'
-      yellow:  '0xe0af68'
-      blue:    '0x7aa2f7'
-      magenta: '0xbb9af7'
-      cyan:    '0x7dcfff'
-      white:   '0xc0caf5'
-    indexed_colors:
-      - { index: 16, color: '0xff9e64' }
-      - { index: 17, color: '0xdb4b4b' }
-
-# colors: *light
-colors: *tokyo
 
 # Visual Bell
 #
@@ -221,11 +140,6 @@ colors: *tokyo
 #   animation: EaseOutExpo
 #   duration: 0
 
-# Background opacity
-#
-# Window opacity as a floating point number from `0.0` to `1.0`.
-# The value `0.0` is completely transparent and `1.0` is opaque.
-opacity: 1.0
 
 # Mouse bindings
 #
@@ -245,14 +159,6 @@ opacity: 1.0
 mouse_bindings:
   - { mouse: Middle, action: PasteSelection }
 
-mouse:
-  # Click settings
-  #
-  # The `double_click` and `triple_click` settings control the time
-  # alacritty should wait for accepting multiple clicks as one double
-  # or triple click.
-  double_click: { threshold: 300 }
-  triple_click: { threshold: 300 }
 
   hide_when_typing: false
 

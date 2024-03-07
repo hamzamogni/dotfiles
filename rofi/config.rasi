@@ -6,4 +6,5 @@ configuration {
  show-icons: true;
  }
 
- @theme "palenight"
+//@theme "palenight"
+@theme "/home/hmogni/.local/share/rofi/themes/spotlight.rasi"

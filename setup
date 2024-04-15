@@ -12,7 +12,10 @@ chmod u+x $HOME/scripts/ -R
 ln -sf $PWD/.bashrc $HOME/.bashrc
 ln -sf $PWD/.bash_aliases $HOME/.bash_aliases
 ln -sf $PWD/.bash_profile $HOME/.bash_profile
+
 ln -sf $PWD/.zshrc $HOME/.zshrc
+ln -sf $PWD/.zsh_profile $HOME/.zsh_profile
+
 ln -sf $PWD/.vimrc $HOME/.vimrc
 ln -sf $PWD/.tmux.conf $HOME/.tmux.conf
 

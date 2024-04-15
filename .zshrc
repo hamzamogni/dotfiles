@@ -111,10 +111,9 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-#
-alias ll='ls -alF'
-alias k="kubectl"
-alias vim="nvim"
+source ~/.zsh_profile
+
+
 
 
 export EDITOR=/usr/bin/nvim
@@ -128,8 +127,6 @@ export PATH="$PATH:$HOME/.config/composer/vendor/bin"
 export PATH="$PATH:$HOME/go/bin"
 export PATH="$PATH:/opt/flutter/bin"
 
-
-export CURRENT_UID=$(id -u):$(id -g)
 
 fpath+=$HOME/.zsh/pure
 fpath+=~/.zfunc

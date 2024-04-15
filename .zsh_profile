@@ -1,0 +1,18 @@
+VIM="nvim"
+
+addToPath() {
+  if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
+    export PATH="$1:$PATH"
+  fi
+}
+
+alias ll='ls -alF'
+alias k="kubectl"
+alias vim="nvim"
+
+export GIT_EDITOR=$VIM
+export DOTFILES=$HOME/dotfiles
+
+addToPath $DOTFILES/scripts
+
+bindkey -s ^f "tmux-sessionizer\n"

@@ -25,3 +25,5 @@ vim.keymap.set({ "n", "v" }, "<leader>Y", [["+Y]])
 
 
 vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww ~/scripts/tmux-sessionizer<CR>")
+
+map("n", "err", "iif err != nil {<CR>}<Esc>Olog.Fatal(err)<Esc>")

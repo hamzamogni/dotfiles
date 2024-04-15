@@ -15,10 +15,6 @@ return require('packer').startup(function(use)
     use 'vim-pandoc/vim-pandoc'
     use 'vim-pandoc/vim-pandoc-syntax'
 
-    -- navigator
-    use { 'ray-x/guihua.lua', run = 'cd lua/fzy && make' }
-    use 'ray-x/navigator.lua'
-
     use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })
     use('nvim-treesitter/playground')
     use('nvim-treesitter/nvim-treesitter-context')
@@ -48,6 +44,10 @@ return require('packer').startup(function(use)
             { 'hrsh7th/cmp-buffer' },
             { 'hrsh7th/cmp-path' },
             { 'saadparwaiz1/cmp_luasnip' }, -- Required
+
+            { 'L3MON4D3/LuaSnip' },
+            { 'rafamadriz/friendly-snippets' },
+
         }
     }
 

@@ -127,7 +127,6 @@ export PATH="$PATH:$HOME/.config/composer/vendor/bin"
 export PATH="$PATH:$HOME/go/bin"
 export PATH="$PATH:/opt/flutter/bin"
 
-
 fpath+=$HOME/.zsh/pure
 fpath+=~/.zfunc
 
@@ -137,8 +136,14 @@ prompt pure
 # turn on git stash status
 zstyle :prompt:pure:git:stash show yes
 
+# Generated for envman. Do not edit.
+[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - zsh)"
+
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/home/hmogni/google-cloud-sdk/path.zsh.inc' ]; then . '/home/hmogni/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f '/home/hmogni/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/home/hmogni/Downloads/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/home/hmogni/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/hmogni/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f '/home/hmogni/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/hmogni/Downloads/google-cloud-sdk/completion.zsh.inc'; fi

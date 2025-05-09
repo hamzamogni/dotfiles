@@ -1,0 +1,6 @@
+#!/bin/sh
+
+
+mkdir -p $HOME/.config/ncmpcpp
+
+ln -sf $PWD/config $HOME/.config/ncmpcpp/config

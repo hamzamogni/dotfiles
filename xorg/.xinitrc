@@ -32,6 +32,6 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
  unset f
 fi
 
-export QT_QPA_PLATFORMTHEME=qt5ct
+xset r rate 300 40
 
 i3

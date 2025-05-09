@@ -21,10 +21,9 @@ focus_follows_mouse false
 
 #Startup 
 #exec --no-startup-id feh --bg-fill ~/wallpapers/nature.jpg
-exec --no-startup-id picom -b --config ~/.config/compton/compton.conf
+#exec --no-startup-id picom -b --config ~/.config/compton/compton.conf
 exec --no-startup-id nm-applet
 exec --no-startup-id rescuetime
-exec --no-startup-id udiskie --tray
 exec --no-startup-id libinput-gestures-setup start
 exec --no-startup-id xfsettingsd start
 
@@ -32,8 +31,10 @@ exec --no-startup-id slack
 
 bindsym $mod+Return           exec --no-startup-id alacritty
 bindsym $mod+Shift+Return     exec --no-startup-id i3-input
-bindsym $mod+Shift+I          exec --no-startup-id chromium
 bindsym $mod+Shift+F          exec --no-startup-id alacritty -e ranger
+bindsym $mod+Shift+U          exec --no-startup-id alacritty --hold -e sudo pacman -Suy
+bindsym $mod+b                exec --no-startup-id "i3-msg 'workspace 3; exec firefox --profile /home/hmogni/.mozilla/firefox/kdd7ajnd.default-release'"
+bindsym $mod+Shift+B          exec --no-startup-id "i3-msg 'workspace 2; exec firefox --profile /home/hmogni/.mozilla/firefox/1kfjn00o.52-Entertainment'"
 bindsym $mod+Escape           exec --no-startup-id i3lock -tf -i ~/Pictures/Wallpapers/deer3_lock.png
 bindsym $mod+d                exec --no-startup-id i3-dmenu-desktop #rofi -show combi
 bindsym $mod+Shift+period     exec systemctl suspend
@@ -43,9 +44,35 @@ bindsym Shift+Print           exec --no-startup-id scrot '%Y-%m-%d_%H.%M.%S_$wx$
 bindsym $mod+Shift+BackSpace  exec --no-startup-id xfconf-query -c xsettings -p /Net/ThemeName -s "Adwaita" 
 bindsym $mod+BackSpace        exec --no-startup-id xfconf-query -c xsettings -p /Net/ThemeName -s "Adwaita-dark" 
 
-bindsym XF86AudioRaiseVolume  exec --no-startup-id pactl set-sink-volume 0 +2% #increase sound volume
-bindsym XF86AudioLowerVolume  exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
-bindsym XF86AudioMute         exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+
+bindsym $mod+Shift+V          exec --no-startup-id pavucontrol
+bindsym $mod+m                mode $media_mode
+
+mode $media_mode {
+        # raise
+        bindsym k exec --no-startup-id "BLOCK_BUTTON=4 ~/scripts/volume"
+        # lower
+        bindsym j exec --no-startup-id "BLOCK_BUTTON=5 ~/scripts/volume"
+        # mute
+        bindsym m exec --no-startup-id "BLOCK_BUTTON=3 ~/scripts/volume"
+
+
+        bindsym l exec --no-startup-id mpc next
+        bindsym h exec --no-startup-id mpc prev
+
+        bindsym f exec --no-startup-id mpc seek +10
+        bindsym b exec --no-startup-id mpc seek -10
+
+        bindsym p exec --no-startup-id mpc toggle
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+
+bindsym XF86AudioRaiseVolume  exec --no-startup-id "BLOCK_BUTTON=4 ~/scripts/volume"
+bindsym XF86AudioLowerVolume  exec --no-startup-id "BLOCK_BUTTON=5 ~/scripts/volume"
+bindsym XF86AudioMute         exec --no-startup-id "BLOCK_BUTTON=3 ~/scripts/volume"
 
 bindsym XF86AudioPlay         exec playerctl play-pause
 bindsym XF86AudioNext         exec playerctl next
@@ -60,6 +87,8 @@ bindsym $mod+Shift+M          move workspace to output next
 # default window mode settings
 for_window [class="^.*"]              border pixel 2
 for_window [class="^GIMP"]            floating enable
+for_window [class="Bitwarden"]        move window to scratchpad
+#for_window [class="thunderbird"]      floating disable
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -132,20 +161,23 @@ bindsym $mod+0 workspace $ws10
 
 # assign default workspace to apps
 assign [class="code-oss"]                $ws2
-assign [class="firefox"]                 $ws3
 assign [class="Chromium"]                $ws3
 assign [class="Google-chrome"]           $ws3
-assign [class="okular"]                  $ws5
-assign [class="notion-app"]              $ws5
 assign [class="ticktick"]                $ws5
 assign [class="zoom"]                    $ws7
 assign [class="skype"]                   $ws7
 assign [class="Slack"]                   $ws7
 assign [class="discord"]                 $ws7
-assign [class="Thunderbird"]             $ws8
+assign [class="thunderbird"]             $ws8
 assign [class="Rhythmbox"]               $ws10
 assign [class="cantata"]                 $ws10
-assign [class="spotify"]                 $ws10
+assign [class="Spotify"]                 $ws10
+
+# Make the currently focused window a scratchpad
+bindsym $mod+Shift+minus move scratchpad
+
+# Show the first scratchpad window
+bindsym $mod+minus scratchpad show
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $ws1

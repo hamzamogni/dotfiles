@@ -4,3 +4,4 @@
 mkdir -p $HOME/.config/ncmpcpp
 
 ln -sf $PWD/config $HOME/.config/ncmpcpp/config
+ln -sf $PWD/bindings $HOME/.config/ncmpcpp/bindings

@@ -3,3 +3,4 @@
 mkdir -p $HOME/.config/alacritty
 
 ln -sf $PWD/alacritty.toml $HOME/.config/alacritty/alacritty.toml
+ln -sf $PWD/catppuccin-macchiato.toml $HOME/.config/alacritty/catppuccin-macchiato.toml

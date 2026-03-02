@@ -113,9 +113,6 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 source ~/.zsh_profile
 
-
-
-
 export EDITOR=/usr/bin/nvim
 export TERMINAL=alacritty
 
@@ -126,6 +123,9 @@ export PATH="$PATH:$HOME/.yarn/bin"
 export PATH="$PATH:$HOME/.config/composer/vendor/bin"
 export PATH="$PATH:$HOME/go/bin"
 export PATH="$PATH:/opt/flutter/bin"
+
+export FLYCTL_INSTALL="/home/hmogni/.fly"
+export PATH="$FLYCTL_INSTALL/bin:$PATH"
 
 fpath+=$HOME/.zsh/pure
 fpath+=~/.zfunc

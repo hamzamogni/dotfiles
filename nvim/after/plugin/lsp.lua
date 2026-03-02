@@ -1,26 +1,17 @@
 local map = vim.keymap.set
 
-local lsp = require('lsp-zero')
-lsp.preset("recommended")
-
-require('luasnip.loaders.from_vscode').lazy_load()
-local luasnip = require('luasnip')
-
-map({"i", "s"}, "<C-K>", function() luasnip.expand() end, {silent = true})
-map({"i", "s"}, "<C-L>", function() luasnip.jump( 1) end, {silent = true})
-map({"i", "s"}, "<C-J>", function() luasnip.jump(-1) end, {silent = true})
-
-lsp.ensure_installed({
+require('mason').setup({})
+require("mason-lspconfig").setup {
     "gopls",
-    "tsserver",
+    "ts_ls",
     "pylsp",
     "lua_ls",
     "rust_analyzer",
     "clangd",
-})
+}
 
 -- Fix Undefined global 'vim'
-lsp.configure('lua-language-server', {
+vim.lsp.config('lua_ls', {
     settings = {
         Lua = {
             diagnostics = {
@@ -30,51 +21,21 @@ lsp.configure('lua-language-server', {
     }
 })
 
-local cmp = require('cmp')
-local cmp_select = { behavior = cmp.SelectBehavior.Select }
-
-local cmp_mappings = lsp.defaults.cmp_mappings({
-    ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
-    ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-    ['<C-y>'] = cmp.mapping.confirm({ select = true }),
-    ['<C-Space>'] = cmp.mapping.complete(),
+vim.api.nvim_create_autocmd('LspAttach', {
+    callback = function(args)
+        map('n', "gd", vim.lsp.buf.definition)
+        map('n', "K", vim.lsp.buf.hover)
+        map('n', "<leader>vws", vim.lsp.buf.workspace_symbol)
+        map('n', "<leader>vd", vim.diagnostic.open_float)
+        map('n', "[d", vim.diagnostic.goto_next)
+        map('n', "]d", vim.diagnostic.goto_prev)
+        map('n', "<leader>vca", vim.lsp.buf.code_action)
+        map('n', "<leader>vrr", vim.lsp.buf.references)
+        map('n', "<leader>vrn", vim.lsp.buf.rename)
+        map('n', "<leader>ff", vim.lsp.buf.format)
+        map('i', "<C-h>", vim.lsp.buf.signature_help)
+    end,
 })
-
-cmp_mappings['<Tab>'] = nil
-cmp_mappings['<S-Tab>'] = nil
-
-lsp.setup_nvim_cmp({
-    mapping = cmp_mappings
-})
-
-lsp.set_preferences({
-    suggest_lsp_servers = false,
-    sign_icons = {
-        error = 'E',
-        warn = 'W',
-        hint = 'H',
-        info = 'I',
-    }
-})
-
----@diagnostic disable-next-line: unused-local
-lsp.on_attach(function(client, bufnr)
-    local opts = { buffer = bufnr, remap = false }
-
-    map('n', "gd", function() vim.lsp.buf.definition() end, opts)
-    map('n', "K", function() vim.lsp.buf.hover() end, opts)
-    map('n', "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
-    map('n', "<leader>vd", function() vim.diagnostic.open_float() end, opts)
-    map('n', "[d", function() vim.diagnostic.goto_next() end, opts)
-    map('n', "]d", function() vim.diagnostic.goto_prev() end, opts)
-    map('n', "<leader>vca", function() vim.lsp.buf.code_action() end, opts)
-    map('n', "<leader>vrr", function() vim.lsp.buf.references() end, opts)
-    map('n', "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
-    map('n', "<leader>ff", function() vim.lsp.buf.format() end, opts)
-    map('i', "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
-end)
-
-lsp.setup()
 
 vim.diagnostic.config({
     virtual_text = true

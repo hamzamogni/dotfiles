@@ -1,46 +1,82 @@
-[colors.primary]
-background = '#0E1415'
-foreground = '#CECECE'
+[bell]
+animation = "EaseOutExpo"
+duration = 0
 
-[colors.cursor]
-text = '#0E1415'
-cursor = '#CECECE'
+[colors]
+draw_bold_text_with_bright_colors = true
 
-[colors.normal]
-black = '#0E1415'
-red = '#e25d56'
-green = '#73ca50'
-yellow = '#e9bf57'
-blue = '#4a88e4'
-magenta = '#915caf'
-cyan = '#23acdd'
-white = '#f0f0f0'
+[cursor]
+blink_interval = 500
+blink_timeout = 5
+unfocused_hollow = false
 
-[colors.bright]
-black = '#777777'
-red = '#f36868'
-green = '#88db3f'
-yellow = '#f0bf7a'
-blue = '#6f8fdb'
-magenta = '#e987e9'
-cyan = '#4ac9e2'
-white = '#FFFFFF'
+[cursor.style]
+blinking = "Off"
+shape = "Block"
+
+[env]
+TERM = "xterm-256color"
+
+[font]
+size = 11
 
 [font.bold]
-family = "MesloLGS NF"
+family = "JetBrainsMono Nerd Font"
 style = "Bold"
 
+[font.glyph_offset]
+x = 0
+y = 0
+
 [font.italic]
-family = "MesloLGS NF"
-style = "Italic"
+family = "JetBrainsMono Nerd Font"
 
 [font.normal]
-family = "MesloLGS NF"
+family = "JetBrainsMono Nerd Font"
 style = "Regular"
+
+[font.offset]
+x = 0
+y = 0
+
+[mouse]
+hide_when_typing = true
+
+[[mouse.bindings]]
+action = "PasteSelection"
+mouse = "Middle"
+
+[selection]
+semantic_escape_chars = ",│`|:\"' ()[]{}<>"
 
 [terminal.shell]
 program = "/bin/zsh"
 
-[general]
-live_config_reload = true
+[window]
+decorations = "full"
+dynamic_title = true
+option_as_alt = "Both"
+opacity = 1.0
+# blur = true
 
+[window.dimensions]
+columns = 160
+lines = 80
+
+[window.padding]
+x = 2
+y = 1
+
+[general]
+
+live_config_reload = true
+import = [
+  "~/.config/alacritty/catppuccin-macchiato.toml"
+]
+
+[terminal]
+
+[[keyboard.bindings]]
+key = "Return"
+mods = "Shift"
+chars = "\n"

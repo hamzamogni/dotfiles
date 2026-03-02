@@ -4,9 +4,6 @@ local map = vim.keymap.set
 
 map("n", "<leader>pv", vim.cmd.Ex)
 
--- Get out of insert mode
-map("i", "jj", "<Esc>")
-
 -- Move between windows
 map('', '<leader>ww', ':wincmd w<cr>')
 map('', '<leader>wh', ':wincmd h<cr>')

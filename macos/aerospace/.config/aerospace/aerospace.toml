@@ -165,6 +165,9 @@ gaps.outer.right =      10
     cmd-ctrl-shift-s = ['exec-and-forget open -a Spotify', 'workspace M']
     cmd-ctrl-shift-slash = 'exec-and-forget open -a Bitwarden'
 
+    # Toggle light/dark mode (script in bin/.local/bin)
+    cmd-ctrl-shift-t = 'exec-and-forget ~/.local/bin/toggle-appearance'
+
     # See: https://nikitabobko.github.io/AeroSpace/commands#close
     cmd-ctrl-w = 'close'
 

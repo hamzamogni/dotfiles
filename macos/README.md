@@ -36,7 +36,7 @@ Every folder is a [stow](https://www.gnu.org/software/stow/) package that mirror
 | `starship`  | Minimal prompt                                                                          |
 | `git`       | Git defaults, aliases and identity                                                      |
 | `btop`      | System monitor, using terminal colors                                                   |
-| `bin`       | Scripts in `~/.local/bin`: `tmux-sessionizer` (alias `ts`), `tmux-session-switch`       |
+| `bin`       | Scripts in `~/.local/bin`: `tmux-sessionizer` (alias `ts`), `tmux-session-switch`, `toggle-appearance` |
 | `aerospace` | Tiling window manager: shortcuts and app-to-workspace rules                             |
 | `karabiner` | Keyboard remapping: turns Caps Lock into Super / Escape                                 |
 
@@ -104,6 +104,7 @@ To add a rule, add an `[[on-window-detected]]` block in `aerospace.toml`. Find a
 | `Super+Shift+S`                        | Open Spotify, and go to workspace M                       |
 | `Super+Shift+F`                        | New Finder window                                         |
 | `Super+Shift+/`                        | Bitwarden                                                 |
+| `Super+Shift+T`                        | Toggle light / dark mode                                  |
 | `Super+W`                              | Close window                                              |
 | `Super+H/J/K/L` or `Super+Arrows`      | Focus window left / down / up / right                     |
 | `Super+Shift+H/J/K/L` or `+Arrows`     | Move window left / down / up / right                      |
@@ -170,6 +171,8 @@ Prefix is `Ctrl+Space` (or `Ctrl+B`). Most actions don't need the prefix and use
 ## Light and dark mode
 
 Ghostty switches between Catppuccin Latte (light) and Mocha (dark) with macOS. tmux, bat, fzf, eza, starship and btop use the terminal's colors, so they switch with it. Neovim switches itself through `auto-dark-mode.nvim`.
+
+To switch by hand, press `Super+Shift+T` or run `toggle-appearance`. This sets macOS to a fixed Light or Dark appearance; to go back to switching automatically with the time of day, choose **Auto** in System Settings → Appearance.
 
 ## Common changes
 

@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# Toggle macOS between light and dark mode. Ghostty, Neovim and the CLI tools follow along.
+# Note: this switches Appearance from "Auto" to a fixed Light/Dark until set back to Auto
+# in System Settings → Appearance.
+
+osascript -e 'tell application "System Events" to tell appearance preferences to set dark mode to not dark mode'

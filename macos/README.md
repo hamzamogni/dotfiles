@@ -1,6 +1,6 @@
 # macOS dotfiles
 
-Omarchy's terminal setup (Ghostty, zsh, tmux, Neovim) on macOS, with Catppuccin that follows the system light/dark appearance.
+A terminal-first setup (Ghostty, zsh, tmux, Neovim) with Catppuccin that follows the system light/dark appearance.
 
 ## Install
 
@@ -15,16 +15,16 @@ Anything already in the way (like a default `~/.zprofile`) is moved to `~/.dotfi
 
 Every folder is a [stow](https://www.gnu.org/software/stow/) package that mirrors `~`:
 
-| Package    | What                                                                          |
-| ---------- | ----------------------------------------------------------------------------- |
-| `zsh`      | Omarchy's bash config ported to zsh, plus autosuggestions and syntax highlighting |
-| `ghostty`  | Terminal: Maple Mono, translucent, Catppuccin Latte/Mocha                     |
-| `tmux`     | Omarchy's tmux config                                                         |
-| `nvim`     | LazyVim with Omarchy's tweaks                                                 |
-| `starship` | Omarchy's prompt                                                              |
-| `git`      | Omarchy's git defaults plus your identity                                     |
-| `bin`      | Scripts in `~/.local/bin`: `tmux-sessionizer` (alias `ts`), `tmux-session-switch` |
-| `btop`     | Omarchy's btop config, using terminal colors                                  |
+| Package    | What                                                                               |
+| ---------- | ---------------------------------------------------------------------------------- |
+| `zsh`      | Shell: aliases, functions, starship, zoxide, fzf, autosuggestions, syntax highlighting |
+| `ghostty`  | Terminal: Maple Mono, translucent, Catppuccin Latte/Mocha                          |
+| `tmux`     | Multiplexer: `Ctrl+Space` prefix, Alt-based navigation, status bar on top          |
+| `nvim`     | LazyVim with Catppuccin, transparency and auto light/dark                          |
+| `starship` | Minimal prompt                                                                     |
+| `git`      | Git defaults, aliases and identity                                                 |
+| `btop`     | System monitor, using terminal colors                                              |
+| `bin`      | Scripts in `~/.local/bin`: `tmux-sessionizer` (alias `ts`), `tmux-session-switch`  |
 
 Files are symlinked, so editing `~/.config/...` edits this repo.
 
@@ -41,24 +41,35 @@ Ghostty switches between Catppuccin Latte and Mocha with macOS. tmux, bat, fzf, 
 
 ## Keyboard
 
-| Linux / Omarchy                 | Mac                                         |
-| ------------------------------- | ------------------------------------------- |
-| `Ctrl+C/V/W/T` in apps          | `Cmd+C/V/W/T`                               |
-| `Alt`                           | Left `Option` (right `Option` types accents) |
-| `Ctrl` in the terminal          | `Control`                                   |
-| `Super` (window manager)        | `Cmd+Ctrl`, reserved for AeroSpace          |
+| Linux                    | Mac                                          |
+| ------------------------ | -------------------------------------------- |
+| `Ctrl+C/V/W/T` in apps   | `Cmd+C/V/W/T`                                |
+| `Alt`                    | Left `Option` (right `Option` types accents) |
+| `Ctrl` in the terminal   | `Control`                                    |
+| `Super` (window manager) | `Cmd+Ctrl`, reserved for AeroSpace           |
+
+Shell:
+
+| Keys / command  | Action                                           |
+| --------------- | ------------------------------------------------ |
+| `Alt+C`         | Pick a folder below the current one and `cd` to it |
+| `cd <name>`     | Jump to a frequently used folder (zoxide)        |
+| `zi`            | Pick a frequently used folder with fzf           |
+| `Ctrl+R`        | Search history with fzf                          |
+| `ts`            | Pick a project and open it as a tmux session     |
 
 tmux (prefix `Ctrl+Space`, or `Ctrl+B`):
 
-| Keys                         | Action                              |
-| ---------------------------- | ----------------------------------- |
-| `Alt+Enter` / `Alt+Shift+Enter` | Split pane down / right          |
-| `Alt+Escape`                 | Close pane                          |
-| `Ctrl+Alt+Arrows`            | Move between panes                  |
-| `Ctrl+Alt+Shift+Arrows`      | Resize pane                         |
-| `Alt+1..9`                   | Go to window                        |
-| `Alt+Left/Right`             | Previous / next window              |
-| `Alt+Up/Down`                | Previous / next session             |
-| `prefix f`                   | Pick a project with fzf, open it as a session |
-| `prefix s`                   | Switch session with fzf (with preview) |
-| `prefix ?`                   | Show all keybindings                |
+| Keys                            | Action                                        |
+| ------------------------------- | --------------------------------------------- |
+| `Alt+Enter` / `Alt+Shift+Enter` | Split pane down / right                       |
+| `Alt+Escape`                    | Close pane                                    |
+| `Ctrl+Alt+Arrows`               | Move between panes                            |
+| `Ctrl+Alt+Shift+Arrows`         | Resize pane                                   |
+| `Alt+1..9`                      | Go to window                                  |
+| `Alt+Left/Right`                | Previous / next window                        |
+| `Alt+Up/Down`                   | Previous / next session                       |
+| `prefix f`                      | Pick a project with fzf, open it as a session |
+| `prefix s`                      | Switch session with fzf (with preview)        |
+| `prefix q`                      | Reload tmux config                            |
+| `prefix ?`                      | Show all keybindings                          |

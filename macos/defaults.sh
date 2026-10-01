@@ -35,8 +35,9 @@ defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
 defaults -currentHost write -g com.apple.mouse.tapBehavior -int 1
 
-# Finder: show extensions, path bar and status bar, list view by default
-defaults write -g AppleShowAllExtensions -bool true
+# Finder: path bar and status bar, list view by default
+# Keep "Show all filename extensions" off: Spotlight follows it and would list apps as "Name.app"
+defaults write -g AppleShowAllExtensions -bool false
 defaults write com.apple.finder ShowPathbar -bool true
 defaults write com.apple.finder ShowStatusBar -bool true
 defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"

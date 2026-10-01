@@ -1,0 +1,39 @@
+# Omarchy's Ghostty config, adapted for macOS.
+# See all options with: ghostty +show-config --default --docs
+
+# Theme: follows macOS light/dark appearance
+theme = light:Catppuccin Latte,dark:Catppuccin Mocha
+
+# Font
+font-family = "Maple Mono NF"
+font-size = 14
+# Turn ligatures off for a calmer look (remove this line to bring them back)
+font-feature = -calt
+
+# Window
+window-padding-x = 14
+window-padding-y = 14
+window-padding-balance = true
+window-colorspace = display-p3
+macos-titlebar-style = transparent
+background-opacity = 0.95
+background-blur = true
+confirm-close-surface = false
+resize-overlay = never
+
+# Cursor styling
+cursor-style = "block"
+cursor-style-blink = false
+
+# Cursor styling + SSH session terminfo
+# (all shell integration options must be passed together)
+shell-integration-features = no-cursor,ssh-env
+
+# Left Option acts as Alt (for tmux and the shell); right Option still types special characters
+macos-option-as-alt = left
+
+# Keyboard bindings
+# Send Shift+Enter as CSI-u so TUIs can distinguish it from Enter.
+keybind = shift+enter=csi:13;2u
+# Legacy encoding sends Alt+Shift+Enter the same as Alt+Enter; send CSI-u so tmux can match M-S-Enter.
+keybind = alt+shift+enter=csi:13;4u

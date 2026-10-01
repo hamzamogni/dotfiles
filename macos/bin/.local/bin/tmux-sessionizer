@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+# Pick a directory with fzf and open (or switch to) a tmux session there.
+# Usage: tmux-sessionizer [directory]
+#
+# Candidates are your projects (~/workspaces/<host>/<org>/<repo>) plus the
+# directories zoxide knows you visit often.
+
+export PATH="$HOME/.local/bin:/opt/homebrew/bin:$PATH"
+
+if [[ $# -eq 1 ]]; then
+  selected=$1
+else
+  selected=$(
+    {
+      find "$HOME/workspaces" -mindepth 3 -maxdepth 3 -type d 2>/dev/null
+      command -v zoxide &>/dev/null && zoxide query --list
+    } | awk -v home="$HOME" '!seen[$0]++ { short = $0; sub("^" home, "~", short); print $0 "\t" short }' |
+      fzf --reverse --prompt="session> " --delimiter='\t' --with-nth=2 \
+        --preview 'eza --icons=always --group-directories-first {1}' |
+      cut -f1
+  )
+fi
+
+[[ -z $selected ]] && exit 0
+
+# tmux doesn't allow dots or colons in session names
+name=$(basename "$selected" | tr '.:' '__')
+
+if ! tmux has-session -t="$name" 2>/dev/null; then
+  tmux new-session -ds "$name" -c "$selected"
+fi
+
+if [[ -n $TMUX ]]; then
+  tmux switch-client -t "$name"
+else
+  tmux attach-session -t "$name"
+fi

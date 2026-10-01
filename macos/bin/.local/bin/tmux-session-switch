@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# Pick a running tmux session with fzf (previewing its current pane) and switch to it.
+
+export PATH="$HOME/.local/bin:/opt/homebrew/bin:$PATH"
+
+session=$(
+  tmux list-sessions -F '#{session_last_attached} #S' | sort -rn | cut -d' ' -f2- |
+    fzf --reverse --prompt="switch> " --preview 'tmux capture-pane -ep -t {}'
+)
+
+[[ -z $session ]] && exit 0
+
+if [[ -n $TMUX ]]; then
+  tmux switch-client -t "$session"
+else
+  tmux attach-session -t "$session"
+fi

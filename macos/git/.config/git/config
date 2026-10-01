@@ -1,0 +1,40 @@
+# See https://git-scm.com/docs/git-config
+
+[user]
+	name = Hamza Mogni
+	email = contact@hmogni.me
+[alias]
+	co = checkout
+	br = branch
+	ci = commit
+	st = status
+	sh = stash
+	sub = submodule
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
+[init]
+	defaultBranch = main
+[pull]
+	rebase = true 			 # Rebase (instead of merge) on pull
+[push]
+	autoSetupRemote = true   # Automatically set upstream branch on push
+[diff]
+	algorithm = histogram    # Clearer diffs on moved/edited lines
+	colorMoved = plain       # Highlight moved blocks in diffs
+	mnemonicPrefix = true    # More intuitive refs in diff output
+[commit]
+	verbose = true           # Include diff comment in commit message template
+[column]
+	ui = auto 			     # Output in columns when possible
+[branch]
+	sort = -committerdate    # Sort branches by most recent commit first
+[tag]
+	sort = -version:refname  # Sort version numbers as you would expect
+[rerere]
+	enabled = true           # Record and reuse conflict resolutions
+	autoupdate = true        # Apply stored conflict resolutions automatically
+
+# Machine-specific settings that should not be committed, e.g. a work identity:
+#   [includeIf "gitdir:~/workspaces/work/"]
+#   	path = ~/.config/git/work
+[include]
+	path = ~/.config/git/local

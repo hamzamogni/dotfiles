@@ -1,0 +1,73 @@
+# Everything installed on this Mac. Add a line, then run: brew bundle --file=macos/Brewfile
+# See what's installed but missing from this file: brew bundle cleanup --file=macos/Brewfile
+
+# Shell & terminal
+brew "stow"
+brew "tmux"
+brew "neovim"
+brew "starship"
+brew "zoxide"
+brew "eza"
+brew "fzf"
+brew "bat"
+brew "fd"
+brew "ripgrep"
+brew "jq"
+brew "gum"
+brew "btop"
+brew "fastfetch"
+brew "dua-cli"
+brew "tlrc"
+brew "yt-dlp"
+brew "lazygit"
+brew "lazydocker"
+brew "zsh-autosuggestions"
+brew "zsh-syntax-highlighting"
+
+# Development
+brew "git"
+brew "gh"
+brew "mise"
+brew "go"
+brew "rust"
+brew "llvm"
+brew "tree-sitter-cli"
+brew "podman"
+brew "docker-compose" # Used by `podman compose`
+cask "podman-desktop"
+cask "gcloud-cli"
+
+# System tools
+brew "memtester"
+brew "stress-ng"
+
+# Fonts
+cask "font-maple-mono-nf"
+
+# Apps
+cask "ghostty"
+cask "zed"
+cask "obsidian"
+cask "google-chrome"
+cask "firefox"
+cask "spotify"
+cask "discord"
+cask "proton-mail"
+cask "protonvpn"
+
+# AI
+cask "claude"
+cask "claude-code"
+cask "chatgpt"
+cask "codex"
+cask "t3-code"
+
+# Work
+cask "microsoft-outlook"
+cask "microsoft-teams"
+cask "slack"
+
+# Mac App Store (sign in to the App Store first)
+brew "mas"
+mas "Bitwarden", id: 1352778147
+mas "WhatsApp", id: 310633997

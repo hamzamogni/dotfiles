@@ -54,8 +54,8 @@ automatically-unhide-macos-hidden-apps = false
 # This config option is only available since 'config-version = 2'
 # Fallback value (if you omit the key): persistent-workspaces = []
 # Other workspaces disappear when empty, so Super+Tab only cycles through workspaces in use.
-# 1, B and C always exist so they keep their accordion layout even when empty.
-persistent-workspaces = ["1", "B", "C"]
+# 1, 7, B and C always exist so they keep their accordion layout even when empty.
+persistent-workspaces = ["1", "7", "B", "C"]
 
 # A callback that runs every time binding mode changes
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
@@ -107,14 +107,19 @@ gaps.outer.right =      10
     if = 'test %{app-bundle-id} = com.google.Chrome'
     run = ['move-node-to-workspace B', 'layout accordion']
 
+# Workspace 7 (accordion): Outlook and Teams
+[[on-window-detected]]
+    if = 'test %{app-bundle-id} = com.microsoft.Outlook || test %{app-bundle-id} = com.microsoft.teams2'
+    run = ['move-node-to-workspace 7', 'layout accordion']
+
 # Workspace 8: Proton Mail
 [[on-window-detected]]
     if = 'test %{app-bundle-id} = ch.protonmail.desktop'
     run = 'move-node-to-workspace 8'
 
-# Workspace C (accordion): Slack, WhatsApp and Teams
+# Workspace C (accordion): Slack and WhatsApp
 [[on-window-detected]]
-    if = 'test %{app-bundle-id} = com.tinyspeck.slackmacgap || test %{app-bundle-id} = net.whatsapp.WhatsApp || test %{app-bundle-id} = com.microsoft.teams2'
+    if = 'test %{app-bundle-id} = com.tinyspeck.slackmacgap || test %{app-bundle-id} = net.whatsapp.WhatsApp'
     run = ['move-node-to-workspace C', 'layout accordion']
 
 # Workspace M: Spotify
@@ -127,9 +132,9 @@ gaps.outer.right =      10
     if = 'test %{app-bundle-id} = md.obsidian'
     run = 'move-node-to-workspace N'
 
-# Any other window opened on workspace 1, B or C joins the accordion
+# Any other window opened on workspace 1, 7, B or C joins the accordion
 [[on-window-detected]]
-    if = 'test %{workspace} = 1 || test %{workspace} = B || test %{workspace} = C'
+    if = 'test %{workspace} = 1 || test %{workspace} = 7 || test %{workspace} = B || test %{workspace} = C'
     run = 'layout accordion'
 
 # 'main' binding mode declaration

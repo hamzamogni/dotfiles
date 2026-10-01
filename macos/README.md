@@ -82,7 +82,7 @@ New windows of these apps are moved to a fixed workspace:
 
 - **Tiles** places windows side by side. **Accordion** stacks windows on top of each other with a small edge of the others showing, like tabs. Move between them with `Super+H/J/K/L` (or arrows). Accordion is used for workspace 1 (AI apps) and B (one Chrome window per profile).
 - Workspaces 1 and B always exist, even when empty, so they keep their accordion layout. Other workspaces disappear when empty, so `Super+Tab` only cycles through workspaces in use.
-- System Settings and Activity Monitor always float instead of tiling.
+- System Settings, Activity Monitor and Bitwarden always float instead of tiling.
 
 Limits of the rules:
 

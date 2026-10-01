@@ -89,7 +89,7 @@ gaps.outer.right =      10
 
 # Windows that shouldn't be tiled
 [[on-window-detected]]
-    if = 'test %{app-bundle-id} = com.apple.systempreferences || test %{app-bundle-id} = com.apple.ActivityMonitor'
+    if = 'test %{app-bundle-id} = com.apple.systempreferences || test %{app-bundle-id} = com.apple.ActivityMonitor || test %{app-bundle-id} = com.bitwarden.desktop'
     run = 'layout floating'
 
 # Workspace 1 (accordion): T3 Code, Codex (the ChatGPT app) and Claude

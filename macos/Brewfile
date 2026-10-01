@@ -44,6 +44,11 @@ brew "stress-ng"
 # Fonts
 cask "font-maple-mono-nf"
 
+# Window manager
+tap "nikitabobko/tap"
+cask "nikitabobko/tap/aerospace"
+cask "karabiner-elements" # Caps Lock: hold = Cmd+Ctrl (Super), tap = Escape
+
 # Apps
 cask "ghostty"
 cask "zed"

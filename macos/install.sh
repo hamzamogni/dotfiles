@@ -8,8 +8,14 @@ set -euo pipefail
 
 cd "$(dirname "$0")"
 DOTFILES="$(pwd -P)"
-PACKAGES=(zsh ghostty tmux nvim starship git btop bin)
+PACKAGES=(zsh ghostty tmux nvim starship git btop bin aerospace karabiner)
 BACKUP_DIR="$HOME/.dotfiles-backup/$(date +%Y%m%d-%H%M%S)"
+
+backup() {
+  mkdir -p "$(dirname "$BACKUP_DIR/$1")"
+  mv "$HOME/$1" "$BACKUP_DIR/$1"
+  echo "Backed up ~/$1 to $BACKUP_DIR"
+}
 
 # Homebrew
 if ! command -v brew &>/dev/null; then
@@ -19,16 +25,25 @@ eval "$(/opt/homebrew/bin/brew shellenv bash)"
 
 brew bundle --file="$DOTFILES/Brewfile" || echo "Some Brewfile entries failed (Mac App Store apps need you to be signed in). Continuing."
 
-# Move files that would block stow out of the way, e.g. a default ~/.zprofile
 for package in "${PACKAGES[@]}"; do
+  # Each ~/.config/<tool> folder should be a single link to this repo, so apps that
+  # rewrite their config (like Karabiner) write here. Move real folders out of the way.
+  for dir in "$package"/.config/*/; do
+    [[ -d $dir ]] || continue
+    relative="${dir#"$package"/}"
+    relative="${relative%/}"
+    if [[ -d "$HOME/$relative" && ! -L "$HOME/$relative" ]]; then
+      backup "$relative"
+    fi
+  done
+
+  # Move files that would block stow out of the way, e.g. a default ~/.zprofile
   while IFS= read -r -d '' file; do
     relative="${file#"$package"/}"
     target="$HOME/$relative"
 
     if [[ -e $target || -L $target ]] && [[ "$(realpath "$target" 2>/dev/null)" != "$DOTFILES/$file" ]]; then
-      mkdir -p "$(dirname "$BACKUP_DIR/$relative")"
-      mv "$target" "$BACKUP_DIR/$relative"
-      echo "Backed up ~/$relative to $BACKUP_DIR"
+      backup "$relative"
     fi
   done < <(find "$package" -type f -print0)
 done

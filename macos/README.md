@@ -25,6 +25,8 @@ Every folder is a [stow](https://www.gnu.org/software/stow/) package that mirror
 | `git`      | Git defaults, aliases and identity                                                 |
 | `btop`     | System monitor, using terminal colors                                              |
 | `bin`      | Scripts in `~/.local/bin`: `tmux-sessionizer` (alias `ts`), `tmux-session-switch`  |
+| `aerospace`| Tiling window manager, driven by `Super` (hold Caps Lock)                          |
+| `karabiner`| Caps Lock: hold = `Super` (sends `Cmd+Ctrl`), tap = `Esc`; both Shifts = Caps Lock |
 
 Files are symlinked, so editing `~/.config/...` edits this repo.
 
@@ -46,7 +48,33 @@ Ghostty switches between Catppuccin Latte and Mocha with macOS. tmux, bat, fzf, 
 | `Ctrl+C/V/W/T` in apps   | `Cmd+C/V/W/T`                                |
 | `Alt`                    | Left `Option` (right `Option` types accents) |
 | `Ctrl` in the terminal   | `Control`                                    |
-| `Super` (window manager) | `Cmd+Ctrl`, reserved for AeroSpace           |
+| `Super` (window manager) | Hold `Caps Lock` (sends `Cmd+Ctrl`)          |
+| `Esc`                    | Tap `Caps Lock` (or `Esc`)                   |
+| `Caps Lock`              | Both `Shift` keys together                   |
+
+Windows (AeroSpace):
+
+| Keys                            | Action                                  |
+| ------------------------------- | --------------------------------------- |
+| `Super+Enter`                   | New terminal window                     |
+| `Super+Shift+Enter` / `+B`      | New browser window                      |
+| `Super+Shift+F/O/M`             | Finder / Obsidian / Spotify             |
+| `Super+Shift+/`                 | Bitwarden                               |
+| `Super+W`                       | Close window                            |
+| `Super+Arrows`                  | Focus window                            |
+| `Super+Shift+Arrows`            | Move window                             |
+| `Super+1..0`                    | Go to workspace 1..10                   |
+| `Super+Shift+1..0`              | Move window to workspace (and follow)   |
+| `Super+Shift+Alt+1..0`          | Move window to workspace (stay)         |
+| `Super+Tab` / `+Shift+Tab`      | Next / previous workspace               |
+| `Super+Alt+Tab`                 | Last used workspace                     |
+| `Super+F`                       | Fullscreen                              |
+| `Super+T`                       | Toggle floating                         |
+| `Super+J`                       | Toggle split direction                  |
+| `Super+L`                       | Toggle tiles / accordion layout         |
+| `Super+-` / `=`                 | Narrower / wider (`+Shift`: height, `+Alt`: smaller steps) |
+| `Super+Shift+Alt+Arrows`        | Move workspace to another monitor       |
+| `Super+;` then `Esc` / `R` / `Backspace` / `Arrows` | Reload config / reset layout / close other windows / join with neighbor |
 
 Shell:
 

@@ -1,0 +1,129 @@
+# Tiling window manager. Cmd+Ctrl plays the role of Super on Linux; Alt is left to tmux.
+# Karabiner turns a held Caps Lock into Cmd+Ctrl, so every binding below is one key + the letter.
+# Commands: https://nikitabobko.github.io/AeroSpace/commands
+
+config-version = 2
+
+start-at-login = true
+auto-reload-config = true
+
+enable-normalization-flatten-containers = true
+enable-normalization-opposite-orientation-for-nested-containers = true
+accordion-padding = 30
+default-root-container-layout = 'tiles'
+default-root-container-orientation = 'auto'
+
+# Mouse follows focus when the focused monitor changes
+on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+
+key-mapping.preset = 'qwerty'
+
+gaps.inner.horizontal = 10
+gaps.inner.vertical = 10
+gaps.outer.left = 10
+gaps.outer.bottom = 10
+gaps.outer.top = 10
+gaps.outer.right = 10
+
+# Windows that shouldn't be tiled
+[[on-window-detected]]
+if.app-id = 'com.apple.systempreferences'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.ActivityMonitor'
+run = 'layout floating'
+
+[mode.main.binding]
+# Apps
+cmd-ctrl-enter = '''exec-and-forget osascript -e 'tell application "Ghostty" to new window' -e 'tell application "Ghostty" to activate' '''
+cmd-ctrl-shift-enter = 'exec-and-forget open -na "Google Chrome" --args --new-window'
+cmd-ctrl-shift-b = 'exec-and-forget open -na "Google Chrome" --args --new-window'
+cmd-ctrl-shift-f = 'exec-and-forget open ~'
+cmd-ctrl-shift-o = 'exec-and-forget open -a Obsidian'
+cmd-ctrl-shift-m = 'exec-and-forget open -a Spotify'
+cmd-ctrl-shift-slash = 'exec-and-forget open -a Bitwarden'
+
+# Windows
+cmd-ctrl-w = 'close'
+cmd-ctrl-j = 'layout tiles horizontal vertical' # Toggle split direction
+cmd-ctrl-l = 'layout tiles accordion'           # Toggle workspace layout
+cmd-ctrl-t = 'layout floating tiling'
+cmd-ctrl-f = 'fullscreen'
+
+cmd-ctrl-left = 'focus left'
+cmd-ctrl-right = 'focus right'
+cmd-ctrl-up = 'focus up'
+cmd-ctrl-down = 'focus down'
+
+cmd-ctrl-shift-left = 'move left'
+cmd-ctrl-shift-right = 'move right'
+cmd-ctrl-shift-up = 'move up'
+cmd-ctrl-shift-down = 'move down'
+
+cmd-ctrl-minus = 'resize width -100'
+cmd-ctrl-equal = 'resize width +100'
+cmd-ctrl-shift-minus = 'resize height -100'
+cmd-ctrl-shift-equal = 'resize height +100'
+cmd-ctrl-alt-minus = 'resize width -25'
+cmd-ctrl-alt-equal = 'resize width +25'
+cmd-ctrl-shift-alt-minus = 'resize height -25'
+cmd-ctrl-shift-alt-equal = 'resize height +25'
+
+# Workspaces
+cmd-ctrl-1 = 'workspace 1'
+cmd-ctrl-2 = 'workspace 2'
+cmd-ctrl-3 = 'workspace 3'
+cmd-ctrl-4 = 'workspace 4'
+cmd-ctrl-5 = 'workspace 5'
+cmd-ctrl-6 = 'workspace 6'
+cmd-ctrl-7 = 'workspace 7'
+cmd-ctrl-8 = 'workspace 8'
+cmd-ctrl-9 = 'workspace 9'
+cmd-ctrl-0 = 'workspace 10'
+
+# Move window to workspace and follow it
+cmd-ctrl-shift-1 = 'move-node-to-workspace --focus-follows-window 1'
+cmd-ctrl-shift-2 = 'move-node-to-workspace --focus-follows-window 2'
+cmd-ctrl-shift-3 = 'move-node-to-workspace --focus-follows-window 3'
+cmd-ctrl-shift-4 = 'move-node-to-workspace --focus-follows-window 4'
+cmd-ctrl-shift-5 = 'move-node-to-workspace --focus-follows-window 5'
+cmd-ctrl-shift-6 = 'move-node-to-workspace --focus-follows-window 6'
+cmd-ctrl-shift-7 = 'move-node-to-workspace --focus-follows-window 7'
+cmd-ctrl-shift-8 = 'move-node-to-workspace --focus-follows-window 8'
+cmd-ctrl-shift-9 = 'move-node-to-workspace --focus-follows-window 9'
+cmd-ctrl-shift-0 = 'move-node-to-workspace --focus-follows-window 10'
+
+# Move window to workspace silently
+cmd-ctrl-shift-alt-1 = 'move-node-to-workspace 1'
+cmd-ctrl-shift-alt-2 = 'move-node-to-workspace 2'
+cmd-ctrl-shift-alt-3 = 'move-node-to-workspace 3'
+cmd-ctrl-shift-alt-4 = 'move-node-to-workspace 4'
+cmd-ctrl-shift-alt-5 = 'move-node-to-workspace 5'
+cmd-ctrl-shift-alt-6 = 'move-node-to-workspace 6'
+cmd-ctrl-shift-alt-7 = 'move-node-to-workspace 7'
+cmd-ctrl-shift-alt-8 = 'move-node-to-workspace 8'
+cmd-ctrl-shift-alt-9 = 'move-node-to-workspace 9'
+cmd-ctrl-shift-alt-0 = 'move-node-to-workspace 10'
+
+cmd-ctrl-tab = 'workspace --wrap-around next'
+cmd-ctrl-shift-tab = 'workspace --wrap-around prev'
+cmd-ctrl-alt-tab = 'workspace-back-and-forth'
+
+# Monitors
+cmd-ctrl-shift-alt-left = 'move-workspace-to-monitor left'
+cmd-ctrl-shift-alt-right = 'move-workspace-to-monitor right'
+cmd-ctrl-shift-alt-up = 'move-workspace-to-monitor up'
+cmd-ctrl-shift-alt-down = 'move-workspace-to-monitor down'
+
+# Less common actions: press Cmd+Ctrl+; then a key
+cmd-ctrl-semicolon = 'mode service'
+
+[mode.service.binding]
+esc = ['reload-config', 'mode main']
+r = ['flatten-workspace-tree', 'mode main'] # Reset layout
+backspace = ['close-all-windows-but-current', 'mode main']
+left = ['join-with left', 'mode main']
+right = ['join-with right', 'mode main']
+up = ['join-with up', 'mode main']
+down = ['join-with down', 'mode main']

@@ -64,7 +64,7 @@ cask "protonvpn"
 cask "claude"
 cask "claude-code"
 cask "chatgpt"
-cask "codex"
+cask "codex" # Codex CLI (Codex desktop is part of the ChatGPT app)
 cask "t3-code"
 
 # Work

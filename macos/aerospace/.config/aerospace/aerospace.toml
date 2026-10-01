@@ -1,129 +1,273 @@
-# Tiling window manager. Cmd+Ctrl plays the role of Super on Linux; Alt is left to tmux.
+# Based on AeroSpace's default config:
+#   /Applications/AeroSpace.app/Contents/Resources/default-config.toml
+#
+# Cmd+Ctrl plays the role of Super on Linux; Alt is left to tmux.
 # Karabiner turns a held Caps Lock into Cmd+Ctrl, so every binding below is one key + the letter.
-# Commands: https://nikitabobko.github.io/AeroSpace/commands
 
+# Config version for compatibility and deprecations
+# See: https://nikitabobko.github.io/AeroSpace/guide#config-version
+# Fallback value (if you omit the key): config-version = 1
 config-version = 2
 
+# You can use it to add commands that run after AeroSpace startup.
+# Available commands : https://nikitabobko.github.io/AeroSpace/commands
+after-startup-command = []
+
+# Start AeroSpace at login
 start-at-login = true
+
+# Automatically reload the config when the config file is saved
+# After setting this to true, reload once manually to start the auto-reloading
 auto-reload-config = true
 
+# Normalizations. See: https://nikitabobko.github.io/AeroSpace/guide#normalization
 enable-normalization-flatten-containers = true
 enable-normalization-opposite-orientation-for-nested-containers = true
+
+# See: https://nikitabobko.github.io/AeroSpace/guide#layouts
+# The 'accordion-padding' specifies the size of accordion padding
+# You can set 0 to disable the padding feature
 accordion-padding = 30
+
+# Possible values: tiles|accordion
 default-root-container-layout = 'tiles'
+
+# Possible values: horizontal|vertical|auto
+# 'auto' means: wide monitor (anything wider than high) gets horizontal orientation,
+#               tall monitor (anything higher than wide) gets vertical orientation
 default-root-container-orientation = 'auto'
 
-# Mouse follows focus when the focused monitor changes
+# Mouse follows focus when focused monitor changes
+# Drop it from your config, if you don't like this behavior
+# See https://nikitabobko.github.io/AeroSpace/guide#on-focus-changed-callbacks
+# See https://nikitabobko.github.io/AeroSpace/commands#move-mouse
+# Fallback value (if you omit the key): on-focused-monitor-changed = []
 on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 
+# You can effectively turn off macOS "Hide application" (cmd-h) feature by toggling this flag
+# Useful if you don't use this macOS feature, but accidentally hit cmd-h or cmd-alt-h key
+# Also see: https://nikitabobko.github.io/AeroSpace/goodies#disable-hide-app
+automatically-unhide-macos-hidden-apps = false
+
+# List of workspaces that should stay alive even when they contain no windows,
+# even when they are invisible.
+# This config option is only available since 'config-version = 2'
+# Fallback value (if you omit the key): persistent-workspaces = []
+# Other workspaces disappear when empty, so Super+Tab only cycles through workspaces in use.
+# 1 and B always exist so they keep their accordion layout even when empty.
+persistent-workspaces = ["1", "B"]
+
+# A callback that runs every time binding mode changes
+# See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
+# See: https://nikitabobko.github.io/AeroSpace/commands#mode
+on-mode-changed = []
+
+focus-follows-mouse.enabled = true
+
+# Possible values: (qwerty|dvorak|colemak)
+# See https://nikitabobko.github.io/AeroSpace/guide#key-mapping
 key-mapping.preset = 'qwerty'
 
+# Gaps between windows (inner-*) and between monitor edges (outer-*).
+# Possible values:
+# - Constant:     gaps.outer.top = 8
+# - Per monitor:  gaps.outer.top = [{ monitor.main = 16 }, { monitor."some-pattern" = 32 }, 24]
+#                 In this example, 24 is a default value when there is no match.
+#                 Monitor pattern is the same as for 'workspace-to-monitor-force-assignment'.
+#                 See:
+#                 https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
 gaps.inner.horizontal = 10
-gaps.inner.vertical = 10
-gaps.outer.left = 10
-gaps.outer.bottom = 10
-gaps.outer.top = 10
-gaps.outer.right = 10
+gaps.inner.vertical =   10
+gaps.outer.left =       10
+gaps.outer.bottom =     10
+gaps.outer.top =        10
+gaps.outer.right =      10
+
+# Rules for new windows, checked top to bottom; the first match wins.
+# Find an app's ID with: aerospace list-apps
+# See: https://nikitabobko.github.io/AeroSpace/guide#on-window-detected-callback
 
 # Windows that shouldn't be tiled
 [[on-window-detected]]
-if.app-id = 'com.apple.systempreferences'
-run = 'layout floating'
+    if = 'test %{app-bundle-id} = com.apple.systempreferences || test %{app-bundle-id} = com.apple.ActivityMonitor'
+    run = 'layout floating'
 
+# Workspace 1 (accordion): T3 Code, Codex (the ChatGPT app) and Claude
 [[on-window-detected]]
-if.app-id = 'com.apple.ActivityMonitor'
-run = 'layout floating'
+    if = 'test %{app-bundle-id} = com.t3tools.t3code || test %{app-bundle-id} = com.openai.codex || test %{app-bundle-id} = com.anthropic.claudefordesktop'
+    run = ['move-node-to-workspace 1', 'layout accordion']
 
+# Workspace 2: Zed
+[[on-window-detected]]
+    if = 'test %{app-bundle-id} = dev.zed.Zed'
+    run = 'move-node-to-workspace 2'
+
+# Workspace B (accordion): Chrome, so windows of different profiles stack
+[[on-window-detected]]
+    if = 'test %{app-bundle-id} = com.google.Chrome'
+    run = ['move-node-to-workspace B', 'layout accordion']
+
+# Workspace M: Spotify
+[[on-window-detected]]
+    if = 'test %{app-bundle-id} = com.spotify.client'
+    run = 'move-node-to-workspace M'
+
+# Workspace N: Obsidian
+[[on-window-detected]]
+    if = 'test %{app-bundle-id} = md.obsidian'
+    run = 'move-node-to-workspace N'
+
+# Any other window opened on workspace 1 or B joins the accordion
+[[on-window-detected]]
+    if = 'test %{workspace} = 1 || test %{workspace} = B'
+    run = 'layout accordion'
+
+# 'main' binding mode declaration
+# See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
+# 'main' binding mode must be always presented
+# Fallback value (if you omit the key): mode.main.binding = {}
 [mode.main.binding]
-# Apps
-cmd-ctrl-enter = '''exec-and-forget osascript -e 'tell application "Ghostty" to new window' -e 'tell application "Ghostty" to activate' '''
-cmd-ctrl-shift-enter = 'exec-and-forget open -na "Google Chrome" --args --new-window'
-cmd-ctrl-shift-b = 'exec-and-forget open -na "Google Chrome" --args --new-window'
-cmd-ctrl-shift-f = 'exec-and-forget open ~'
-cmd-ctrl-shift-o = 'exec-and-forget open -a Obsidian'
-cmd-ctrl-shift-m = 'exec-and-forget open -a Spotify'
-cmd-ctrl-shift-slash = 'exec-and-forget open -a Bitwarden'
 
-# Windows
-cmd-ctrl-w = 'close'
-cmd-ctrl-j = 'layout tiles horizontal vertical' # Toggle split direction
-cmd-ctrl-l = 'layout tiles accordion'           # Toggle workspace layout
-cmd-ctrl-t = 'layout floating tiling'
-cmd-ctrl-f = 'fullscreen'
+    # All possible keys:
+    # - Letters.        a, b, c, ..., z
+    # - Numbers.        0, 1, 2, ..., 9
+    # - Keypad numbers. keypad0, keypad1, keypad2, ..., keypad9
+    # - F-keys.         f1, f2, ..., f20
+    # - Special keys.   minus, equal, period, comma, slash, backslash, quote, semicolon,
+    #                   backtick, leftSquareBracket, rightSquareBracket, space, enter, esc,
+    #                   backspace, tab, pageUp, pageDown, home, end, forwardDelete,
+    #                   sectionSign (ISO keyboards only, european keyboards only)
+    # - Keypad special. keypadClear, keypadDecimalMark, keypadDivide, keypadEnter, keypadEqual,
+    #                   keypadMinus, keypadMultiply, keypadPlus
+    # - Arrows.         left, down, up, right
 
-cmd-ctrl-left = 'focus left'
-cmd-ctrl-right = 'focus right'
-cmd-ctrl-up = 'focus up'
-cmd-ctrl-down = 'focus down'
+    # All possible modifiers: cmd, alt, ctrl, shift
 
-cmd-ctrl-shift-left = 'move left'
-cmd-ctrl-shift-right = 'move right'
-cmd-ctrl-shift-up = 'move up'
-cmd-ctrl-shift-down = 'move down'
+    # All possible commands: https://nikitabobko.github.io/AeroSpace/commands
 
-cmd-ctrl-minus = 'resize width -100'
-cmd-ctrl-equal = 'resize width +100'
-cmd-ctrl-shift-minus = 'resize height -100'
-cmd-ctrl-shift-equal = 'resize height +100'
-cmd-ctrl-alt-minus = 'resize width -25'
-cmd-ctrl-alt-equal = 'resize width +25'
-cmd-ctrl-shift-alt-minus = 'resize height -25'
-cmd-ctrl-shift-alt-equal = 'resize height +25'
+    # Apps
+    # See: https://nikitabobko.github.io/AeroSpace/commands#exec-and-forget
+    cmd-ctrl-enter = '''exec-and-forget osascript -e 'tell application "Ghostty" to new window' -e 'tell application "Ghostty" to activate' '''
+    # Apps with their own workspace also switch to it
+    cmd-ctrl-shift-enter = ['exec-and-forget open -na "Google Chrome" --args --new-window', 'workspace B']
+    cmd-ctrl-shift-b = ['exec-and-forget open -na "Google Chrome" --args --new-window', 'workspace B']
+    cmd-ctrl-shift-f = 'exec-and-forget open ~'
+    cmd-ctrl-shift-o = ['exec-and-forget open -a Obsidian', 'workspace N']
+    cmd-ctrl-shift-m = ['exec-and-forget open -a Spotify', 'workspace M']
+    cmd-ctrl-shift-slash = 'exec-and-forget open -a Bitwarden'
 
-# Workspaces
-cmd-ctrl-1 = 'workspace 1'
-cmd-ctrl-2 = 'workspace 2'
-cmd-ctrl-3 = 'workspace 3'
-cmd-ctrl-4 = 'workspace 4'
-cmd-ctrl-5 = 'workspace 5'
-cmd-ctrl-6 = 'workspace 6'
-cmd-ctrl-7 = 'workspace 7'
-cmd-ctrl-8 = 'workspace 8'
-cmd-ctrl-9 = 'workspace 9'
-cmd-ctrl-0 = 'workspace 10'
+    # See: https://nikitabobko.github.io/AeroSpace/commands#close
+    cmd-ctrl-w = 'close'
 
-# Move window to workspace and follow it
-cmd-ctrl-shift-1 = 'move-node-to-workspace --focus-follows-window 1'
-cmd-ctrl-shift-2 = 'move-node-to-workspace --focus-follows-window 2'
-cmd-ctrl-shift-3 = 'move-node-to-workspace --focus-follows-window 3'
-cmd-ctrl-shift-4 = 'move-node-to-workspace --focus-follows-window 4'
-cmd-ctrl-shift-5 = 'move-node-to-workspace --focus-follows-window 5'
-cmd-ctrl-shift-6 = 'move-node-to-workspace --focus-follows-window 6'
-cmd-ctrl-shift-7 = 'move-node-to-workspace --focus-follows-window 7'
-cmd-ctrl-shift-8 = 'move-node-to-workspace --focus-follows-window 8'
-cmd-ctrl-shift-9 = 'move-node-to-workspace --focus-follows-window 9'
-cmd-ctrl-shift-0 = 'move-node-to-workspace --focus-follows-window 10'
+    # See: https://nikitabobko.github.io/AeroSpace/commands#layout
+    cmd-ctrl-slash = 'layout tiles horizontal vertical' # Toggle split direction
+    cmd-ctrl-comma = 'layout tiles accordion'           # Toggle workspace layout
+    cmd-ctrl-t = 'layout floating tiling'
 
-# Move window to workspace silently
-cmd-ctrl-shift-alt-1 = 'move-node-to-workspace 1'
-cmd-ctrl-shift-alt-2 = 'move-node-to-workspace 2'
-cmd-ctrl-shift-alt-3 = 'move-node-to-workspace 3'
-cmd-ctrl-shift-alt-4 = 'move-node-to-workspace 4'
-cmd-ctrl-shift-alt-5 = 'move-node-to-workspace 5'
-cmd-ctrl-shift-alt-6 = 'move-node-to-workspace 6'
-cmd-ctrl-shift-alt-7 = 'move-node-to-workspace 7'
-cmd-ctrl-shift-alt-8 = 'move-node-to-workspace 8'
-cmd-ctrl-shift-alt-9 = 'move-node-to-workspace 9'
-cmd-ctrl-shift-alt-0 = 'move-node-to-workspace 10'
+    # See: https://nikitabobko.github.io/AeroSpace/commands#fullscreen
+    cmd-ctrl-f = 'fullscreen'
 
-cmd-ctrl-tab = 'workspace --wrap-around next'
-cmd-ctrl-shift-tab = 'workspace --wrap-around prev'
-cmd-ctrl-alt-tab = 'workspace-back-and-forth'
+    # See: https://nikitabobko.github.io/AeroSpace/commands#focus
+    cmd-ctrl-h = 'focus left'
+    cmd-ctrl-j = 'focus down'
+    cmd-ctrl-k = 'focus up'
+    cmd-ctrl-l = 'focus right'
+    cmd-ctrl-left = 'focus left'
+    cmd-ctrl-down = 'focus down'
+    cmd-ctrl-up = 'focus up'
+    cmd-ctrl-right = 'focus right'
 
-# Monitors
-cmd-ctrl-shift-alt-left = 'move-workspace-to-monitor left'
-cmd-ctrl-shift-alt-right = 'move-workspace-to-monitor right'
-cmd-ctrl-shift-alt-up = 'move-workspace-to-monitor up'
-cmd-ctrl-shift-alt-down = 'move-workspace-to-monitor down'
+    # See: https://nikitabobko.github.io/AeroSpace/commands#move
+    cmd-ctrl-shift-h = 'move left'
+    cmd-ctrl-shift-j = 'move down'
+    cmd-ctrl-shift-k = 'move up'
+    cmd-ctrl-shift-l = 'move right'
+    cmd-ctrl-shift-left = 'move left'
+    cmd-ctrl-shift-down = 'move down'
+    cmd-ctrl-shift-up = 'move up'
+    cmd-ctrl-shift-right = 'move right'
 
-# Less common actions: press Cmd+Ctrl+; then a key
-cmd-ctrl-semicolon = 'mode service'
+    # See: https://nikitabobko.github.io/AeroSpace/commands#resize
+    cmd-ctrl-minus = 'resize width -100'
+    cmd-ctrl-equal = 'resize width +100'
+    cmd-ctrl-shift-minus = 'resize height -100'
+    cmd-ctrl-shift-equal = 'resize height +100'
+    cmd-ctrl-alt-minus = 'resize width -25'
+    cmd-ctrl-alt-equal = 'resize width +25'
+    cmd-ctrl-shift-alt-minus = 'resize height -25'
+    cmd-ctrl-shift-alt-equal = 'resize height +25'
 
+    # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
+    cmd-ctrl-1 = 'workspace 1'
+    cmd-ctrl-2 = 'workspace 2'
+    cmd-ctrl-3 = 'workspace 3'
+    cmd-ctrl-4 = 'workspace 4'
+    cmd-ctrl-5 = 'workspace 5'
+    cmd-ctrl-6 = 'workspace 6'
+    cmd-ctrl-7 = 'workspace 7'
+    cmd-ctrl-8 = 'workspace 8'
+    cmd-ctrl-9 = 'workspace 9'
+    cmd-ctrl-0 = 'workspace 10'
+    cmd-ctrl-b = 'workspace B' # Browser
+    cmd-ctrl-m = 'workspace M' # Music
+    cmd-ctrl-n = 'workspace N' # Notes
+
+    cmd-ctrl-tab = 'workspace --wrap-around next'
+    cmd-ctrl-shift-tab = 'workspace --wrap-around prev'
+
+    # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
+    # Move window to workspace and follow it
+    cmd-ctrl-shift-1 = 'move-node-to-workspace --focus-follows-window 1'
+    cmd-ctrl-shift-2 = 'move-node-to-workspace --focus-follows-window 2'
+    cmd-ctrl-shift-3 = 'move-node-to-workspace --focus-follows-window 3'
+    cmd-ctrl-shift-4 = 'move-node-to-workspace --focus-follows-window 4'
+    cmd-ctrl-shift-5 = 'move-node-to-workspace --focus-follows-window 5'
+    cmd-ctrl-shift-6 = 'move-node-to-workspace --focus-follows-window 6'
+    cmd-ctrl-shift-7 = 'move-node-to-workspace --focus-follows-window 7'
+    cmd-ctrl-shift-8 = 'move-node-to-workspace --focus-follows-window 8'
+    cmd-ctrl-shift-9 = 'move-node-to-workspace --focus-follows-window 9'
+    cmd-ctrl-shift-0 = 'move-node-to-workspace --focus-follows-window 10'
+
+    # Move window to workspace silently
+    cmd-ctrl-shift-alt-1 = 'move-node-to-workspace 1'
+    cmd-ctrl-shift-alt-2 = 'move-node-to-workspace 2'
+    cmd-ctrl-shift-alt-3 = 'move-node-to-workspace 3'
+    cmd-ctrl-shift-alt-4 = 'move-node-to-workspace 4'
+    cmd-ctrl-shift-alt-5 = 'move-node-to-workspace 5'
+    cmd-ctrl-shift-alt-6 = 'move-node-to-workspace 6'
+    cmd-ctrl-shift-alt-7 = 'move-node-to-workspace 7'
+    cmd-ctrl-shift-alt-8 = 'move-node-to-workspace 8'
+    cmd-ctrl-shift-alt-9 = 'move-node-to-workspace 9'
+    cmd-ctrl-shift-alt-0 = 'move-node-to-workspace 10'
+
+    # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
+    cmd-ctrl-alt-tab = 'workspace-back-and-forth'
+
+    # See: https://nikitabobko.github.io/AeroSpace/commands#move-workspace-to-monitor
+    cmd-ctrl-shift-alt-left = 'move-workspace-to-monitor left'
+    cmd-ctrl-shift-alt-down = 'move-workspace-to-monitor down'
+    cmd-ctrl-shift-alt-up = 'move-workspace-to-monitor up'
+    cmd-ctrl-shift-alt-right = 'move-workspace-to-monitor right'
+
+    # See: https://nikitabobko.github.io/AeroSpace/commands#mode
+    cmd-ctrl-semicolon = 'mode service'
+
+# 'service' binding mode declaration.
+# See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
 [mode.service.binding]
-esc = ['reload-config', 'mode main']
-r = ['flatten-workspace-tree', 'mode main'] # Reset layout
-backspace = ['close-all-windows-but-current', 'mode main']
-left = ['join-with left', 'mode main']
-right = ['join-with right', 'mode main']
-up = ['join-with up', 'mode main']
-down = ['join-with down', 'mode main']
+    esc = ['reload-config', 'mode main']
+    r = ['flatten-workspace-tree', 'mode main'] # reset layout
+    f = ['layout floating tiling', 'mode main'] # Toggle between floating and tiling layout
+    backspace = ['close-all-windows-but-current', 'mode main']
+
+    # sticky is not yet supported https://github.com/nikitabobko/AeroSpace/issues/2
+    #s = ['layout sticky tiling', 'mode main']
+
+    h = ['join-with left', 'mode main']
+    j = ['join-with down', 'mode main']
+    k = ['join-with up', 'mode main']
+    l = ['join-with right', 'mode main']
+    left = ['join-with left', 'mode main']
+    down = ['join-with down', 'mode main']
+    up = ['join-with up', 'mode main']
+    right = ['join-with right', 'mode main']

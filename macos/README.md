@@ -75,20 +75,22 @@ New windows of these apps are moved to a fixed workspace:
 | --------- | --------- | ---------------------------------------- | --------- |
 | `1`       | `Super+1` | T3 Code, Codex (the ChatGPT app), Claude | Accordion |
 | `2`       | `Super+2` | Zed                                      | Tiles     |
+| `8`       | `Super+8` | Proton Mail                              | Tiles     |
 | `B`       | `Super+B` | Google Chrome (all profiles)             | Accordion |
+| `C`       | `Super+C` | Slack, WhatsApp, Microsoft Teams         | Accordion |
 | `M`       | `Super+M` | Spotify                                  | Tiles     |
 | `N`       | `Super+N` | Obsidian                                 | Tiles     |
-| `3`–`10`  | `Super+3..0` | Everything else (opens on the current workspace) | Tiles |
+| others    | `Super+3..0` | Everything else (opens on the current workspace) | Tiles |
 
-- **Tiles** places windows side by side. **Accordion** stacks windows on top of each other with a small edge of the others showing, like tabs. Move between them with `Super+H/J/K/L` (or arrows). Accordion is used for workspace 1 (AI apps) and B (one Chrome window per profile).
-- Workspaces 1 and B always exist, even when empty, so they keep their accordion layout. Other workspaces disappear when empty, so `Super+Tab` only cycles through workspaces in use.
+- **Tiles** places windows side by side. **Accordion** stacks windows on top of each other with a small edge of the others showing, like tabs. Move between them with `Super+H/J/K/L` (or arrows). Accordion is used for workspace 1 (AI apps), B (one Chrome window per profile) and C (chat apps).
+- Workspaces 1, B and C always exist, even when empty, so they keep their accordion layout. Other workspaces disappear when empty, so `Super+Tab` only cycles through workspaces in use.
 - System Settings, Activity Monitor and Bitwarden always float instead of tiling.
 
 Limits of the rules:
 
-- They only apply to **newly opened windows**. Windows already open when a rule was added stay where they are (move them with `Super+Shift+<number>`, or close and reopen them).
-- Any window opened on workspace 1 or B joins the accordion. A window moved there with a shortcut joins it as long as the workspace is already in accordion.
-- `Super+,` switches any workspace between tiles and accordion. On 1 and B, the next new window switches it back to accordion.
+- They only apply to **newly opened windows**. Windows already open when a rule was added stay where they are (move them with `Super+Shift+<workspace>`, e.g. `Super+Shift+C`, or close and reopen them).
+- Any window opened on workspace 1, B or C joins the accordion. A window moved there with a shortcut joins it as long as the workspace is already in accordion.
+- `Super+,` switches any workspace between tiles and accordion. On 1, B and C, the next new window switches it back to accordion.
 
 To add a rule, add an `[[on-window-detected]]` block in `aerospace.toml`. Find an app's ID with `aerospace list-apps`.
 
@@ -97,17 +99,17 @@ To add a rule, add an `[[on-window-detected]]` block in `aerospace.toml`. Find a
 | Keys                                   | Action                                                    |
 | -------------------------------------- | --------------------------------------------------------- |
 | `Super+Enter`                          | New terminal (Ghostty) window                              |
-| `Super+Shift+Enter` / `Super+Shift+B`  | New Chrome window, and go to workspace B                  |
+| `Super+Shift+Enter`                    | New Chrome window, and go to workspace B                  |
 | `Super+Shift+O`                        | Open Obsidian, and go to workspace N                      |
-| `Super+Shift+M`                        | Open Spotify, and go to workspace M                       |
+| `Super+Shift+S`                        | Open Spotify, and go to workspace M                       |
 | `Super+Shift+F`                        | New Finder window                                         |
 | `Super+Shift+/`                        | Bitwarden                                                 |
 | `Super+W`                              | Close window                                              |
 | `Super+H/J/K/L` or `Super+Arrows`      | Focus window left / down / up / right                     |
 | `Super+Shift+H/J/K/L` or `+Arrows`     | Move window left / down / up / right                      |
-| `Super+1..0`, `Super+B/M/N`            | Go to workspace                                           |
-| `Super+Shift+1..0`                     | Move window to workspace (and follow it)                  |
-| `Super+Shift+Alt+1..0`                 | Move window to workspace (stay where you are)             |
+| `Super+1..0`, `Super+B/C/M/N`          | Go to workspace                                           |
+| `Super+Shift+1..0`, `Super+Shift+B/C/M/N` | Move window to workspace (and follow it)               |
+| `Super+Shift+Alt+1..0`, `Super+Shift+Alt+B/C/M/N` | Move window to workspace (stay where you are)  |
 | `Super+Tab` / `Super+Shift+Tab`        | Next / previous workspace                                 |
 | `Super+Alt+Tab`                        | Last used workspace                                       |
 | `Super+F`                              | Fullscreen                                                |

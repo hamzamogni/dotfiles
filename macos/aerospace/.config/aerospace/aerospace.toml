@@ -54,8 +54,8 @@ automatically-unhide-macos-hidden-apps = false
 # This config option is only available since 'config-version = 2'
 # Fallback value (if you omit the key): persistent-workspaces = []
 # Other workspaces disappear when empty, so Super+Tab only cycles through workspaces in use.
-# 1 and B always exist so they keep their accordion layout even when empty.
-persistent-workspaces = ["1", "B"]
+# 1, B and C always exist so they keep their accordion layout even when empty.
+persistent-workspaces = ["1", "B", "C"]
 
 # A callback that runs every time binding mode changes
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
@@ -107,6 +107,16 @@ gaps.outer.right =      10
     if = 'test %{app-bundle-id} = com.google.Chrome'
     run = ['move-node-to-workspace B', 'layout accordion']
 
+# Workspace 8: Proton Mail
+[[on-window-detected]]
+    if = 'test %{app-bundle-id} = ch.protonmail.desktop'
+    run = 'move-node-to-workspace 8'
+
+# Workspace C (accordion): Slack, WhatsApp and Teams
+[[on-window-detected]]
+    if = 'test %{app-bundle-id} = com.tinyspeck.slackmacgap || test %{app-bundle-id} = net.whatsapp.WhatsApp || test %{app-bundle-id} = com.microsoft.teams2'
+    run = ['move-node-to-workspace C', 'layout accordion']
+
 # Workspace M: Spotify
 [[on-window-detected]]
     if = 'test %{app-bundle-id} = com.spotify.client'
@@ -117,9 +127,9 @@ gaps.outer.right =      10
     if = 'test %{app-bundle-id} = md.obsidian'
     run = 'move-node-to-workspace N'
 
-# Any other window opened on workspace 1 or B joins the accordion
+# Any other window opened on workspace 1, B or C joins the accordion
 [[on-window-detected]]
-    if = 'test %{workspace} = 1 || test %{workspace} = B'
+    if = 'test %{workspace} = 1 || test %{workspace} = B || test %{workspace} = C'
     run = 'layout accordion'
 
 # 'main' binding mode declaration
@@ -150,10 +160,9 @@ gaps.outer.right =      10
     cmd-ctrl-enter = '''exec-and-forget osascript -e 'tell application "Ghostty" to new window' -e 'tell application "Ghostty" to activate' '''
     # Apps with their own workspace also switch to it
     cmd-ctrl-shift-enter = ['exec-and-forget open -na "Google Chrome" --args --new-window', 'workspace B']
-    cmd-ctrl-shift-b = ['exec-and-forget open -na "Google Chrome" --args --new-window', 'workspace B']
     cmd-ctrl-shift-f = 'exec-and-forget open ~'
     cmd-ctrl-shift-o = ['exec-and-forget open -a Obsidian', 'workspace N']
-    cmd-ctrl-shift-m = ['exec-and-forget open -a Spotify', 'workspace M']
+    cmd-ctrl-shift-s = ['exec-and-forget open -a Spotify', 'workspace M']
     cmd-ctrl-shift-slash = 'exec-and-forget open -a Bitwarden'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#close
@@ -209,6 +218,7 @@ gaps.outer.right =      10
     cmd-ctrl-9 = 'workspace 9'
     cmd-ctrl-0 = 'workspace 10'
     cmd-ctrl-b = 'workspace B' # Browser
+    cmd-ctrl-c = 'workspace C' # Chat
     cmd-ctrl-m = 'workspace M' # Music
     cmd-ctrl-n = 'workspace N' # Notes
 
@@ -227,6 +237,10 @@ gaps.outer.right =      10
     cmd-ctrl-shift-8 = 'move-node-to-workspace --focus-follows-window 8'
     cmd-ctrl-shift-9 = 'move-node-to-workspace --focus-follows-window 9'
     cmd-ctrl-shift-0 = 'move-node-to-workspace --focus-follows-window 10'
+    cmd-ctrl-shift-b = 'move-node-to-workspace --focus-follows-window B'
+    cmd-ctrl-shift-c = 'move-node-to-workspace --focus-follows-window C'
+    cmd-ctrl-shift-m = 'move-node-to-workspace --focus-follows-window M'
+    cmd-ctrl-shift-n = 'move-node-to-workspace --focus-follows-window N'
 
     # Move window to workspace silently
     cmd-ctrl-shift-alt-1 = 'move-node-to-workspace 1'
@@ -239,6 +253,10 @@ gaps.outer.right =      10
     cmd-ctrl-shift-alt-8 = 'move-node-to-workspace 8'
     cmd-ctrl-shift-alt-9 = 'move-node-to-workspace 9'
     cmd-ctrl-shift-alt-0 = 'move-node-to-workspace 10'
+    cmd-ctrl-shift-alt-b = 'move-node-to-workspace B'
+    cmd-ctrl-shift-alt-c = 'move-node-to-workspace C'
+    cmd-ctrl-shift-alt-m = 'move-node-to-workspace M'
+    cmd-ctrl-shift-alt-n = 'move-node-to-workspace N'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
     cmd-ctrl-alt-tab = 'workspace-back-and-forth'

@@ -11,7 +11,14 @@ config-version = 2
 
 # You can use it to add commands that run after AeroSpace startup.
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
-after-startup-command = []
+# Default layouts: workspaces 1, 7, B and C stack their windows as an accordion.
+# These workspaces are listed in persistent-workspaces below so they exist at startup.
+after-startup-command = [
+    'layout --workspace 1 --root h_accordion',
+    'layout --workspace 7 --root h_accordion',
+    'layout --workspace B --root h_accordion',
+    'layout --workspace C --root h_accordion',
+]
 
 # Start AeroSpace at login
 start-at-login = true
@@ -54,7 +61,7 @@ automatically-unhide-macos-hidden-apps = false
 # This config option is only available since 'config-version = 2'
 # Fallback value (if you omit the key): persistent-workspaces = []
 # Other workspaces disappear when empty, so Super+Tab only cycles through workspaces in use.
-# 1, 7, B and C always exist so they keep their accordion layout even when empty.
+# 1, 7, B and C always exist, so the accordion layout set in after-startup-command sticks.
 persistent-workspaces = ["1", "7", "B", "C"]
 
 # A callback that runs every time binding mode changes
@@ -95,7 +102,7 @@ gaps.outer.right =      10
 # Workspace 1 (accordion): T3 Code, Codex (the ChatGPT app) and Claude
 [[on-window-detected]]
     if = 'test %{app-bundle-id} = com.t3tools.t3code || test %{app-bundle-id} = com.openai.codex || test %{app-bundle-id} = com.anthropic.claudefordesktop'
-    run = ['move-node-to-workspace 1', 'layout accordion']
+    run = 'move-node-to-workspace 1'
 
 # Workspace 2: Zed
 [[on-window-detected]]
@@ -105,12 +112,12 @@ gaps.outer.right =      10
 # Workspace B (accordion): Chrome, so windows of different profiles stack
 [[on-window-detected]]
     if = 'test %{app-bundle-id} = com.google.Chrome'
-    run = ['move-node-to-workspace B', 'layout accordion']
+    run = 'move-node-to-workspace B'
 
 # Workspace 7 (accordion): Outlook and Teams
 [[on-window-detected]]
     if = 'test %{app-bundle-id} = com.microsoft.Outlook || test %{app-bundle-id} = com.microsoft.teams2'
-    run = ['move-node-to-workspace 7', 'layout accordion']
+    run = 'move-node-to-workspace 7'
 
 # Workspace 8: Proton Mail
 [[on-window-detected]]
@@ -120,7 +127,7 @@ gaps.outer.right =      10
 # Workspace C (accordion): Slack and WhatsApp
 [[on-window-detected]]
     if = 'test %{app-bundle-id} = com.tinyspeck.slackmacgap || test %{app-bundle-id} = net.whatsapp.WhatsApp'
-    run = ['move-node-to-workspace C', 'layout accordion']
+    run = 'move-node-to-workspace C'
 
 # Workspace M: Spotify
 [[on-window-detected]]
@@ -131,11 +138,6 @@ gaps.outer.right =      10
 [[on-window-detected]]
     if = 'test %{app-bundle-id} = md.obsidian'
     run = 'move-node-to-workspace N'
-
-# Any other window opened on workspace 1, 7, B or C joins the accordion
-[[on-window-detected]]
-    if = 'test %{workspace} = 1 || test %{workspace} = 7 || test %{workspace} = B || test %{workspace} = C'
-    run = 'layout accordion'
 
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes

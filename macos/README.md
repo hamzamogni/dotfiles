@@ -84,14 +84,15 @@ New windows of these apps are moved to a fixed workspace:
 | others    | `Super+3..0` | Everything else (opens on the current workspace) | Tiles |
 
 - **Tiles** places windows side by side. **Accordion** stacks windows on top of each other with a small edge of the others showing, like tabs. Move between them with `Super+H/J/K/L` (or arrows). Accordion is used for workspace 1 (AI apps), 7 (Outlook and Teams), B (one Chrome window per profile) and C (chat apps).
-- Workspaces 1, 7, B and C always exist, even when empty, so they keep their accordion layout. Other workspaces disappear when empty, so `Super+Tab` only cycles through workspaces in use.
+- Workspaces 1, 7, B and C are set to accordion when AeroSpace starts (`after-startup-command` in `aerospace.toml`). They always exist, even when empty, so they keep that layout. Other workspaces disappear when empty, so `Super+Tab` only cycles through workspaces in use.
 - System Settings, Activity Monitor and Bitwarden always float instead of tiling.
 
 Limits of the rules:
 
 - They only apply to **newly opened windows**. Windows already open when a rule was added stay where they are (move them with `Super+Shift+<workspace>`, e.g. `Super+Shift+C`, or close and reopen them).
-- Any window opened on workspace 1, 7, B or C joins the accordion. A window moved there with a shortcut joins it as long as the workspace is already in accordion.
-- `Super+,` switches any workspace between tiles and accordion. On 1, 7, B and C, the next new window switches it back to accordion.
+- Any window opened on or moved to workspace 1, 7, B or C joins the accordion.
+- `Super+,` switches any workspace between tiles and accordion. A switch stays until you change it back or AeroSpace restarts, which resets 1, 7, B and C to accordion.
+- To make another workspace accordion by default, add it to both `after-startup-command` and `persistent-workspaces`. Changes to `after-startup-command` take effect the next time AeroSpace starts.
 
 To add a rule, add an `[[on-window-detected]]` block in `aerospace.toml`. Find an app's ID with `aerospace list-apps`.
 

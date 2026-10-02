@@ -167,6 +167,7 @@ gaps.outer.right =      10
     cmd-ctrl-shift-enter = ['exec-and-forget open -na "Google Chrome" --args --new-window', 'workspace B']
     cmd-ctrl-shift-f = 'exec-and-forget open ~'
     cmd-ctrl-shift-o = ['exec-and-forget open -a Obsidian', 'workspace N']
+    cmd-ctrl-shift-e = ['exec-and-forget open -a Zed', 'workspace 2']
     cmd-ctrl-shift-s = ['exec-and-forget open -a Spotify', 'workspace M']
     cmd-ctrl-shift-slash = 'exec-and-forget open -a Bitwarden'
 

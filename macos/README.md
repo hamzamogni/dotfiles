@@ -102,6 +102,7 @@ To add a rule, add an `[[on-window-detected]]` block in `aerospace.toml`. Find a
 | `Super+Enter`                          | New terminal (Ghostty) window                              |
 | `Super+Shift+Enter`                    | New Chrome window, and go to workspace B                  |
 | `Super+Shift+O`                        | Open Obsidian, and go to workspace N                      |
+| `Super+Shift+E`                        | Open Zed, and go to workspace 2                           |
 | `Super+Shift+S`                        | Open Spotify, and go to workspace M                       |
 | `Super+Shift+F`                        | New Finder window                                         |
 | `Super+Shift+/`                        | Bitwarden                                                 |

@@ -139,6 +139,20 @@ gaps.outer.right =      10
     if = 'test %{app-bundle-id} = md.obsidian'
     run = 'move-node-to-workspace N'
 
+# Pin workspaces to monitors. 'main' is the display marked Main in System Settings -> Displays
+# (the external monitor when connected, otherwise the laptop). When only one screen is connected,
+# everything falls back to it. Pinned workspaces ignore move-workspace-to-monitor.
+# Workspaces not listed here (3-6, 8-10) open on the main monitor by default.
+# See: https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
+[workspace-to-monitor-force-assignment]
+    1 = 'main'                 # AI apps
+    2 = 'main'                 # Zed
+    B = 'main'                 # Chrome
+    7 = ['built-in', 'main']   # Outlook, Teams
+    C = ['built-in', 'main']   # Slack, WhatsApp
+    M = ['built-in', 'main']   # Spotify
+    N = ['built-in', 'main']   # Obsidian
+
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
 # 'main' binding mode must be always presented
@@ -277,6 +291,11 @@ gaps.outer.right =      10
     cmd-ctrl-shift-alt-down = 'move-workspace-to-monitor down'
     cmd-ctrl-shift-alt-up = 'move-workspace-to-monitor up'
     cmd-ctrl-shift-alt-right = 'move-workspace-to-monitor right'
+
+    # See: https://nikitabobko.github.io/AeroSpace/commands#focus-monitor
+    cmd-ctrl-period = 'focus-monitor --wrap-around next'
+    # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-monitor
+    cmd-ctrl-shift-period = 'move-node-to-monitor --focus-follows-window --wrap-around next'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#mode
     cmd-ctrl-semicolon = 'mode service'

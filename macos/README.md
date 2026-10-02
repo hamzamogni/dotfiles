@@ -71,17 +71,19 @@ Things to know:
 
 New windows of these apps are moved to a fixed workspace:
 
-| Workspace | Shortcut  | Apps                                     | Layout    |
-| --------- | --------- | ---------------------------------------- | --------- |
-| `1`       | `Super+1` | T3 Code, Codex (the ChatGPT app), Claude | Accordion |
-| `2`       | `Super+2` | Zed                                      | Tiles     |
-| `7`       | `Super+7` | Microsoft Outlook, Microsoft Teams       | Accordion |
-| `8`       | `Super+8` | Proton Mail                              | Tiles     |
-| `B`       | `Super+B` | Google Chrome (all profiles)             | Accordion |
-| `C`       | `Super+C` | Slack, WhatsApp                          | Accordion |
-| `M`       | `Super+M` | Spotify                                  | Tiles     |
-| `N`       | `Super+N` | Obsidian                                 | Tiles     |
-| others    | `Super+3..0` | Everything else (opens on the current workspace) | Tiles |
+| Workspace | Shortcut     | Apps                                     | Layout    | Monitor  |
+| --------- | ------------ | ---------------------------------------- | --------- | -------- |
+| `1`       | `Super+1`    | T3 Code, Codex (the ChatGPT app), Claude | Accordion | Main     |
+| `2`       | `Super+2`    | Zed                                      | Tiles     | Main     |
+| `7`       | `Super+7`    | Microsoft Outlook, Microsoft Teams       | Accordion | Laptop   |
+| `8`       | `Super+8`    | Proton Mail                              | Tiles     | Main     |
+| `B`       | `Super+B`    | Google Chrome (all profiles)             | Accordion | Main     |
+| `C`       | `Super+C`    | Slack, WhatsApp                          | Accordion | Laptop   |
+| `M`       | `Super+M`    | Spotify                                  | Tiles     | Laptop   |
+| `N`       | `Super+N`    | Obsidian                                 | Tiles     | Laptop   |
+| others    | `Super+3..0` | Everything else (opens on the current workspace) | Tiles | Main |
+
+"Main" is the display marked as Main in System Settings → Displays (the external monitor when one is connected). See [Multiple monitors](#multiple-monitors).
 
 - **Tiles** places windows side by side. **Accordion** stacks windows on top of each other with a small edge of the others showing, like tabs. Move between them with `Super+H/J/K/L` (or arrows). Accordion is used for workspace 1 (AI apps), 7 (Outlook and Teams), B (one Chrome window per profile) and C (chat apps).
 - Workspaces 1, 7, B and C are set to accordion when AeroSpace starts (`after-startup-command` in `aerospace.toml`). They always exist, even when empty, so they keep that layout. Other workspaces disappear when empty, so `Super+Tab` only cycles through workspaces in use.
@@ -95,6 +97,24 @@ Limits of the rules:
 - To make another workspace accordion by default, add it to both `after-startup-command` and `persistent-workspaces`. Changes to `after-startup-command` take effect the next time AeroSpace starts.
 
 To add a rule, add an `[[on-window-detected]]` block in `aerospace.toml`. Find an app's ID with `aerospace list-apps`.
+
+### Multiple monitors
+
+- Workspaces are shared between monitors. Each monitor shows one workspace at a time, and every workspace belongs to one monitor.
+- Going to a workspace (e.g. `Super+B`) shows it on the monitor it belongs to and focuses that monitor. It does not open on whichever screen you're looking at.
+- Workspaces are pinned to monitors in `[workspace-to-monitor-force-assignment]` in `aerospace.toml` (see the Monitor column above):
+  - **Main monitor:** 1, 2, B, plus every workspace not listed (3–6, 8–10).
+  - **Laptop screen:** 7, C, M, N.
+  - With only one screen connected (laptop alone, or lid closed on an external monitor), everything falls back to it.
+- Pinned workspaces can't be moved with `Super+Shift+Alt+Arrows`; change the pinning in the config instead. Unpinned ones can.
+- `Super+.` focuses the other monitor. `Super+Shift+.` sends the focused window to the other monitor (to whatever workspace is visible there).
+
+macOS settings this relies on (applied by `defaults.sh`, as recommended by AeroSpace):
+
+- **"Displays have separate Spaces" is off.** With it on, macOS has focus and performance bugs with AeroSpace across monitors. Takes effect after logging out and back in. Side effect: a full-screen app (macOS green button) blacks out the other monitor; use `Super+F` (AeroSpace fullscreen) instead.
+- **Mission Control groups windows by app.** Otherwise it shows tiny thumbnails, because AeroSpace parks hidden windows in a screen corner.
+
+Also arrange your monitors (System Settings → Displays → Arrange) so **every screen has a free bottom-left or bottom-right corner**: that's where AeroSpace parks hidden windows. With the laptop centered below the external monitor, all corners are free.
 
 ### Shortcuts
 
@@ -122,6 +142,8 @@ To add a rule, add an `[[on-window-detected]]` block in `aerospace.toml`. Find a
 | `Super+,`                              | Toggle tiles / accordion                                  |
 | `Super+-` / `Super+=`                  | Narrower / wider (`+Shift`: height, `+Alt`: smaller steps) |
 | `Super+Shift+Alt+Arrows`               | Move workspace to another monitor                         |
+| `Super+.`                              | Focus the other monitor                                   |
+| `Super+Shift+.`                        | Move window to the other monitor                          |
 | `Super+;`, then `Esc`                  | Reload config                                             |
 | `Super+;`, then `R`                    | Reset the workspace layout                                |
 | `Super+;`, then `F`                    | Toggle floating                                           |

@@ -52,6 +52,12 @@ defaults write com.apple.dock autohide-time-modifier -float 0.4
 defaults write com.apple.dock minimize-to-application -bool true
 defaults write com.apple.dock show-recents -bool false
 
+# AeroSpace recommendations (https://nikitabobko.github.io/AeroSpace/guide)
+# Turn off "Displays have separate Spaces": avoids focus and performance bugs with multiple monitors (needs a logout)
+defaults write com.apple.spaces spans-displays -bool true
+# Mission Control: group windows by app, otherwise AeroSpace's hidden windows make it show tiny thumbnails
+defaults write com.apple.dock expose-group-apps -bool true
+
 # Screenshots: PNG in ~/Pictures/Screenshots, no window shadow
 mkdir -p "$HOME/Pictures/Screenshots"
 defaults write com.apple.screencapture location -string "$HOME/Pictures/Screenshots"
@@ -60,4 +66,4 @@ defaults write com.apple.screencapture disable-shadow -bool true
 
 killall Dock Finder SystemUIServer 2>/dev/null || true
 
-echo "macOS settings applied. Log out and back in for keyboard and trackpad changes to fully apply."
+echo "macOS settings applied. Log out and back in for keyboard, trackpad and Spaces changes to fully apply."

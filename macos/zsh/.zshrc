@@ -5,3 +5,6 @@ done
 
 # Machine-specific or secret settings that should not be committed
 [[ -f "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"
+
+# Pi
+export PATH="$HOME/.local/bin:$PATH"

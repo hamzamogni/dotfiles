@@ -1,56 +1,40 @@
 #!/usr/bin/env bash
 # Set up this Mac from the dotfiles in this folder. Safe to re-run.
 #
-# Usage: ./install.sh              Install Homebrew packages and link dotfiles
-#        ./install.sh --defaults   Also apply macOS settings from defaults.sh
+# Usage: ./install.sh               Install Homebrew packages and link dotfiles
+#        ./install.sh --defaults    Also apply macOS settings from defaults.sh
+#        ./install.sh --link-only   Only link dotfiles, skip Homebrew
 
 set -euo pipefail
 
 cd "$(dirname "$0")"
 DOTFILES="$(pwd -P)"
-PACKAGES=(zsh ghostty tmux nvim starship git btop bin aerospace karabiner)
-BACKUP_DIR="$HOME/.dotfiles-backup/$(date +%Y%m%d-%H%M%S)"
+REPO="$(dirname "$DOTFILES")"
+export BACKUP_DIR="$HOME/.dotfiles-backup/$(date +%Y%m%d-%H%M%S)"
 
-backup() {
-  mkdir -p "$(dirname "$BACKUP_DIR/$1")"
-  mv "$HOME/$1" "$BACKUP_DIR/$1"
-  echo "Backed up ~/$1 to $BACKUP_DIR"
-}
-
-# Homebrew
-if ! command -v brew &>/dev/null; then
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-fi
-eval "$(/opt/homebrew/bin/brew shellenv bash)"
-
-brew bundle --file="$DOTFILES/Brewfile" || echo "Some Brewfile entries failed (Mac App Store apps need you to be signed in). Continuing."
-
-for package in "${PACKAGES[@]}"; do
-  # Each ~/.config/<tool> folder should be a single link to this repo, so apps that
-  # rewrite their config (like Karabiner) write here. Move real folders out of the way.
-  for dir in "$package"/.config/*/; do
-    [[ -d $dir ]] || continue
-    relative="${dir#"$package"/}"
-    relative="${relative%/}"
-    if [[ -d "$HOME/$relative" && ! -L "$HOME/$relative" ]]; then
-      backup "$relative"
-    fi
-  done
-
-  # Move files that would block stow out of the way, e.g. a default ~/.zprofile
-  while IFS= read -r -d '' file; do
-    relative="${file#"$package"/}"
-    target="$HOME/$relative"
-
-    if [[ -e $target || -L $target ]] && [[ "$(realpath "$target" 2>/dev/null)" != "$DOTFILES/$file" ]]; then
-      backup "$relative"
-    fi
-  done < <(find "$package" -type f -print0)
+link_only=false
+defaults=false
+for arg in "$@"; do
+  case $arg in
+    --link-only) link_only=true ;;
+    --defaults) defaults=true ;;
+    *) echo "Unknown option: $arg" >&2; exit 1 ;;
+  esac
 done
 
-mkdir -p "$HOME/.config"
-stow --restow --target="$HOME" "${PACKAGES[@]}"
-echo "Linked: ${PACKAGES[*]}"
+if ! $link_only; then
+  if ! command -v brew &>/dev/null; then
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  fi
+  for brew in /opt/homebrew/bin/brew /usr/local/bin/brew; do
+    [[ -x $brew ]] && eval "$("$brew" shellenv bash)" && break
+  done
+
+  brew bundle --file="$DOTFILES/Brewfile" || echo "Some Brewfile entries failed (Mac App Store apps need you to be signed in). Continuing."
+fi
+
+"$REPO/scripts/link.sh" "$REPO/shared"
+"$REPO/scripts/link.sh" "$DOTFILES" aerospace karabiner bin
 
 # Ghostty on macOS also reads this file, and it would override the linked config
 ghostty_app_config="$HOME/Library/Application Support/com.mitchellh.ghostty/config.ghostty"
@@ -58,7 +42,7 @@ if [[ -s $ghostty_app_config ]]; then
   echo "Warning: $ghostty_app_config is not empty and overrides ~/.config/ghostty. Consider emptying it."
 fi
 
-if [[ ${1:-} == "--defaults" ]]; then
+if $defaults; then
   "$DOTFILES/defaults.sh"
 fi
 

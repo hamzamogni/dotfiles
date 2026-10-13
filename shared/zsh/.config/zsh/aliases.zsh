@@ -44,6 +44,7 @@ alias d='podman'
 alias t='tmux attach || tmux new -s Work'
 alias ts='tmux-sessionizer'
 n() { if (( $# == 0 )); then command nvim . ; else command nvim "$@"; fi; }
+alias vim='nvim'
 
 # Git
 alias g='git'

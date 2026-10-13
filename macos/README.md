@@ -175,6 +175,7 @@ Coming from Linux:
 | `zi`           | Pick a frequently used folder with fzf              |
 | `Ctrl+R`       | Search history with fzf                             |
 | `ts`           | Pick a project and open it as a tmux session        |
+| `t` / `tu`     | Attach to tmux on this Mac / on the Ubuntu machine  |
 
 ### tmux
 
@@ -193,6 +194,16 @@ Prefix is `Caps Lock+A`, `Ctrl+Space` or `Ctrl+B`. Ghostty turns `Caps Lock+A` i
 | `prefix s`                      | Switch session with fzf (with preview)        |
 | `prefix q`                      | Reload tmux config                            |
 | `prefix ?`                      | Show all keybindings                          |
+
+### Working on the Ubuntu machine
+
+Each machine runs its own tmux, with one session per project on the machine that has the code. Don't run Ubuntu's tmux inside the Mac's. Keep one Ghostty tab per machine instead:
+
+1. `Cmd+T` opens a new tab. Run `tu` there. It SSHes to `hmogni-srv1` over Tailscale and attaches to tmux, or starts it.
+2. `Cmd+1` / `Cmd+2` switch between the Mac tab and the Ubuntu tab. Inside each, `prefix f` and `prefix s` pick that machine's projects.
+3. If the connection drops, Ubuntu's sessions keep running. Run `tu` again.
+
+The Mac's tmux is blue and Ubuntu's is orange, so you can tell them apart.
 
 ## Light and dark mode
 

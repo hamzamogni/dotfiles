@@ -17,8 +17,8 @@ if (( $# == 0 )); then
 fi
 
 # Packages whose folders must stay real in ~, so other files can sit next to the linked ones:
-# git's ~/.config/git/local, installers writing to ~/.local/bin, Ghostty's per-OS os.ghostty.
-NO_FOLDING=" git bin ghostty "
+# git's ~/.config/git/local, installers writing to ~/.local/bin, per-OS os.ghostty and os.conf.
+NO_FOLDING=" git bin ghostty tmux "
 
 BACKUP_DIR="${BACKUP_DIR:-$HOME/.dotfiles-backup/$(date +%Y%m%d-%H%M%S)}"
 REPO_TAIL="$(basename "$(dirname "$DOTFILES")")/$(basename "$DOTFILES")"

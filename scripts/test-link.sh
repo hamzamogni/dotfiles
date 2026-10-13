@@ -29,13 +29,14 @@ echo "[user] email = work@example.com" >"$repo/macos/git/.config/git/local"
 ln -s ../../src/dotfiles/macos/git/.config/git "$HOME/.config/git"
 ln -s ../../src/dotfiles/macos/nvim/.config/nvim "$HOME/.config/nvim"
 ln -s ../../src/dotfiles/shared/ghostty/.config/ghostty "$HOME/.config/ghostty"
+ln -s ../../src/dotfiles/shared/tmux/.config/tmux "$HOME/.config/tmux"
 echo "binary" >"$repo/macos/bin/.local/bin/pi"
 ln -s ../../src/dotfiles/macos/bin/.local/bin "$HOME/.local/bin"
 
 link_all() {
   "$repo/scripts/link.sh" "$repo/shared"
   "$repo/scripts/link.sh" "$repo/macos" aerospace karabiner bin ghostty
-  "$repo/scripts/link.sh" "$repo/ubuntu" bin terminal ghostty
+  "$repo/scripts/link.sh" "$repo/ubuntu" bin terminal ghostty tmux
 }
 
 link_all >/dev/null
@@ -48,6 +49,7 @@ check "~/.config/git/local moved out of the repo" 'grep -q work@example.com "$HO
 check "the old macos/git folder is gone" '[[ ! -e $repo/macos/git ]]'
 check "~/.config/ghostty is a real folder" '[[ -d $HOME/.config/ghostty && ! -L $HOME/.config/ghostty ]]'
 check "~/.config/ghostty has the shared config and a per-OS os.ghostty" '[[ -L $HOME/.config/ghostty/config.ghostty && -L $HOME/.config/ghostty/os.ghostty ]]'
+check "~/.config/tmux has the shared tmux.conf and Ubuntu's os.conf" '[[ ! -L $HOME/.config/tmux ]] && points_to .config/tmux/tmux.conf shared/tmux/.config/tmux/tmux.conf && points_to .config/tmux/os.conf ubuntu/tmux/.config/tmux/os.conf'
 check "~/.local/bin is a real folder" '[[ -d $HOME/.local/bin && ! -L $HOME/.local/bin ]]'
 check "~/.local/bin/pi moved out of the repo" '[[ -f $HOME/.local/bin/pi && ! -L $HOME/.local/bin/pi ]]'
 check "tmux-sessionizer links to shared/bin" 'points_to .local/bin/tmux-sessionizer shared/bin/.local/bin/tmux-sessionizer'

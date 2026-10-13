@@ -36,6 +36,10 @@ fi
 "$REPO/scripts/link.sh" "$REPO/shared"
 "$REPO/scripts/link.sh" "$DOTFILES" aerospace karabiner bin
 
+if ! $link_only; then
+  "$REPO/scripts/install-nvim-plugins.sh"
+fi
+
 # Ghostty on macOS also reads this file, and it would override the linked config
 ghostty_app_config="$HOME/Library/Application Support/com.mitchellh.ghostty/config.ghostty"
 if [[ -s $ghostty_app_config ]]; then
@@ -50,6 +54,5 @@ cat <<EOF
 
 Done. Next steps:
   - Open a new Ghostty window to load the new shell config.
-  - Start Neovim once to let LazyVim install its plugins.
   - Set up containers: podman machine init && podman machine start
 EOF

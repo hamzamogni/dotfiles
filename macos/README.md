@@ -21,7 +21,7 @@ After the first install:
 
 1. **Open Karabiner-Elements** and approve everything macOS asks for (driver/system extension, Input Monitoring, keyboard type). Without this, Caps Lock is not remapped.
 2. **Open AeroSpace** and give it Accessibility permission. It starts automatically at login after that.
-3. Open a new Ghostty window to load the shell config, and start `nvim` once so LazyVim installs its plugins.
+3. Open a new Ghostty window to load the shell config.
 4. Set up containers: `podman machine init && podman machine start`.
 
 ## Layout

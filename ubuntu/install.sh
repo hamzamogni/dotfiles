@@ -67,6 +67,8 @@ fi
 "$REPO/scripts/link.sh" "$DOTFILES" bin terminal
 
 if ! $link_only; then
+  "$REPO/scripts/install-nvim-plugins.sh"
+
   zsh_path="$(command -v zsh)"
   if [[ "$(getent passwd "$(id -un)" | cut -d: -f7)" != "$zsh_path" ]]; then
     echo "Switching your login shell to zsh. chsh asks for your password."
@@ -82,5 +84,4 @@ cat <<DONE
 
 Done. Next steps:
   - Log out and back in, so GNOME starts with zsh and the new settings.
-  - Start Neovim once to let LazyVim install its plugins.
 DONE

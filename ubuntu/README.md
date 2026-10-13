@@ -17,9 +17,10 @@ The installer does the following:
 3. Installs [mise](https://mise.jdx.dev) into `~/.local/bin` and a stable Rust toolchain with `rustup`.
 4. Installs the Maple Mono NF font into `~/.local/share/fonts`, after checking its SHA-256.
 5. Links `../shared` and this folder's packages into `~`. Anything in the way moves to `~/.dotfiles-backup/<date>/`.
-6. Switches your login shell to zsh. `chsh` asks for your password. Bash stays installed.
+6. Installs LazyVim's plugins at the commits in `lazy-lock.json`, the same ones the Mac uses.
+7. Switches your login shell to zsh. `chsh` asks for your password. Bash stays installed.
 
-Log out and back in after the first install, so the GNOME session starts with zsh. Then start `nvim` once so LazyVim installs its plugins.
+Log out and back in after the first install, so the GNOME session starts with zsh.
 
 ## Layout
 

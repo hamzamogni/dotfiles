@@ -17,6 +17,11 @@ fi
 
 # Fish-style suggestions and syntax highlighting (highlighting must load last)
 for plugin in zsh-autosuggestions zsh-syntax-highlighting; do
-  [[ -f "$HOMEBREW_PREFIX/share/$plugin/$plugin.zsh" ]] && source "$HOMEBREW_PREFIX/share/$plugin/$plugin.zsh"
+  for dir in ${HOMEBREW_PREFIX:+$HOMEBREW_PREFIX/share} /usr/share; do
+    if [[ -f $dir/$plugin/$plugin.zsh ]]; then
+      source "$dir/$plugin/$plugin.zsh"
+      break
+    fi
+  done
 done
-unset plugin
+unset plugin dir

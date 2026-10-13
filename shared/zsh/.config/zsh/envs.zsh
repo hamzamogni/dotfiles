@@ -12,5 +12,8 @@ export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 # Use the terminal's 16 colors, so fzf follows the light/dark theme
 export FZF_DEFAULT_OPTS="--color=16"
 
-typeset -U path
-path+=("$HOME/.local/bin")
+# Android SDK, where Android Studio installs it on macOS
+if [[ -d $HOME/Library/Android/sdk ]]; then
+  export ANDROID_HOME="$HOME/Library/Android/sdk"
+  path=("$ANDROID_HOME/platform-tools" "$ANDROID_HOME/cmdline-tools/latest/bin" "$ANDROID_HOME/emulator" $path)
+fi

@@ -11,7 +11,7 @@ alias eff='$EDITOR "$(ff)"'
 sff() {
   if (( $# == 0 )); then echo "Usage: sff <destination> (e.g. sff host:/tmp/)"; return 1; fi
   local file
-  file=$(find . -type f -exec stat -f '%m%t%N' {} + | sort -rn | cut -f2- | ff) && [[ -n $file ]] && scp "$file" "$1"
+  file=$(print -rl -- **/*(.DNom) | ff) && [[ -n $file ]] && scp "$file" "$1"
 }
 
 if (( $+commands[zoxide] )); then

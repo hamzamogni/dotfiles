@@ -13,7 +13,7 @@ setopt hist_ignore_space   # Skip commands starting with a space
 setopt hist_ignore_dups    # Skip repeated commands
 
 # Autocompletion (including completions installed by Homebrew)
-fpath=("${HOMEBREW_PREFIX:-/opt/homebrew}/share/zsh/site-functions" $fpath)
+[[ -n $HOMEBREW_PREFIX ]] && fpath=("$HOMEBREW_PREFIX/share/zsh/site-functions" $fpath)
 autoload -Uz compinit
 mkdir -p "$XDG_CACHE_HOME/zsh"
 compinit -d "$XDG_CACHE_HOME/zsh/zcompdump"

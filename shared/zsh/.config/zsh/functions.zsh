@@ -13,30 +13,35 @@ ga() {
   local base="$(basename "$PWD")"
   local wt_path="../${base}--${branch}"
 
-  git worktree add -b "$branch" "$wt_path"
-  mise trust "$wt_path"
+  git worktree add -b "$branch" "$wt_path" || return 1
   cd "$wt_path"
 }
 
-# Remove worktree and branch from within active worktree directory.
+# Remove the current worktree and its branch. Refuses uncommitted work, unmerged branches
+# and worktrees that T3 Code manages.
 gd() {
-  if gum confirm "Remove worktree and branch?"; then
-    local cwd base branch root worktree
+  local worktree branch main
+  worktree="$(git rev-parse --show-toplevel)" || return 1
+  branch="$(git branch --show-current)"
+  main="$(git worktree list --porcelain | sed -n '1s/^worktree //p')"
 
-    cwd="$(pwd)"
-    worktree="$(basename "$cwd")"
-
-    # split on first `--`
-    root="${worktree%%--*}"
-    branch="${worktree#*--}"
-
-    # Protect against accidentally nuking a non-worktree directory
-    if [[ "$root" != "$worktree" ]]; then
-      cd "../$root"
-      git worktree remove "$cwd" --force || return 1
-      git branch -D "$branch"
-    fi
+  if [[ $worktree == "$main" ]]; then
+    echo "gd: $worktree is the main checkout, not a worktree"
+    return 1
   fi
+  if [[ $worktree == "$HOME/.t3/"* ]]; then
+    echo "gd: T3 Code manages $worktree. Remove it from T3 Code."
+    return 1
+  fi
+  if [[ -n "$(git status --porcelain)" ]]; then
+    echo "gd: $worktree has uncommitted changes"
+    return 1
+  fi
+
+  gum confirm "Remove worktree $worktree${branch:+ and branch $branch}?" || return 0
+  cd "$main" || return 1
+  git worktree remove "$worktree" || return 1
+  [[ -n $branch ]] && git branch -d "$branch"
 }
 
 # SSH Port Forwarding Functions

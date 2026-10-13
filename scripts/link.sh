@@ -16,9 +16,9 @@ if (( $# == 0 )); then
   set -- $(cd "$STOW_DIR" && ls -d */ | tr -d /)
 fi
 
-# Packages whose folders must stay real in ~, so tools can add private files next to the
-# linked ones (git's ~/.config/git/local, installers writing to ~/.local/bin).
-NO_FOLDING=" git bin "
+# Packages whose folders must stay real in ~, so other files can sit next to the linked ones:
+# git's ~/.config/git/local, installers writing to ~/.local/bin, Ghostty's per-OS os.ghostty.
+NO_FOLDING=" git bin ghostty "
 
 BACKUP_DIR="${BACKUP_DIR:-$HOME/.dotfiles-backup/$(date +%Y%m%d-%H%M%S)}"
 REPO_TAIL="$(basename "$(dirname "$DOTFILES")")/$(basename "$DOTFILES")"

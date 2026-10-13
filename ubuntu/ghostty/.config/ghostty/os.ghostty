@@ -1,0 +1,2 @@
+# Caps Lock + A sends the tmux prefix (Ctrl+Space). keyd turns held Caps Lock into Super.
+keybind = super+a=text:\x00

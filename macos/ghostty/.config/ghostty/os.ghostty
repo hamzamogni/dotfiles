@@ -1,0 +1,2 @@
+# Caps Lock + A sends the tmux prefix (Ctrl+Space). Karabiner turns held Caps Lock into Cmd+Ctrl.
+keybind = cmd+ctrl+a=text:\x00

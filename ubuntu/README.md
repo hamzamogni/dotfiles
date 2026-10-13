@@ -28,6 +28,7 @@ Log out and back in after the first install, so the GNOME session starts with zs
 | ---------- | -------------------------------------------------------------------------- |
 | `bin`      | `toggle-appearance`, which switches GNOME between light and dark mode      |
 | `terminal` | `~/.config/xdg-terminals.list`, which makes Ghostty the default terminal    |
+| `ghostty`  | `os.ghostty`, which makes `Caps Lock+A` send the tmux prefix              |
 
 `defaults.sh` and `keyd/` are not stow packages. `defaults.sh` applies them with `--defaults`.
 
@@ -69,5 +70,6 @@ To turn it off, run `sudo systemctl disable --now keyd`.
 | `Super+Shift+1..5`      | Move window to workspace                 |
 | `Super+Tab` / `Super+Shift+Tab` | Next / previous workspace        |
 | `Alt+Tab`               | Switch windows (unchanged)               |
+| `Caps Lock+A`           | tmux prefix, same as `Ctrl+Space`        |
 
-`defaults.sh` also sets five fixed workspaces, fast key repeat and tap to click. It turns off Ubuntu Dock's `Super+<number>` app shortcuts, which would clash with the workspace shortcuts. Ghostty, Neovim and the CLI tools follow GNOME's light and dark mode.
+`defaults.sh` also sets five fixed workspaces, fast key repeat and tap to click. It turns off Ubuntu Dock's `Super+<number>` app shortcuts and GNOME's `Super+A` app grid, which would clash with the workspace shortcuts and the tmux prefix. Ghostty, Neovim and the CLI tools follow GNOME's light and dark mode.

@@ -28,13 +28,14 @@ mkdir -p "$repo/macos/git/.config/git"
 echo "[user] email = work@example.com" >"$repo/macos/git/.config/git/local"
 ln -s ../../src/dotfiles/macos/git/.config/git "$HOME/.config/git"
 ln -s ../../src/dotfiles/macos/nvim/.config/nvim "$HOME/.config/nvim"
+ln -s ../../src/dotfiles/shared/ghostty/.config/ghostty "$HOME/.config/ghostty"
 echo "binary" >"$repo/macos/bin/.local/bin/pi"
 ln -s ../../src/dotfiles/macos/bin/.local/bin "$HOME/.local/bin"
 
 link_all() {
   "$repo/scripts/link.sh" "$repo/shared"
-  "$repo/scripts/link.sh" "$repo/macos" aerospace karabiner bin
-  "$repo/scripts/link.sh" "$repo/ubuntu" bin terminal
+  "$repo/scripts/link.sh" "$repo/macos" aerospace karabiner bin ghostty
+  "$repo/scripts/link.sh" "$repo/ubuntu" bin terminal ghostty
 }
 
 link_all >/dev/null
@@ -45,6 +46,8 @@ check "~/.config/git is a real folder" '[[ -d $HOME/.config/git && ! -L $HOME/.c
 check "~/.config/git/config links to shared/git" 'points_to .config/git/config shared/git/.config/git/config'
 check "~/.config/git/local moved out of the repo" 'grep -q work@example.com "$HOME/.config/git/local" && [[ ! -L $HOME/.config/git/local ]]'
 check "the old macos/git folder is gone" '[[ ! -e $repo/macos/git ]]'
+check "~/.config/ghostty is a real folder" '[[ -d $HOME/.config/ghostty && ! -L $HOME/.config/ghostty ]]'
+check "~/.config/ghostty has the shared config and a per-OS os.ghostty" '[[ -L $HOME/.config/ghostty/config.ghostty && -L $HOME/.config/ghostty/os.ghostty ]]'
 check "~/.local/bin is a real folder" '[[ -d $HOME/.local/bin && ! -L $HOME/.local/bin ]]'
 check "~/.local/bin/pi moved out of the repo" '[[ -f $HOME/.local/bin/pi && ! -L $HOME/.local/bin/pi ]]'
 check "tmux-sessionizer links to shared/bin" 'points_to .local/bin/tmux-sessionizer shared/bin/.local/bin/tmux-sessionizer'

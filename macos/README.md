@@ -10,8 +10,9 @@ A keyboard-driven, terminal-first setup for macOS:
 ## Install
 
 ```sh
-./install.sh             # Homebrew packages + link dotfiles into ~
-./install.sh --defaults  # ...and apply macOS settings from defaults.sh
+./install.sh              # Homebrew packages + link dotfiles into ~
+./install.sh --defaults   # ...and apply macOS settings from defaults.sh
+./install.sh --link-only  # only link dotfiles, skip Homebrew
 ```
 
 Anything already in the way (like a default `~/.zprofile` or an existing `~/.config/<tool>` folder) is moved to `~/.dotfiles-backup/<date>/`.
@@ -20,12 +21,12 @@ After the first install:
 
 1. **Open Karabiner-Elements** and approve everything macOS asks for (driver/system extension, Input Monitoring, keyboard type). Without this, Caps Lock is not remapped.
 2. **Open AeroSpace** and give it Accessibility permission. It starts automatically at login after that.
-3. Open a new Ghostty window to load the shell config, and start `nvim` once so LazyVim installs its plugins.
+3. Open a new Ghostty window to load the shell config.
 4. Set up containers: `podman machine init && podman machine start`.
 
 ## Layout
 
-Every folder is a [stow](https://www.gnu.org/software/stow/) package that mirrors `~`:
+Every folder is a [stow](https://www.gnu.org/software/stow/) package that mirrors `~`. The packages Ubuntu uses too live in [`../shared`](../shared). The rest live here.
 
 | Package     | What                                                                                    |
 | ----------- | --------------------------------------------------------------------------------------- |
@@ -36,13 +37,13 @@ Every folder is a [stow](https://www.gnu.org/software/stow/) package that mirror
 | `starship`  | Minimal prompt                                                                          |
 | `git`       | Git defaults, aliases and identity                                                      |
 | `btop`      | System monitor, using terminal colors                                                   |
-| `bin`       | Scripts in `~/.local/bin`: `tmux-sessionizer` (alias `ts`), `tmux-session-switch`, `toggle-appearance` |
+| `bin`       | Scripts in `~/.local/bin`: `tmux-sessionizer` (alias `ts`) and `tmux-session-switch` in `shared/`, `toggle-appearance` here |
 | `aerospace` | Tiling window manager: shortcuts and app-to-workspace rules                             |
 | `karabiner` | Keyboard remapping: turns Caps Lock into Super / Escape                                 |
 
-Each `~/.config/<tool>` is a symlink to the matching folder here, so editing a config in `~/.config` edits this repo, and apps that rewrite their own config (Karabiner) write here too.
+Each `~/.config/<tool>` is a symlink to the matching folder in this repo, so editing a config in `~/.config` edits this repo, and apps that rewrite their own config (Karabiner) write here too. `~/.config/git` and `~/.local/bin` are the exception. They are real folders holding one link per file, so `~/.config/git/local` and tools installed into `~/.local/bin` stay out of the repo.
 
-To link a single package by hand, run from this folder: `stow -t ~ <package>` (`-R` to re-link, `-D` to unlink, `-n -v` for a dry run).
+`../scripts/link.sh` does the linking for both Mac and Ubuntu. To link a single package by hand, run `../scripts/link.sh <folder> <package>`, for example `../scripts/link.sh ../shared nvim`.
 
 ## Caps Lock
 
@@ -203,6 +204,6 @@ To switch by hand, press `Super+Shift+T` or run `toggle-appearance`. This sets m
 
 - **Add an app or CLI tool:** add a line to `Brewfile`, then `brew bundle --file=Brewfile`.
 - **Send an app to a workspace:** add an `[[on-window-detected]]` rule in `aerospace.toml` (see [Workspaces and app rules](#workspaces-and-app-rules)).
-- **Add a config:** create `<tool>/.config/<tool>/...`, add `<tool>` to `PACKAGES` in `install.sh`, then run `stow -t ~ <tool>`.
+- **Add a config:** create `<tool>/.config/<tool>/...` in `../shared` (or here if it's Mac-only, and add it to the `link.sh` line in `install.sh`), then run `./install.sh --link-only`.
 - **Change a macOS setting:** add a `defaults write` line to `defaults.sh`. To find a key, run `defaults read > before.txt`, change the setting in System Settings, run `defaults read > after.txt`, and diff the two files.
 - **Machine-specific settings** that shouldn't be committed go in `~/.zshrc.local` and `~/.config/git/local` (e.g. a work git identity with `includeIf`).

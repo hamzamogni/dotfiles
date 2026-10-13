@@ -66,6 +66,9 @@ fi
 "$REPO/scripts/link.sh" "$REPO/shared"
 "$REPO/scripts/link.sh" "$DOTFILES" bin terminal
 
+# A running tmux server reads its config only when it starts
+tmux source-file "$HOME/.config/tmux/tmux.conf" 2>/dev/null || true
+
 if ! $link_only; then
   "$REPO/scripts/install-nvim-plugins.sh"
 

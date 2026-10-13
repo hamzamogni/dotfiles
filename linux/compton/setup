@@ -1,6 +1,0 @@
-#!/bin/sh
-
-
-mkdir -p $HOME/.config/compton
-
-ln -sf $PWD/compton.conf $HOME/.config/compton/compton.conf

@@ -1,3 +1,0 @@
-#!/bin/sh
-
-echo $(df -h | grep $partition | awk '{print $5}')

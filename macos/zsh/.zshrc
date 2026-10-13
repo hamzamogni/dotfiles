@@ -8,3 +8,6 @@ done
 
 # Pi
 export PATH="$HOME/.local/bin:$PATH"
+
+export ANDROID_HOME="$HOME/Library/Android/sdk"
+export PATH="$ANDROID_HOME/platform-tools:$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/emulator:$PATH"

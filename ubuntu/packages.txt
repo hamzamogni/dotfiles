@@ -1,0 +1,50 @@
+# apt packages for ubuntu/install.sh, one per line. The Ubuntu counterpart of macos/Brewfile.
+
+# Shell and terminal
+zsh
+zsh-autosuggestions
+zsh-syntax-highlighting
+ghostty
+fontconfig
+wl-clipboard
+
+# CLI tools
+stow
+tmux
+neovim
+starship
+zoxide
+eza
+fzf
+bat
+fd-find
+ripgrep
+jq
+gum
+btop
+fastfetch
+tealdeer
+yt-dlp
+lazygit
+curl
+unzip
+
+# Development
+git
+git-lfs
+gh
+build-essential
+golang-go
+rustup
+clang
+llvm
+tree-sitter-cli
+podman
+podman-compose
+
+# Hardware testing
+memtester
+stress-ng
+
+# Caps Lock as Super and Escape (set up by defaults.sh)
+keyd

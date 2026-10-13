@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Toggle GNOME between light and dark mode. Ghostty, Neovim and the CLI tools follow along.
+
+if [[ "$(gsettings get org.gnome.desktop.interface color-scheme)" == "'prefer-dark'" ]]; then
+  gsettings set org.gnome.desktop.interface color-scheme prefer-light
+else
+  gsettings set org.gnome.desktop.interface color-scheme prefer-dark
+fi

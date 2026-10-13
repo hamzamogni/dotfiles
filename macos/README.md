@@ -178,7 +178,7 @@ Coming from Linux:
 
 ### tmux
 
-Prefix is `Ctrl+Space` (or `Ctrl+B`). Most actions don't need the prefix and use `Alt` (left Option):
+Prefix is `Caps Lock+A`, `Ctrl+Space` or `Ctrl+B`. Ghostty turns `Caps Lock+A` into `Ctrl+Space` (see `ghostty/.config/ghostty/os.ghostty`). New panes and windows open in the current pane's folder. Most actions don't need the prefix and use `Alt` (left Option):
 
 | Keys                            | Action                                        |
 | ------------------------------- | --------------------------------------------- |

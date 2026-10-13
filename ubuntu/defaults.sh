@@ -43,6 +43,9 @@ gsettings set org.gnome.desktop.wm.keybindings switch-applications-backward "[]"
 gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-right "['<Super>Tab']"
 gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-left "['<Super><Shift>Tab']"
 
+# Super+A is Caps Lock + A, which Ghostty turns into the tmux prefix. GNOME uses it for the app grid.
+gsettings set org.gnome.shell.keybindings toggle-application-view "[]"
+
 # Windows
 gsettings set org.gnome.desktop.wm.keybindings close "['<Super>w', '<Alt>F4']"
 gsettings set org.gnome.desktop.wm.keybindings toggle-fullscreen "['<Super>f']"

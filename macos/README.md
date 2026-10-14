@@ -190,6 +190,9 @@ Prefix is `Caps Lock+A`, `Ctrl+Space` or `Ctrl+B`. Ghostty turns `Caps Lock+A` i
 | `Alt+1..9`                      | Go to window                                  |
 | `Alt+Left/Right`                | Previous / next window                        |
 | `Alt+Up/Down`                   | Previous / next session                       |
+| `prefix h/j/k/l`                | Move to pane left / down / up / right. After the prefix, press several in a row |
+| `prefix -` / `prefix v`         | Split pane down / right                       |
+| `prefix x` / `prefix X`         | Close pane / window                           |
 | `prefix f`                      | Pick a project with fzf, open it as a session |
 | `prefix s`                      | Switch session with fzf (with preview)        |
 | `prefix q`                      | Reload tmux config                            |

@@ -6,6 +6,10 @@
     // Editor in normal or visual mode, plus panels that aren't editors
     "context": "VimControl && !menu || !Editor && !Terminal",
     "bindings": {
+      // Space is only the leader. Without this, a leader sequence that times out replays
+      // space as vim's default `space` (move right).
+      "space": null,
+
       // Windows
       "ctrl-h": "workspace::ActivatePaneLeft",
       "ctrl-j": "workspace::ActivatePaneDown",

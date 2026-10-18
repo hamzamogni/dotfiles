@@ -1,5 +1,21 @@
 // Zed set up to feel like the LazyVim config in shared/nvim. Leader keys live in keymap.json.
 {
+  "gutter": {
+    "line_numbers": true
+  },
+  "show_wrap_guides": true,
+  "tab_bar": {
+    "show": false,
+    "show_pinned_tabs_in_separate_row": false
+  },
+  "preview_tabs": {
+    "enabled": true
+  },
+  "tabs": {
+    "show_diagnostics": "off",
+    "git_status": false
+  },
+  "diff_view_style": "unified",
   "vim_mode": true,
   "vim": {
     "use_smartcase_find": true,

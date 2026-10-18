@@ -1,0 +1,146 @@
+// LazyVim's keys in Zed. Leader is space. Zed's own vim defaults already cover gd, gr, gy, gI,
+// K, gcc, ]d/[d, ]c/[c, ]b/[b and the ctrl-w window keys.
+// Defaults: https://github.com/zed-industries/zed/blob/main/assets/keymaps/vim.json
+[
+  {
+    // Editor in normal or visual mode, plus panels that aren't editors
+    "context": "VimControl && !menu || !Editor && !Terminal",
+    "bindings": {
+      // Windows
+      "ctrl-h": "workspace::ActivatePaneLeft",
+      "ctrl-j": "workspace::ActivatePaneDown",
+      "ctrl-k": "workspace::ActivatePaneUp",
+      "ctrl-l": "workspace::ActivatePaneRight",
+      "space -": "pane::SplitDown",
+      "space |": "pane::SplitRight",
+      "space w -": "pane::SplitDown",
+      "space w |": "pane::SplitRight",
+      "space w d": "pane::CloseActiveItem",
+      "space w m": "workspace::ToggleZoom",
+      "space w =": "vim::ResetPaneSizes",
+
+      // Buffers
+      "shift-h": "pane::ActivatePreviousItem",
+      "shift-l": "pane::ActivateNextItem",
+      "space ,": "tab_switcher::Toggle",
+      "space `": "pane::AlternateFile",
+      "space b b": "pane::AlternateFile",
+      "space b d": "pane::CloseActiveItem",
+      "space b o": "pane::CloseOtherItems",
+      "space b p": "pane::TogglePinTab",
+      "space b shift-d": "pane::CloseAllItems",
+
+      // Find files
+      "space space": "file_finder::Toggle",
+      "space f f": "file_finder::Toggle",
+      "space f r": "file_finder::Toggle",
+      "space f b": "tab_switcher::Toggle",
+      "space f p": "projects::OpenRecent",
+      "space f n": "workspace::NewFile",
+      "space f t": "terminal_panel::ToggleFocus",
+      "space f c": "zed::OpenSettings",
+
+      // File tree
+      "space e": "project_panel::ToggleFocus",
+      "space shift-e": "project_panel::ToggleFocus",
+
+      // Search
+      "space /": "text_finder::Toggle",
+      "space s g": "pane::DeploySearch",
+      "space s w": "pane::DeploySearch",
+      "space s r": "pane::DeploySearch",
+      "space s s": "outline::Toggle",
+      "space s shift-s": "project_symbols::Toggle",
+      "space s k": "zed::OpenKeymap",
+      "space s c": "command_palette::Toggle",
+      "space :": "command_palette::Toggle",
+      "space s d": "diagnostics::Deploy",
+      "space x x": "diagnostics::Deploy",
+
+      // Git
+      "space g g": ["task::Spawn", { "task_name": "lazygit", "reveal_target": "center" }],
+      "space g s": "git_panel::ToggleFocus",
+      "space g b": "git::Blame",
+      "space g f": "git::FileHistory",
+      "space g d": "git::Diff",
+      "space g shift-b": "git::Branch",
+      "space g c": "git::Commit",
+      "space g p": "git::Push",
+      "space g shift-p": "git::Pull",
+
+      // UI toggles
+      "space u w": "editor::ToggleSoftWrap",
+      "space u l": "editor::ToggleLineNumbers",
+      "space u shift-l": "editor::ToggleRelativeLineNumbers",
+      "space u h": "editor::ToggleInlayHints",
+      "space u d": "editor::ToggleDiagnostics",
+      "space u g": "editor::ToggleIndentGuides",
+      "space u b": "theme::ToggleMode",
+      "space u shift-c": "theme_selector::Toggle",
+      "space u z": "workspace::ToggleZoom",
+
+      // Terminal
+      "ctrl-/": "terminal_panel::Toggle",
+
+      // Misc
+      "space l": "zed::Extensions",
+      "space q q": "zed::Quit"
+    }
+  },
+  {
+    // Code and hunk keys only make sense in an editor
+    "context": "VimControl && !menu",
+    "bindings": {
+      "space c a": "editor::ToggleCodeActions",
+      "space c r": "editor::Rename",
+      "space c f": "editor::Format",
+      "space c d": "editor::Hover",
+      "space c s": "outline::Toggle",
+      "space c o": "editor::OrganizeImports",
+      "] h": "editor::GoToHunk",
+      "[ h": "editor::GoToPreviousHunk",
+      "space g h s": "git::StageAndNext",
+      "space g h r": "git::RestoreAndNext",
+      "space g h p": "editor::ToggleSelectedDiffHunks",
+      "space g h b": "editor::ToggleGitBlameInline"
+    }
+  },
+  {
+    "context": "Terminal",
+    "bindings": {
+      "ctrl-/": "terminal_panel::Toggle"
+    }
+  },
+  {
+    // neo-tree keys. Space in the tree is free for the leader instead of opening a file.
+    "context": "ProjectPanel && not_editing",
+    "bindings": {
+      "space": null,
+      "space e": "workspace::ToggleLeftDock",
+      "q": "workspace::ToggleLeftDock",
+      "a": "project_panel::NewFile",
+      "shift-a": "project_panel::NewDirectory",
+      "d": "project_panel::Trash",
+      "r": "project_panel::Rename",
+      "y": "project_panel::Copy",
+      "x": "project_panel::Cut",
+      "p": "project_panel::Paste",
+      "c": "project_panel::Duplicate",
+      "shift-y": "workspace::CopyRelativePath",
+      "shift-h": "project_panel::ToggleHideHidden",
+      "l": "project_panel::ExpandSelectedEntry",
+      "enter": "project_panel::OpenPermanent",
+      "s": "project_panel::OpenSplitVertical",
+      "shift-s": "project_panel::OpenSplitHorizontal",
+      "z": "project_panel::CollapseAllEntries"
+    }
+  },
+  {
+    "context": "GitPanel && ChangesList && !GitBranchSelector && !GitRepositorySelector",
+    "bindings": {
+      "q": "workspace::ToggleLeftDock",
+      "c": "git::Commit",
+      "s": "git::ToggleStaged"
+    }
+  }
+]

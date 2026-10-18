@@ -1,0 +1,46 @@
+// Zed set up to feel like the LazyVim config in shared/nvim. Leader keys live in keymap.json.
+{
+  "vim_mode": true,
+  "vim": {
+    "use_smartcase_find": true,
+    "toggle_relative_line_numbers": true
+  },
+  "relative_line_numbers": "enabled",
+  "which_key": {
+    "enabled": true,
+    "delay_ms": 300
+  },
+
+  // Catppuccin Mocha in dark mode, Latte in light mode, like Neovim
+  "theme": {
+    "mode": "system",
+    "light": "Catppuccin Latte",
+    "dark": "Catppuccin Mocha"
+  },
+  "icon_theme": {
+    "mode": "system",
+    "light": "Catppuccin Latte",
+    "dark": "Catppuccin Mocha"
+  },
+  "auto_install_extensions": {
+    "catppuccin": true,
+    "catppuccin-icons": true
+  },
+
+  // Same font as Ghostty
+  "buffer_font_family": "Maple Mono NF",
+  "buffer_font_size": 14,
+  "buffer_font_features": {
+    "calt": false
+  },
+
+  // LazyVim keeps the file tree on the left and scrolls with a margin
+  "project_panel": {
+    "dock": "left"
+  },
+  "git_panel": {
+    "dock": "left"
+  },
+  "vertical_scroll_margin": 4,
+  "format_on_save": "on"
+}

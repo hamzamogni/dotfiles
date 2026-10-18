@@ -116,8 +116,8 @@
     "context": "ProjectPanel && not_editing",
     "bindings": {
       "space": null,
-      "space e": "workspace::ToggleLeftDock",
-      "q": "workspace::ToggleLeftDock",
+      "space e": "workspace::ToggleRightDock",
+      "q": "workspace::ToggleRightDock",
       "a": "project_panel::NewFile",
       "shift-a": "project_panel::NewDirectory",
       "d": "project_panel::Trash",
@@ -138,7 +138,7 @@
   {
     "context": "GitPanel && ChangesList && !GitBranchSelector && !GitRepositorySelector",
     "bindings": {
-      "q": "workspace::ToggleLeftDock",
+      "q": "workspace::ToggleRightDock",
       "c": "git::Commit",
       "s": "git::ToggleStaged"
     }

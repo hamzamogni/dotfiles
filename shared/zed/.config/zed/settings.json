@@ -34,13 +34,6 @@
     "calt": false
   },
 
-  // LazyVim keeps the file tree on the left and scrolls with a margin
-  "project_panel": {
-    "dock": "left"
-  },
-  "git_panel": {
-    "dock": "left"
-  },
   "vertical_scroll_margin": 4,
   "format_on_save": "on"
 }

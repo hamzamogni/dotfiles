@@ -1,5 +1,6 @@
 # File system
-if (( $+commands[eza] )); then
+# When stdin is not a terminal, eza lists the paths it reads from stdin, so in agent shells `ls` would print nothing.
+if (( $+commands[eza] )) && [[ -t 0 ]]; then
   alias ls='eza -lh --group-directories-first --icons=auto'
   alias lsa='ls -a'
   alias lt='eza --tree --level=2 --long --icons --git'

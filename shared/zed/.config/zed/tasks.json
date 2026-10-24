@@ -1,4 +1,3 @@
-// Run by <leader>gg in keymap.json, like LazyVim's lazygit float
 [
   {
     "label": "lazygit",
@@ -9,6 +8,18 @@
     "use_new_terminal": true,
     "allow_concurrent_runs": true,
     "show_summary": false,
-    "show_command": false
-  }
+    "show_command": false,
+  },
+  {
+    "label": "difft: branch vs main",
+    "command": "GIT_EXTERNAL_DIFF=difft git diff origin/main...HEAD",
+    "reveal_target": "center",
+    "use_new_terminal": true,
+  },
+  {
+    "label": "difft: current file vs main",
+    "command": "GIT_EXTERNAL_DIFF=difft git diff origin/main...HEAD -- \"$ZED_RELATIVE_FILE\"",
+    "reveal_target": "center",
+    "use_new_terminal": true,
+  },
 ]

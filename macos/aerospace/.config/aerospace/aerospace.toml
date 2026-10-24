@@ -99,14 +99,14 @@ gaps.outer.right =      10
     if = 'test %{app-bundle-id} = com.apple.systempreferences || test %{app-bundle-id} = com.apple.ActivityMonitor || test %{app-bundle-id} = com.bitwarden.desktop'
     run = 'layout floating'
 
-# Workspace 1 (accordion): T3 Code, Codex (the ChatGPT app) and Claude
+# Workspace 1 (accordion): Codex (the ChatGPT app) and Claude
 [[on-window-detected]]
-    if = 'test %{app-bundle-id} = com.t3tools.t3code || test %{app-bundle-id} = com.openai.codex || test %{app-bundle-id} = com.anthropic.claudefordesktop'
+    if = 'test %{app-bundle-id} = com.openai.codex || test %{app-bundle-id} = com.anthropic.claudefordesktop'
     run = 'move-node-to-workspace 1'
 
-# Workspace 2: Zed
+# Workspace 2: Zed, Delta and T3 Code
 [[on-window-detected]]
-    if = 'test %{app-bundle-id} = dev.zed.Zed'
+    if = 'test %{app-bundle-id} = dev.zed.Zed || test %{app-bundle-id} = com.zed-industries.delta || test %{app-bundle-id} = com.t3tools.t3code'
     run = 'move-node-to-workspace 2'
 
 # Workspace B (accordion): Chrome, so windows of different profiles stack
@@ -146,7 +146,7 @@ gaps.outer.right =      10
 # See: https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
 [workspace-to-monitor-force-assignment]
     1 = 'main'                 # AI apps
-    2 = 'main'                 # Zed
+    2 = 'main'                 # Zed, Delta, T3 Code
     B = 'main'                 # Chrome
     7 = ['built-in', 'main']   # Outlook, Teams
     C = ['built-in', 'main']   # Slack, WhatsApp

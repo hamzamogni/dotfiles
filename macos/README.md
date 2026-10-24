@@ -74,8 +74,8 @@ New windows of these apps are moved to a fixed workspace:
 
 | Workspace | Shortcut     | Apps                                     | Layout    | Monitor  |
 | --------- | ------------ | ---------------------------------------- | --------- | -------- |
-| `1`       | `Super+1`    | T3 Code, Codex (the ChatGPT app), Claude | Accordion | Main     |
-| `2`       | `Super+2`    | Zed                                      | Tiles     | Main     |
+| `1`       | `Super+1`    | Codex (the ChatGPT app), Claude          | Accordion | Main     |
+| `2`       | `Super+2`    | Zed, Delta, T3 Code                      | Tiles     | Main     |
 | `7`       | `Super+7`    | Microsoft Outlook, Microsoft Teams       | Accordion | Laptop   |
 | `8`       | `Super+8`    | Proton Mail                              | Tiles     | Main     |
 | `B`       | `Super+B`    | Google Chrome (all profiles)             | Accordion | Main     |

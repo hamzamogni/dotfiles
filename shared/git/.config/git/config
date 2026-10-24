@@ -11,6 +11,8 @@
 	sh = stash
 	sub = submodule
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
+  review = "!f() { git diff --quiet && git diff --cached --quiet || { echo 'Uncommitted changes, stash or commit first'; exit 1; }; base=$(gh pr view $1 --json baseRefName -q .baseRefName) && gh pr checkout $1 --detach && git fetch origin $base && git reset --soft $(git merge-base origin/$base HEAD); }; f"
+  unreview = "!git reset --hard && git checkout -"
 [init]
 	defaultBranch = main
 [pull]

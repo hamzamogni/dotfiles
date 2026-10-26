@@ -1,6 +1,10 @@
-# No padding: text and the tmux bar run to the window edges (cmux's tab bar is already at the top)
-window-padding-x = 0
+# Almost no padding: 2pt on the left so text doesn't touch the sidebar, none elsewhere
+# (cmux's tab bar is already at the top)
+window-padding-x = 2,0
 window-padding-y = 0
 # Lines 2px shorter, so a whole number of them fills a full-height window on the built-in display
 # and the tmux bar ends right at the bottom edge. Other screen sizes may leave a small gap.
 adjust-cell-height = -2
+# Solid background, no transparency or blur
+background-opacity = 1
+background-blur = false

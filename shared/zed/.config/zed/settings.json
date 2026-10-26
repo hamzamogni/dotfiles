@@ -1,5 +1,8 @@
 // Zed set up to feel like the LazyVim config in shared/nvim. Leader keys live in keymap.json.
 {
+  "git_panel": {
+    "tree_view": true
+  },
   "agent": {
     "sandbox_permissions": {
       "network_hosts": [
@@ -25,7 +28,7 @@
       "provider": "openai-subscribed",
       "model": "gpt-6.1-sol",
       "enable_thinking": true,
-      "effort": "medium"
+      "effort": "low"
     },
     "favorite_models": [],
     "model_parameters": []

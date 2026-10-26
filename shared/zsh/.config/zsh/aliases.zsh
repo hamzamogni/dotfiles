@@ -44,9 +44,9 @@ alias ....='cd ../../..'
 alias d='podman'
 alias t='tmux attach || tmux new -s Work'
 alias ts='tmux-sessionizer'
-# Like t, on the Ubuntu machine. Run it in its own Ghostty tab, so tmux doesn't run inside tmux.
+# Like t, on the Ubuntu machine. Run it in its own cmux workspace (Ghostty tab on Ubuntu), so tmux doesn't run inside tmux.
 tu() {
-  [[ -n $TMUX ]] && { echo "tu: open a new Ghostty tab first, you're inside tmux"; return 1; }
+  [[ -n $TMUX ]] && { echo "tu: open a new cmux workspace or Ghostty tab first, you're inside tmux"; return 1; }
   ssh -t hmogni-srv1 'tmux attach || tmux new -s Work'
 }
 n() { if (( $# == 0 )); then command nvim . ; else command nvim "$@"; fi; }

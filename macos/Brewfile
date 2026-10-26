@@ -50,7 +50,7 @@ cask "nikitabobko/tap/aerospace"
 cask "karabiner-elements" # Caps Lock: hold = Cmd+Ctrl (Super), tap = Escape
 
 # Apps
-cask "ghostty"
+cask "cmux" # Terminal, built on Ghostty (reads ~/.config/ghostty)
 cask "zed"
 cask "obsidian"
 cask "google-chrome"

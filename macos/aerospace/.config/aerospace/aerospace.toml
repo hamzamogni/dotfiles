@@ -178,7 +178,7 @@ gaps.outer.right =      10
 
     # Apps
     # See: https://nikitabobko.github.io/AeroSpace/commands#exec-and-forget
-    cmd-ctrl-enter = '''exec-and-forget osascript -e 'tell application "Ghostty" to new window' -e 'tell application "Ghostty" to activate' '''
+    cmd-ctrl-enter = '''exec-and-forget osascript -e 'tell application "cmux" to new window' -e 'tell application "cmux" to activate' '''
     # Apps with their own workspace also switch to it
     cmd-ctrl-shift-enter = ['exec-and-forget open -na "Google Chrome" --args --new-window', 'workspace B']
     cmd-ctrl-shift-f = 'exec-and-forget open ~'

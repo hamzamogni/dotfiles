@@ -1,0 +1,41 @@
+// cmux terminal. Fonts, colors and terminal keybinds come from ~/.config/ghostty.
+// See: https://cmux.com/docs/configuration#cmux-json
+{
+  "$schema": "https://raw.githubusercontent.com/manaflow-ai/cmux/main/web/data/cmux.schema.json",
+  "schemaVersion": 1,
+  "app": {
+    // No title bar row: the traffic lights and controls move into the sidebar,
+    // and the tab bar becomes the top edge of the window
+    "minimalMode": true,
+    "hideTabCloseButton": true
+  },
+  // No buttons on the right of the tab bar (new terminal, browser, splits)
+  "ui": { "surfaceTabBar": { "buttons": [] } },
+  "terminal": { "showScrollBar": false },
+  // Each workspace: its title, then "branch • folder" on one line, then the latest agent message
+  "sidebar": {
+    "branchVerticalLayout": false,
+    "notificationMessageLineLimit": 2,
+    "showPorts": false,
+    "showLog": false,
+    "showProgress": false,
+    "showPullRequests": false,
+    "showCustomMetadata": false
+  },
+  "shortcuts": {
+    // Sidebar workspaces replace Ghostty tabs (one per machine), so they get Ghostty's tab keys.
+    // Cmd+1..9 and Cmd+W already match.
+    "bindings": {
+      "newTab": "cmd+t",
+      "newWindow": "cmd+n",
+      "nextSidebarTab": "cmd+shift+]",
+      "prevSidebarTab": "cmd+shift+[",
+      // Tabs inside a workspace ("surfaces") move out of the way.
+      // Cmd+Ctrl is free here: AeroSpace doesn't bind Super+[ or Super+].
+      "newSurface": "cmd+opt+t",
+      "closeOtherTabsInPane": "none",
+      "nextSurface": "cmd+ctrl+]",
+      "prevSurface": "cmd+ctrl+["
+    }
+  }
+}

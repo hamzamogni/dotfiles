@@ -34,7 +34,7 @@ if ! $link_only; then
 fi
 
 "$REPO/scripts/link.sh" "$REPO/shared"
-"$REPO/scripts/link.sh" "$DOTFILES" aerospace karabiner bin ghostty
+"$REPO/scripts/link.sh" "$DOTFILES" aerospace karabiner bin ghostty cmux
 
 # A running tmux server reads its config only when it starts
 tmux source-file "$HOME/.config/tmux/tmux.conf" 2>/dev/null || true
@@ -43,7 +43,7 @@ if ! $link_only; then
   "$REPO/scripts/install-nvim-plugins.sh"
 fi
 
-# Ghostty on macOS also reads this file, and it would override the linked config
+# Ghostty and cmux on macOS also read this file, and it would override the linked config
 ghostty_app_config="$HOME/Library/Application Support/com.mitchellh.ghostty/config.ghostty"
 if [[ -s $ghostty_app_config ]]; then
   echo "Warning: $ghostty_app_config is not empty and overrides ~/.config/ghostty. Consider emptying it."
@@ -56,6 +56,6 @@ fi
 cat <<EOF
 
 Done. Next steps:
-  - Open a new Ghostty window to load the new shell config.
+  - Open a new cmux window to load the new shell config.
   - Set up containers: podman machine init && podman machine start
 EOF

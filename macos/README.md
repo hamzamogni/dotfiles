@@ -2,7 +2,7 @@
 
 A keyboard-driven, terminal-first setup for macOS:
 
-- **Ghostty** terminal, **zsh**, **tmux** and **Neovim** (LazyVim)
+- **cmux** terminal (built on Ghostty), **zsh**, **tmux** and **Neovim** (LazyVim)
 - **AeroSpace** tiling window manager, with apps sent to fixed workspaces
 - **Caps Lock remapped** to a "Super" key for window management (see [Caps Lock](#caps-lock))
 - **Catppuccin** colors that follow the macOS light/dark appearance
@@ -21,7 +21,7 @@ After the first install:
 
 1. **Open Karabiner-Elements** and approve everything macOS asks for (driver/system extension, Input Monitoring, keyboard type). Without this, Caps Lock is not remapped.
 2. **Open AeroSpace** and give it Accessibility permission. It starts automatically at login after that.
-3. Open a new Ghostty window to load the shell config.
+3. Open a new cmux window to load the shell config.
 4. Set up containers: `podman machine init && podman machine start`.
 
 ## Layout
@@ -31,8 +31,9 @@ Every folder is a [stow](https://www.gnu.org/software/stow/) package that mirror
 | Package     | What                                                                                    |
 | ----------- | --------------------------------------------------------------------------------------- |
 | `zsh`       | Shell: aliases, functions, starship, zoxide, fzf, autosuggestions, syntax highlighting  |
-| `ghostty`   | Terminal: Maple Mono, translucent, Catppuccin Latte/Mocha                               |
-| `tmux`      | Multiplexer: `Ctrl+Space` prefix, Alt-based navigation, status bar on top               |
+| `ghostty`   | Terminal: Maple Mono, translucent, Catppuccin Latte/Mocha. cmux reads it too            |
+| `cmux`      | Terminal app: minimal chrome, sidebar workspaces with Ghostty's tab shortcuts          |
+| `tmux`      | Multiplexer: `Ctrl+Space` prefix, Alt-based navigation, status bar at the bottom          |
 | `nvim`      | LazyVim with Catppuccin, transparency and auto light/dark                               |
 | `starship`  | Minimal prompt                                                                          |
 | `git`       | Git defaults, aliases and identity                                                      |
@@ -121,7 +122,7 @@ Also arrange your monitors (System Settings → Displays → Arrange) so **every
 
 | Keys                                   | Action                                                    |
 | -------------------------------------- | --------------------------------------------------------- |
-| `Super+Enter`                          | New terminal (Ghostty) window                              |
+| `Super+Enter`                          | New terminal (cmux) window                                 |
 | `Super+Shift+Enter`                    | New Chrome window, and go to workspace B                  |
 | `Super+Shift+O`                        | Open Obsidian, and go to workspace N                      |
 | `Super+Shift+E`                        | Open Zed, and go to workspace 2                           |
@@ -179,7 +180,7 @@ Coming from Linux:
 
 ### tmux
 
-Prefix is `Caps Lock+A`, `Ctrl+Space` or `Ctrl+B`. Ghostty turns `Caps Lock+A` into `Ctrl+Space` (see `ghostty/.config/ghostty/os.ghostty`). New panes and windows open in the current pane's folder. Most actions don't need the prefix and use `Alt` (left Option):
+Prefix is `Caps Lock+A`, `Ctrl+Space` or `Ctrl+B`. Ghostty (and cmux) turn `Caps Lock+A` into `Ctrl+Space` (see `ghostty/.config/ghostty/os.ghostty`). New panes and windows open in the current pane's folder. Most actions don't need the prefix and use `Alt` (left Option):
 
 | Keys                            | Action                                        |
 | ------------------------------- | --------------------------------------------- |
@@ -200,17 +201,17 @@ Prefix is `Caps Lock+A`, `Ctrl+Space` or `Ctrl+B`. Ghostty turns `Caps Lock+A` i
 
 ### Working on the Ubuntu machine
 
-Each machine runs its own tmux, with one session per project on the machine that has the code. Don't run Ubuntu's tmux inside the Mac's. Keep one Ghostty tab per machine instead:
+Each machine runs its own tmux, with one session per project on the machine that has the code. Don't run Ubuntu's tmux inside the Mac's. Keep one cmux workspace (sidebar entry) per machine instead. They live in one window, so AeroSpace doesn't move anything around when you switch, as it did with Ghostty's native tabs:
 
-1. `Cmd+T` opens a new tab. Run `tu` there. It SSHes to `hmogni-srv1` over Tailscale and attaches to tmux, or starts it.
-2. `Cmd+1` / `Cmd+2` switch between the Mac tab and the Ubuntu tab. Inside each, `prefix f` and `prefix s` pick that machine's projects.
+1. `Cmd+T` opens a new workspace. Run `tu` there. It SSHes to `hmogni-srv1` over Tailscale and attaches to tmux, or starts it. `Cmd+Shift+R` renames it.
+2. `Cmd+1` / `Cmd+2` (or `Cmd+Shift+[` / `]`) switch between the Mac workspace and the Ubuntu workspace. Inside each, `prefix f` and `prefix s` pick that machine's projects.
 3. If the connection drops, Ubuntu's sessions keep running. Run `tu` again.
 
 The Mac's tmux is blue and Ubuntu's is orange, so you can tell them apart.
 
 ## Light and dark mode
 
-Ghostty switches between Catppuccin Latte (light) and Mocha (dark) with macOS. tmux, bat, fzf, eza, starship and btop use the terminal's colors, so they switch with it. Neovim switches itself through `auto-dark-mode.nvim`.
+cmux (through the Ghostty config) switches between Catppuccin Latte (light) and Mocha (dark) with macOS. tmux, bat, fzf, eza, starship and btop use the terminal's colors, so they switch with it. Neovim switches itself through `auto-dark-mode.nvim`.
 
 To switch by hand, press `Super+Shift+T` or run `toggle-appearance`. This sets macOS to a fixed Light or Dark appearance; to go back to switching automatically with the time of day, choose **Auto** in System Settings → Appearance.
 

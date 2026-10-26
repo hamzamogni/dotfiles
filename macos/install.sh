@@ -34,7 +34,7 @@ if ! $link_only; then
 fi
 
 "$REPO/scripts/link.sh" "$REPO/shared"
-"$REPO/scripts/link.sh" "$DOTFILES" aerospace karabiner bin ghostty cmux
+"$REPO/scripts/link.sh" "$DOTFILES" karabiner bin ghostty cmux
 
 # A running tmux server reads its config only when it starts
 tmux source-file "$HOME/.config/tmux/tmux.conf" 2>/dev/null || true

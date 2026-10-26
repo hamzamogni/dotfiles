@@ -3,7 +3,7 @@
 A keyboard-driven, terminal-first setup for macOS:
 
 - **cmux** terminal (built on Ghostty), **zsh**, **tmux** and **Neovim** (LazyVim)
-- **AeroSpace** tiling window manager, with apps sent to fixed workspaces
+- **AeroSpace** tiling window manager, with apps sent to fixed workspaces (off for now, see [Window management](#window-management-aerospace))
 - **Caps Lock remapped** to a "Super" key for window management (see [Caps Lock](#caps-lock))
 - **Catppuccin** colors that follow the macOS light/dark appearance
 
@@ -20,9 +20,8 @@ Anything already in the way (like a default `~/.zprofile` or an existing `~/.con
 After the first install:
 
 1. **Open Karabiner-Elements** and approve everything macOS asks for (driver/system extension, Input Monitoring, keyboard type). Without this, Caps Lock is not remapped.
-2. **Open AeroSpace** and give it Accessibility permission. It starts automatically at login after that.
-3. Open a new cmux window to load the shell config.
-4. Set up containers: `podman machine init && podman machine start`.
+2. Open a new cmux window to load the shell config.
+3. Set up containers: `podman machine init && podman machine start`.
 
 ## Layout
 
@@ -39,7 +38,7 @@ Every folder is a [stow](https://www.gnu.org/software/stow/) package that mirror
 | `git`       | Git defaults, aliases and identity                                                      |
 | `btop`      | System monitor, using terminal colors                                                   |
 | `bin`       | Scripts in `~/.local/bin`: `tmux-sessionizer` (alias `ts`) and `tmux-session-switch` in `shared/`, `toggle-appearance` here |
-| `aerospace` | Tiling window manager: shortcuts and app-to-workspace rules                             |
+| `aerospace` | Tiling window manager: shortcuts and app-to-workspace rules. Not linked while it's off  |
 | `karabiner` | Keyboard remapping: turns Caps Lock into Super / Escape                                 |
 
 Each `~/.config/<tool>` is a symlink to the matching folder in this repo, so editing a config in `~/.config` edits this repo, and apps that rewrite their own config (Karabiner) write here too. `~/.config/git` and `~/.local/bin` are the exception. They are real folders holding one link per file, so `~/.config/git/local` and tools installed into `~/.local/bin` stay out of the repo.
@@ -52,7 +51,7 @@ Each `~/.config/<tool>` is a symlink to the matching folder in this repo, so edi
 
 | You press                       | You get                                                                 |
 | ------------------------------- | ----------------------------------------------------------------------- |
-| **Hold** Caps Lock + another key | `Cmd+Ctrl` + that key. This is the **Super** key used by AeroSpace.    |
+| **Hold** Caps Lock + another key | `Cmd+Ctrl` + that key. This is the **Super** key.                      |
 | **Tap** Caps Lock on its own    | `Esc`                                                                    |
 | **Both Shift keys** together    | Real Caps Lock (toggles capital letters on/off)                          |
 
@@ -66,6 +65,12 @@ Things to know:
 - Karabiner writes some of its own settings into `karabiner.json` (like the keyboard type). Those changes are expected and fine to commit.
 
 ## Window management (AeroSpace)
+
+**AeroSpace is off for now**, to try plain macOS window management. Its config stays here. The Super shortcuts below, including `Super+Enter` and `Super+Shift+T`, only work while it runs. To bring it back:
+
+1. Uncomment the two AeroSpace lines in `Brewfile`, add `aerospace` to the `link.sh` line in `install.sh`, and run `./install.sh`.
+2. Open AeroSpace and give it Accessibility permission. It starts at login after that (`start-at-login` in the config).
+3. Apply the macOS settings it needs (below).
 
 [AeroSpace](https://nikitabobko.github.io/AeroSpace/guide) tiles windows automatically and groups them into **workspaces** (virtual desktops). All shortcuts use **Super** (hold Caps Lock). The config is `aerospace/.config/aerospace/aerospace.toml`, based on AeroSpace's default config. Saving it reloads AeroSpace automatically.
 
@@ -111,7 +116,11 @@ To add a rule, add an `[[on-window-detected]]` block in `aerospace.toml`. Find a
 - Pinned workspaces can't be moved with `Super+Shift+Alt+Arrows`; change the pinning in the config instead. Unpinned ones can.
 - `Super+.` focuses the other monitor. `Super+Shift+.` sends the focused window to the other monitor (to whatever workspace is visible there).
 
-macOS settings this relies on (applied by `defaults.sh`, as recommended by AeroSpace):
+macOS settings it needs, as recommended by AeroSpace. `defaults.sh` already groups windows by app in Mission Control. It doesn't turn off separate Spaces while AeroSpace is off:
+
+```sh
+defaults write com.apple.spaces spans-displays -bool true    # needs a logout
+```
 
 - **"Displays have separate Spaces" is off.** With it on, macOS has focus and performance bugs with AeroSpace across monitors. Takes effect after logging out and back in. Side effect: a full-screen app (macOS green button) blacks out the other monitor; use `Super+F` (AeroSpace fullscreen) instead.
 - **Mission Control groups windows by app.** Otherwise it shows tiny thumbnails, because AeroSpace parks hidden windows in a screen corner.
@@ -213,7 +222,7 @@ The Mac's tmux is blue and Ubuntu's is orange, so you can tell them apart.
 
 cmux (through the Ghostty config) switches between Catppuccin Latte (light) and Mocha (dark) with macOS. tmux, bat, fzf, eza, starship and btop use the terminal's colors, so they switch with it. Neovim switches itself through `auto-dark-mode.nvim`.
 
-To switch by hand, press `Super+Shift+T` or run `toggle-appearance`. This sets macOS to a fixed Light or Dark appearance; to go back to switching automatically with the time of day, choose **Auto** in System Settings → Appearance.
+To switch by hand, run `toggle-appearance` (or press `Super+Shift+T` while AeroSpace runs). This sets macOS to a fixed Light or Dark appearance; to go back to switching automatically with the time of day, choose **Auto** in System Settings → Appearance.
 
 ## Common changes
 

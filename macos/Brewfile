@@ -44,9 +44,12 @@ brew "stress-ng"
 # Fonts
 cask "font-maple-mono-nf"
 
-# Window manager
-tap "nikitabobko/tap"
-cask "nikitabobko/tap/aerospace"
+# Window manager: AeroSpace is off for now (config kept in aerospace/). To bring it back, uncomment
+# these two lines and add aerospace to the link line in install.sh.
+# tap "nikitabobko/tap"
+# cask "nikitabobko/tap/aerospace"
+
+# Keyboard
 cask "karabiner-elements" # Caps Lock: hold = Cmd+Ctrl (Super), tap = Escape
 
 # Apps

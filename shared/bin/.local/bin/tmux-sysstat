@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# CPU and memory use for the tmux status bar, like "CPU 3% · MEM 41%". Works on macOS and Linux.
+
+if [[ $OSTYPE == darwin* ]]; then
+  cpu=$(ps -A -o %cpu= | awk -v n="$(sysctl -n hw.ncpu)" '{ s += $1 } END { printf "%d", s / n }')
+  # Used memory as Activity Monitor counts it: active + wired + compressed pages
+  mem=$(vm_stat | awk -v total="$(sysctl -n hw.memsize)" '
+    /page size of/ { size = $8 }
+    /Pages active/ { used += $3 }
+    /Pages wired down/ { used += $4 }
+    /Pages occupied by compressor/ { used += $5 }
+    END { printf "%d", used * size * 100 / total }')
+else
+  # CPU busy share between two /proc/stat samples, half a second apart
+  read -r _ user nice system idle iowait irq softirq steal _ < /proc/stat
+  busy1=$((user + nice + system + irq + softirq + steal)) total1=$((busy1 + idle + iowait))
+  sleep 0.5
+  read -r _ user nice system idle iowait irq softirq steal _ < /proc/stat
+  busy2=$((user + nice + system + irq + softirq + steal)) total2=$((busy2 + idle + iowait))
+  cpu=$(( (busy2 - busy1) * 100 / (total2 - total1 > 0 ? total2 - total1 : 1) ))
+  mem=$(awk '/^MemTotal/ { t = $2 } /^MemAvailable/ { a = $2 } END { printf "%d", (t - a) * 100 / t }' /proc/meminfo)
+fi
+
+printf 'CPU %s%% · MEM %s%%' "$cpu" "$mem"

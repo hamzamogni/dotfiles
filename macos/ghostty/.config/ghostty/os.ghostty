@@ -1,5 +1,3 @@
-# Caps Lock + A sends the tmux prefix (Ctrl+Space). Karabiner turns held Caps Lock into Cmd+Ctrl.
-keybind = cmd+ctrl+a=text:\x00
 # No padding: text and the tmux bar run to the window edges (cmux's tab bar is already at the top)
 window-padding-x = 0
 window-padding-y = 0

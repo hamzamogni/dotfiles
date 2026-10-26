@@ -31,7 +31,6 @@
       "nextSidebarTab": "cmd+shift+]",
       "prevSidebarTab": "cmd+shift+[",
       // Tabs inside a workspace ("surfaces") move out of the way.
-      // Cmd+Ctrl is free here: AeroSpace doesn't bind Super+[ or Super+].
       "newSurface": "cmd+opt+t",
       "closeOtherTabsInPane": "none",
       "nextSurface": "cmd+ctrl+]",

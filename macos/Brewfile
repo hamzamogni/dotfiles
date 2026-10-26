@@ -49,9 +49,6 @@ cask "font-maple-mono-nf"
 # tap "nikitabobko/tap"
 # cask "nikitabobko/tap/aerospace"
 
-# Keyboard
-cask "karabiner-elements" # Caps Lock: hold = Cmd+Ctrl (Super), tap = Escape
-
 # Apps
 cask "cmux" # Terminal, built on Ghostty (reads ~/.config/ghostty)
 cask "zed"

@@ -35,7 +35,7 @@ ln -s ../../src/dotfiles/macos/bin/.local/bin "$HOME/.local/bin"
 
 link_all() {
   "$repo/scripts/link.sh" "$repo/shared"
-  "$repo/scripts/link.sh" "$repo/macos" aerospace karabiner bin ghostty
+  "$repo/scripts/link.sh" "$repo/macos" aerospace bin ghostty
   "$repo/scripts/link.sh" "$repo/ubuntu" bin terminal ghostty tmux
 }
 

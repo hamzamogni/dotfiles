@@ -4,7 +4,7 @@ A keyboard-driven, terminal-first setup for macOS:
 
 - **cmux** terminal (built on Ghostty), **zsh**, **tmux** and **Neovim** (LazyVim)
 - **AeroSpace** tiling window manager, with apps sent to fixed workspaces (off for now, see [Window management](#window-management-aerospace))
-- **Caps Lock remapped** to a "Super" key for window management (see [Caps Lock](#caps-lock))
+- **Caps Lock is Control** on the built-in keyboard (see [Caps Lock](#caps-lock))
 - **Catppuccin** colors that follow the macOS light/dark appearance
 
 ## Install
@@ -19,9 +19,8 @@ Anything already in the way (like a default `~/.zprofile` or an existing `~/.con
 
 After the first install:
 
-1. **Open Karabiner-Elements** and approve everything macOS asks for (driver/system extension, Input Monitoring, keyboard type). Without this, Caps Lock is not remapped.
-2. Open a new cmux window to load the shell config.
-3. Set up containers: `podman machine init && podman machine start`.
+1. Open a new cmux window to load the shell config.
+2. Set up containers: `podman machine init && podman machine start`.
 
 ## Layout
 
@@ -39,30 +38,18 @@ Every folder is a [stow](https://www.gnu.org/software/stow/) package that mirror
 | `btop`      | System monitor, using terminal colors                                                   |
 | `bin`       | Scripts in `~/.local/bin`: `tmux-sessionizer` (alias `ts`) and `tmux-session-switch` in `shared/`, `toggle-appearance` here |
 | `aerospace` | Tiling window manager: shortcuts and app-to-workspace rules. Not linked while it's off  |
-| `karabiner` | Keyboard remapping: turns Caps Lock into Super / Escape                                 |
 
-Each `~/.config/<tool>` is a symlink to the matching folder in this repo, so editing a config in `~/.config` edits this repo, and apps that rewrite their own config (Karabiner) write here too. `~/.config/git` and `~/.local/bin` are the exception. They are real folders holding one link per file, so `~/.config/git/local` and tools installed into `~/.local/bin` stay out of the repo.
+Each `~/.config/<tool>` is a symlink to the matching folder in this repo, so editing a config in `~/.config` edits this repo, and apps that rewrite their own config write here too. `~/.config/git` and `~/.local/bin` are the exception. They are real folders holding one link per file, so `~/.config/git/local` and tools installed into `~/.local/bin` stay out of the repo.
 
 `../scripts/link.sh` does the linking for both Mac and Ubuntu. To link a single package by hand, run `../scripts/link.sh <folder> <package>`, for example `../scripts/link.sh ../shared nvim`.
 
 ## Caps Lock
 
-**Caps Lock does not behave like Caps Lock on this Mac.** Karabiner-Elements (installed by the Brewfile) remaps it, using the rules in `karabiner/.config/karabiner/karabiner.json`:
+**Caps Lock is a Control key on the built-in keyboard.** macOS does this itself (System Settings → Keyboard → Keyboard Shortcuts → Modifier Keys), and `defaults.sh` sets it. External keyboards keep their own layout.
 
-| You press                       | You get                                                                 |
-| ------------------------------- | ----------------------------------------------------------------------- |
-| **Hold** Caps Lock + another key | `Cmd+Ctrl` + that key. This is the **Super** key.                      |
-| **Tap** Caps Lock on its own    | `Esc`                                                                    |
-| **Both Shift keys** together    | Real Caps Lock (toggles capital letters on/off)                          |
-
-Why: macOS has no free "Super" key like Linux. `Cmd` belongs to apps and `Alt` (Option) belongs to tmux, so window management uses `Cmd+Ctrl`, which almost nothing else uses. Holding one key is easier than pressing two, and Caps Lock sits on the home row. Tapping it for `Esc` is a bonus for Neovim.
-
-Things to know:
-
-- In this README, **`Super+X` means hold Caps Lock and press X**. Pressing `Cmd+Ctrl+X` by hand does exactly the same thing.
-- The remap only works while Karabiner-Elements is running and has its permissions.
-- To turn it off temporarily: open Karabiner-Elements → Complex Modifications and disable the rules, or quit Karabiner-Elements. To remove it, delete the rules from `karabiner.json` or uninstall Karabiner-Elements.
-- Karabiner writes some of its own settings into `karabiner.json` (like the keyboard type). Those changes are expected and fine to commit.
+- `Caps Lock+A` is the tmux prefix (`Ctrl+A`).
+- `Caps Lock+[` is `Esc` in the terminal and in Neovim (`Ctrl+[`).
+- There's no real Caps Lock on the built-in keyboard.
 
 ## Window management (AeroSpace)
 
@@ -72,7 +59,7 @@ Things to know:
 2. Open AeroSpace and give it Accessibility permission. It starts at login after that (`start-at-login` in the config).
 3. Apply the macOS settings it needs (below).
 
-[AeroSpace](https://nikitabobko.github.io/AeroSpace/guide) tiles windows automatically and groups them into **workspaces** (virtual desktops). All shortcuts use **Super** (hold Caps Lock). The config is `aerospace/.config/aerospace/aerospace.toml`, based on AeroSpace's default config. Saving it reloads AeroSpace automatically.
+[AeroSpace](https://nikitabobko.github.io/AeroSpace/guide) tiles windows automatically and groups them into **workspaces** (virtual desktops). All shortcuts use **Super**, which means `Cmd+Ctrl`. The config is `aerospace/.config/aerospace/aerospace.toml`, based on AeroSpace's default config. Saving it reloads AeroSpace automatically.
 
 ### Workspaces and app rules
 
@@ -172,9 +159,9 @@ Coming from Linux:
 | `Ctrl+C/V/W/T` in apps   | `Cmd+C/V/W/T`                                        |
 | `Alt`                    | Left `Option` (right `Option` still types accents)   |
 | `Ctrl` in the terminal   | `Control`                                            |
-| `Super` (window manager) | Hold `Caps Lock` (see [Caps Lock](#caps-lock))       |
-| `Esc`                    | `Esc`, or tap `Caps Lock`                            |
-| `Caps Lock`              | Both `Shift` keys together                           |
+| `Super` (window manager) | `Cmd+Ctrl` (only used by AeroSpace, which is off)    |
+| `Esc`                    | `Esc`, or `Caps Lock+[`                              |
+| `Ctrl`                   | `Control`, or `Caps Lock` (see [Caps Lock](#caps-lock)) |
 
 ### Shell
 
@@ -189,7 +176,7 @@ Coming from Linux:
 
 ### tmux
 
-Prefix is `Caps Lock+A`, `Ctrl+Space` or `Ctrl+B`. Ghostty (and cmux) turn `Caps Lock+A` into `Ctrl+Space` (see `ghostty/.config/ghostty/os.ghostty`). New panes and windows open in the current pane's folder. Most actions don't need the prefix and use `Alt` (left Option):
+Prefix is `Caps Lock+A` (`Ctrl+A`), `Ctrl+Space` or `Ctrl+B`. To send `Ctrl+A` to the shell or Neovim, press it twice. New panes and windows open in the current pane's folder. Most actions don't need the prefix and use `Alt` (left Option):
 
 | Keys                            | Action                                        |
 | ------------------------------- | --------------------------------------------- |

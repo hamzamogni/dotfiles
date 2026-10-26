@@ -14,6 +14,11 @@ osascript -e 'tell application "System Settings" to quit' 2>/dev/null || true
 # Appearance: switch light/dark automatically (cmux, tmux and Neovim follow along)
 defaults write -g AppleInterfaceStyleSwitchesAutomatically -bool true
 
+# Caps Lock: Control on the built-in keyboard (Caps Lock+A is the tmux prefix, Caps Lock+[ is Esc).
+# Same as System Settings → Keyboard → Keyboard Shortcuts → Modifier Keys. Takes effect at the next login.
+defaults -currentHost write -g com.apple.keyboard.modifiermapping.0-0-0 -array \
+  '<dict><key>HIDKeyboardModifierMappingSrc</key><integer>30064771129</integer><key>HIDKeyboardModifierMappingDst</key><integer>30064771296</integer></dict>'
+
 # Keyboard: fast key repeat, and holding a key repeats it instead of showing accents (needed for vim)
 defaults write -g KeyRepeat -int 2
 defaults write -g InitialKeyRepeat -int 15

@@ -12,13 +12,12 @@ The macOS setup, on Ubuntu GNOME. Ghostty, zsh, tmux and Neovim use the same con
 
 The installer does the following:
 
-1. Installs the apt packages in `packages.txt`, the Ubuntu counterpart of `../macos/Brewfile`.
+1. Installs the apt packages in `packages.txt`, the Ubuntu counterpart of `../macos/Brewfile`. That includes the JetBrains Mono font.
 2. Links `bat` and `fd` in `~/.local/bin` to Ubuntu's `batcat` and `fdfind`.
 3. Installs [mise](https://mise.jdx.dev) into `~/.local/bin` and a stable Rust toolchain with `rustup`.
-4. Installs the Maple Mono NF font into `~/.local/share/fonts`, after checking its SHA-256.
-5. Links `../shared` and this folder's packages into `~`. Anything in the way moves to `~/.dotfiles-backup/<date>/`.
-6. Installs LazyVim's plugins at the commits in `lazy-lock.json`, the same ones the Mac uses.
-7. Switches your login shell to zsh. `chsh` asks for your password. Bash stays installed.
+4. Links `../shared` and this folder's packages into `~`. Anything in the way moves to `~/.dotfiles-backup/<date>/`.
+5. Installs LazyVim's plugins at the commits in `lazy-lock.json`, the same ones the Mac uses.
+6. Switches your login shell to zsh. `chsh` asks for your password. Bash stays installed.
 
 Log out and back in after the first install, so the GNOME session starts with zsh.
 

@@ -41,9 +41,8 @@ cask "gcloud-cli"
 brew "memtester"
 brew "stress-ng"
 
-# Fonts: JetBrains Mono for the terminal, Maple Mono for Zed
+# Fonts
 cask "font-jetbrains-mono"
-cask "font-maple-mono-nf"
 
 # Window manager: AeroSpace is off for now (config kept in aerospace/). To bring it back, uncomment
 # these two lines and add aerospace to the link line in install.sh.

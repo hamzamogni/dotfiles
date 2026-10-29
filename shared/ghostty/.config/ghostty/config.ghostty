@@ -1,11 +1,11 @@
 # Omarchy's Ghostty config, adapted for macOS.
 # See all options with: ghostty +show-config --default --docs
 
-# Theme: follows macOS light/dark appearance
-theme = light:Catppuccin Latte,dark:Catppuccin Mocha
+# Theme: follows the system light/dark appearance. Both themes are in ./themes.
+theme = light:T3 Light,dark:T3 Dark
 
-# Font
-font-family = "Maple Mono NF"
+# Font. Ghostty has Nerd Font icons built in, so the font itself needs no icon patch.
+font-family = "JetBrains Mono"
 font-size = 14
 # Turn ligatures off for a calmer look (remove this line to bring them back)
 font-feature = -calt

@@ -12,6 +12,15 @@
   // No buttons on the right of the tab bar (new terminal, browser, splits)
   "ui": { "surfaceTabBar": { "buttons": [] } },
   "terminal": { "showScrollBar": false },
+  // A solid gray sidebar, one step lighter than the terminal, like the tmux bar.
+  // Selection stays cmux blue, the Mac's tmux accent.
+  "sidebarAppearance": {
+    "matchTerminalBackground": false,
+    "darkModeTintColor": "#1c1c1c",
+    "lightModeTintColor": "#f2f2f2",
+    "tintOpacity": 1
+  },
+  "paneBorderColor": "#262626",
   // Each workspace: its title, then "branch • folder" on one line, then the latest agent message
   "sidebar": {
     "branchVerticalLayout": false,

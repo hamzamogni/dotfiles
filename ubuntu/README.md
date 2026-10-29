@@ -29,7 +29,7 @@ Log out and back in after the first install, so the GNOME session starts with zs
 | `bin`      | `toggle-appearance`, which switches GNOME between light and dark mode      |
 | `terminal` | `~/.config/xdg-terminals.list`, which makes Ghostty the default terminal    |
 | `ghostty`  | `os.ghostty`, which makes `Caps Lock+A` send the tmux prefix              |
-| `tmux`     | `os.conf`, which makes tmux orange (Catppuccin Peach) instead of blue      |
+| `tmux`     | `os.conf`, which makes tmux orange instead of blue                         |
 
 `defaults.sh` and `keyd/` are not stow packages. `defaults.sh` applies them with `--defaults`.
 

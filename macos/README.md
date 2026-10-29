@@ -5,7 +5,7 @@ A keyboard-driven, terminal-first setup for macOS:
 - **cmux** terminal (built on Ghostty), **zsh**, **tmux** and **Neovim** (LazyVim)
 - **AeroSpace** tiling window manager, with apps sent to fixed workspaces (off for now, see [Window management](#window-management-aerospace))
 - **Caps Lock is Control** on the built-in keyboard (see [Caps Lock](#caps-lock))
-- **Catppuccin** colors that follow the macOS light/dark appearance
+- **T3** colors (neutral grays, after T3 Code) that follow the macOS light/dark appearance
 
 ## Install
 
@@ -29,10 +29,10 @@ Every folder is a [stow](https://www.gnu.org/software/stow/) package that mirror
 | Package     | What                                                                                    |
 | ----------- | --------------------------------------------------------------------------------------- |
 | `zsh`       | Shell: aliases, functions, starship, zoxide, fzf, autosuggestions, syntax highlighting  |
-| `ghostty`   | Terminal: Maple Mono, translucent, Catppuccin Latte/Mocha. cmux reads it too            |
-| `cmux`      | Terminal app: minimal chrome, sidebar workspaces with Ghostty's tab shortcuts          |
+| `ghostty`   | Terminal: JetBrains Mono, T3 Light/Dark themes (in `themes/`). cmux reads it too        |
+| `cmux`      | Terminal app: minimal chrome, gray sidebar, workspaces with Ghostty's tab shortcuts     |
 | `tmux`      | Multiplexer: `Ctrl+Space` prefix, Alt-based navigation, status bar at the bottom          |
-| `nvim`      | LazyVim with Catppuccin, transparency and auto light/dark                               |
+| `nvim`      | LazyVim with Catppuccin in T3 colors, transparency and auto light/dark                  |
 | `starship`  | Minimal prompt                                                                          |
 | `git`       | Git defaults, aliases and identity                                                      |
 | `btop`      | System monitor, using terminal colors                                                   |
@@ -207,7 +207,7 @@ The Mac's tmux is blue and Ubuntu's is orange, so you can tell them apart.
 
 ## Light and dark mode
 
-cmux (through the Ghostty config) switches between Catppuccin Latte (light) and Mocha (dark) with macOS. tmux, bat, fzf, eza, starship and btop use the terminal's colors, so they switch with it. Neovim switches itself through `auto-dark-mode.nvim`.
+cmux (through the Ghostty config) switches between the T3 Light and T3 Dark themes with macOS, and its sidebar between light and dark gray. bat, fzf, eza, starship and btop use the terminal's colors, so they switch with it. tmux switches its bar colors when the terminal reports the change. Neovim switches itself through `auto-dark-mode.nvim`.
 
 To switch by hand, run `toggle-appearance` (or press `Super+Shift+T` while AeroSpace runs). This sets macOS to a fixed Light or Dark appearance; to go back to switching automatically with the time of day, choose **Auto** in System Settings → Appearance.
 

@@ -60,11 +60,14 @@
     "delay_ms": 300
   },
 
-  // Catppuccin Mocha in dark mode, Latte in light mode, like Neovim
+  // T3 Dark in dark mode, T3 Light in light mode, like Ghostty (themes/t3.json).
+  // To switch, press space u shift-c (or cmd-k cmd-t) and pick a theme. Zed saves the pick here, in
+  // the slot for the current light/dark mode. Other choices: "Catppuccin Mocha" / "Catppuccin Latte",
+  // "One Dark" / "One Light", "Ayu Dark" / "Ayu Light", "Gruvbox Dark" / "Gruvbox Light".
   "theme": {
     "mode": "system",
-    "light": "Catppuccin Latte",
-    "dark": "Catppuccin Mocha"
+    "light": "T3 Light",
+    "dark": "T3 Dark"
   },
   "icon_theme": {
     "mode": "system",
@@ -77,7 +80,7 @@
   },
 
   // Same font as Ghostty
-  "buffer_font_family": "Maple Mono NF",
+  "buffer_font_family": "JetBrains Mono",
   "buffer_font_size": 14,
   "buffer_font_features": {
     "calt": false

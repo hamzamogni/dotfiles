@@ -9,8 +9,9 @@ export BAT_THEME=ansi
 export MANROFFOPT="-c"
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
-# Use the terminal's 16 colors, so fzf follows the light/dark theme
-export FZF_DEFAULT_OPTS="--color=16"
+# Use the terminal's 16 colors, so fzf follows the light/dark theme: gray text and lines, blue
+# for matches and the current line, no background behind the current line
+export FZF_DEFAULT_OPTS="--color=16,bg+:-1,gutter:-1,fg+:-1:bold,hl:blue,hl+:blue,pointer:blue,marker:blue,prompt:blue,info:8,border:8,separator:8,scrollbar:8,spinner:blue --pointer=▌ --marker=▌"
 
 # Android SDK, where Android Studio installs it on macOS
 if [[ -d $HOME/Library/Android/sdk ]]; then

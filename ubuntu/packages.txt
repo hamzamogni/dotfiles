@@ -6,6 +6,7 @@ zsh-autosuggestions
 zsh-syntax-highlighting
 ghostty
 fontconfig
+fonts-jetbrains-mono
 wl-clipboard
 
 # CLI tools

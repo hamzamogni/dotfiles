@@ -2,8 +2,8 @@
 # Pick a directory with fzf and open (or switch to) a tmux session there.
 # Usage: tmux-sessionizer [directory]
 #
-# Candidates are your projects (~/workspaces/<host>/<org>/<repo>) plus the
-# directories zoxide knows you visit often.
+# Candidates are your projects (~/workspaces/<host>/<org>/<repo>). Typing
+# matches only the repo name; <host>/<org> is shown alongside for context.
 
 export PATH="$HOME/.local/bin:/opt/homebrew/bin:$PATH"
 
@@ -11,11 +11,14 @@ if [[ $# -eq 1 ]]; then
   selected=$1
 else
   selected=$(
-    {
-      find "$HOME/workspaces" -mindepth 3 -maxdepth 3 -type d 2>/dev/null
-      command -v zoxide &>/dev/null && zoxide query --list
-    } | awk -v home="$HOME" '!seen[$0]++ { short = $0; sub("^" home, "~", short); print $0 "\t" short }' |
-      fzf --reverse --prompt="session> " --delimiter='\t' --with-nth=2 \
+    find "$HOME/workspaces" -mindepth 3 -maxdepth 3 -type d 2>/dev/null | sort |
+      awk -v root="$HOME/workspaces/" '{
+        rel = substr($0, length(root) + 1)
+        repo = rel; sub(".*/", "", repo)
+        parent = rel; sub("/[^/]*$", "", parent)
+        print $0 "\t" repo "\t\033[2m" parent "\033[0m"
+      }' |
+      fzf --reverse --ansi --prompt="session> " --delimiter='\t' --with-nth=2,3 --nth=1 \
         --preview 'eza --icons=always --group-directories-first {1}' |
       cut -f1
   )
